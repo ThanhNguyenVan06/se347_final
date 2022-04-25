@@ -11,3 +11,4 @@ class Command(BaseCommand):
         c.execute(sql)
         conn.commit()
         conn.close()
+        print("Deleted all data from food")

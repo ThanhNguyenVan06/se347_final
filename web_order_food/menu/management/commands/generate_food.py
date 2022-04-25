@@ -1,4 +1,3 @@
-from unicodedata import category
 from django.core.management.base import BaseCommand
 from tqdm import tqdm
 from menu.models import food

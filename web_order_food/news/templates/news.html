@@ -1,88 +1,76 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
+{% block content %}
+  <div class="container">
 
-<html>
-    <head>
-      {% load static %}
-        <title>dinh son </title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="{% static 'news/tt.css'  %}">
-    
-    </head>
+    <div class="box-news">
 
-    <body>  
-      <div class="container">
-
-        <div class="box-news">
-    
-          <div class="big-box">
-            <img src="https://res.edu.vn/wp-content/uploads/2021/12/unit-46-topic-food.jpeg" alt="">
-            
-            <div class="des">
-            <h2>Gà rán</h2>
-              <p>
-                Gà rán miền Nam Hoa Kỳ, hay còn gọi là gà rán, là một món ăn xuất xứ từ miền Nam Hoa Kỳ; nguyên liệu chính là những miếng thịt gà đã được lăn bột rồi chiên trên chảo, chiên ngập dầu, chiên áp suất hoặc chiên không dầu
-              </p>
-                <a href="https://drive.google.com/drive/folders/1jijlQrdYkUo9_3eLV5ATk9E4Dx5_0fqU" target="_blank" class="see-more">See More</a> <i class="fas fa-chevron-right"></i>
-            </div>
-    
-          </div>
-    
-    
-          <div class="small-boxs">
-            <div class="content">
-              <img src="https://res.edu.vn/wp-content/uploads/2021/12/unit-46-topic-food.jpeg" alt="">
-              <h2>Gà rán</h2>
-              <p>
-                Gà rán miền Nam Hoa Kỳ, hay còn gọi là gà rán, là một món ăn xuất xứ từ miền Nam Hoa Kỳ; nguyên liệu chính là những miếng thịt gà đã được lăn bột rồi chiên trên chảo, chiên ngập dầu, chiên áp suất hoặc chiên không dầu
-              </p>
-              <div class="more">
-                <a href="https://drive.google.com/drive/folders/1jijlQrdYkUo9_3eLV5ATk9E4Dx5_0fqU" target="_blank" class="see-more">See More</a> <i class="fas fa-chevron-right"></i>
-              </div>
-            </div>
-    
-    
-            <div class="content">
-              <img src="https://res.edu.vn/wp-content/uploads/2021/12/unit-46-topic-food.jpeg" alt="">
-              <h2>Gà rán</h2>
-              <p>
-                Gà rán miền Nam Hoa Kỳ, hay còn gọi là gà rán, là một món ăn xuất xứ từ miền Nam Hoa Kỳ; nguyên liệu chính là những miếng thịt gà đã được lăn bột rồi chiên trên chảo, chiên ngập dầu, chiên áp suất hoặc chiên không dầu
-              </p>
-              <div class="more">
-                <a href="https://drive.google.com/drive/folders/1jijlQrdYkUo9_3eLV5ATk9E4Dx5_0fqU" target="_blank" class="see-more">See More</a> <i class="fas fa-chevron-right"></i>
-              </div>
-            </div>
-    
-    
-    
-            <div class="content">
-              <img src="https://res.edu.vn/wp-content/uploads/2021/12/unit-46-topic-food.jpeg" alt="">
-              <h2>Gà rán</h2>
-              <p>
-                Gà rán miền Nam Hoa Kỳ, hay còn gọi là gà rán, là một món ăn xuất xứ từ miền Nam Hoa Kỳ; nguyên liệu chính là những miếng thịt gà đã được lăn bột rồi chiên trên chảo, chiên ngập dầu, chiên áp suất hoặc chiên không dầu
-              </p>
-              <div class="more">
-                <a href="https://drive.google.com/drive/folders/1jijlQrdYkUo9_3eLV5ATk9E4Dx5_0fqU" target="_blank" class="see-more">See More</a> <i class="fas fa-chevron-right"></i>
-              </div>
-            </div>
-    
-    
-    
-    
-    
-          </div>
-        </div>
-    
-        <div class="right-side">
-          <!-- <h1>Right bar</h1> -->
-          <img src="https://res.edu.vn/wp-content/uploads/2021/12/unit-46-topic-food.jpeg" alt="">
-          <img src="https://res.edu.vn/wp-content/uploads/2021/12/unit-46-topic-food.jpeg" alt="">
-          <img src="https://res.edu.vn/wp-content/uploads/2021/12/unit-46-topic-food.jpeg" alt="">
-          <img src="https://res.edu.vn/wp-content/uploads/2021/12/unit-46-topic-food.jpeg" alt="">
-          <img src="https://res.edu.vn/wp-content/uploads/2021/12/unit-46-topic-food.jpeg" alt="">
-        </div>
+      <div class="big-box">
+        <img src="https://res.edu.vn/wp-content/uploads/2021/12/unit-46-topic-food.jpeg" alt="">
         
-      </div>
-    </body>
-       
+        <div class="des">
+        <h2>Gà rán</h2>
+          <p>
+            Gà rán miền Nam Hoa Kỳ, hay còn gọi là gà rán, là một món ăn xuất xứ từ miền Nam Hoa Kỳ; nguyên liệu chính là những miếng thịt gà đã được lăn bột rồi chiên trên chảo, chiên ngập dầu, chiên áp suất hoặc chiên không dầu
+          </p>
+            <a href="https://drive.google.com/drive/folders/1jijlQrdYkUo9_3eLV5ATk9E4Dx5_0fqU" target="_blank" class="see-more">See More</a> <i class="fas fa-chevron-right"></i>
+        </div>
 
-</html>
+      </div>
+
+
+      <div class="small-boxs">
+        <div class="content">
+          <img src="https://res.edu.vn/wp-content/uploads/2021/12/unit-46-topic-food.jpeg" alt="">
+          <h2>Gà rán</h2>
+          <p>
+            Gà rán miền Nam Hoa Kỳ, hay còn gọi là gà rán, là một món ăn xuất xứ từ miền Nam Hoa Kỳ; nguyên liệu chính là những miếng thịt gà đã được lăn bột rồi chiên trên chảo, chiên ngập dầu, chiên áp suất hoặc chiên không dầu
+          </p>
+          <div class="more">
+            <a href="https://drive.google.com/drive/folders/1jijlQrdYkUo9_3eLV5ATk9E4Dx5_0fqU" target="_blank" class="see-more">See More</a> <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+
+
+        <div class="content">
+          <img src="https://res.edu.vn/wp-content/uploads/2021/12/unit-46-topic-food.jpeg" alt="">
+          <h2>Gà rán</h2>
+          <p>
+            Gà rán miền Nam Hoa Kỳ, hay còn gọi là gà rán, là một món ăn xuất xứ từ miền Nam Hoa Kỳ; nguyên liệu chính là những miếng thịt gà đã được lăn bột rồi chiên trên chảo, chiên ngập dầu, chiên áp suất hoặc chiên không dầu
+          </p>
+          <div class="more">
+            <a href="https://drive.google.com/drive/folders/1jijlQrdYkUo9_3eLV5ATk9E4Dx5_0fqU" target="_blank" class="see-more">See More</a> <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+
+
+
+        <div class="content">
+          <img src="https://res.edu.vn/wp-content/uploads/2021/12/unit-46-topic-food.jpeg" alt="">
+          <h2>Gà rán</h2>
+          <p>
+            Gà rán miền Nam Hoa Kỳ, hay còn gọi là gà rán, là một món ăn xuất xứ từ miền Nam Hoa Kỳ; nguyên liệu chính là những miếng thịt gà đã được lăn bột rồi chiên trên chảo, chiên ngập dầu, chiên áp suất hoặc chiên không dầu
+          </p>
+          <div class="more">
+            <a href="https://drive.google.com/drive/folders/1jijlQrdYkUo9_3eLV5ATk9E4Dx5_0fqU" target="_blank" class="see-more">See More</a> <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+    </div>
+
+    <div class="right-side">
+      <!-- <h1>Right bar</h1> -->
+      <img src="https://res.edu.vn/wp-content/uploads/2021/12/unit-46-topic-food.jpeg" alt="">
+      <img src="https://res.edu.vn/wp-content/uploads/2021/12/unit-46-topic-food.jpeg" alt="">
+      <img src="https://res.edu.vn/wp-content/uploads/2021/12/unit-46-topic-food.jpeg" alt="">
+      <img src="https://res.edu.vn/wp-content/uploads/2021/12/unit-46-topic-food.jpeg" alt="">
+      <img src="https://res.edu.vn/wp-content/uploads/2021/12/unit-46-topic-food.jpeg" alt="">
+    </div>
+    
+  </div>
+{% endblock %}
+  

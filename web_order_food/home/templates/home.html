@@ -1,251 +1,163 @@
-<!DOCTYPE html>
-<html lang="en">
-    {% load static %}
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Blinker|Roboto|Ubuntu&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://kit.fontawesome.com/2e0586df66.js"></script>
-
-    <link rel="stylesheet" href="{% static 'admin/css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'home/style.css' %}">
-    <title>Order Food Online</title>
-  </head>
-  <body>
-    <!-- Top Bar -->
-    <nav class="navigation">
-      <div class="container">
-        <div class="navwrapper">
-          <h3 class="logo">Faasos</h3>
-          <ul class="menu">
-            {% if user.is_authenticated %}
-            <div class="wp-user-logged">
-              <div class="info">
-                <img src="/static/home/image/default-user.png" id="avatar"/>
-                <span>{{user.email}}</span>
-              </div>
-              <ul class="user-menu">
-                <li>
-                  <a href="/profile"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa đổi thông tin</a>
-                </li>
-                <li>
-                  <a href="/cart"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> Giỏ hàng</a>
-                </li>
-                <li>
-                  <a href="#"> <i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất</a>
-                </li>
-              </ul>
-            </div>
-            <div class="bell">
-              <i class="fa fa-bell" aria-hidden="true"></i>
-            </div>
-            {% else %}
-            <li><a href="{% url 'user:register' %}" class="btn btn-darken">Register</a></li>
-            <li><a href="{% url 'user:login' %}" class="btn btn-transparent">Login</a></li>
-            {% endif %}
-            <li id="wp-menu-icon">
-              <a id="menuIcon">
-                <svg width = "20" height = "20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
-              </a>
-              <ul id='menu'>
-                <li>
-                  <a href="/menu"> <i class="fa fa-camera-retro"></i> Menu</a>
-                </li>
-                <li>
-                  <a href="/news"> <i class="fa fa-newspaper-o" aria-hidden="true"></i> Tin Tức</a>
-                </li>
-                <li>
-                  <a href="/discount"> <i class="fa fa-usd" aria-hidden="true"></i> Thông Tin Khuyến Mãi</a>
-                </li>
-              </ul>
-            </li>       
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <!-- Showcase -->
-    <main>
-      <!-- Section a -->
-      <div class="hero">
-        <div class="container">
-          <div class="searchbox">
-            <h3 class="slogun">Finding your favorite food now!</h3>
-            <div class="inputwrapper">
-              <div class="searchwrapper">
-                <input type="text" name="" class="search" />
-              </div>
-              <div class="orderwrapper">
-                <button class="order">Search</button>
-              </div>
-            </div>
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+  <!-- Section a -->
+  <div class="hero">
+    <div class="container">
+      <div class="searchbox">
+        <h3 class="slogun">Finding your favorite food now!</h3>
+        <div class="inputwrapper">
+          <div class="searchwrapper">
+            <input type="text" name="" class="search" />
+          </div>
+          <div class="orderwrapper">
+            <button class="order">Search</button>
           </div>
         </div>
       </div>
+    </div>
+  </div>
 
-      <!-- Section b -->
-      <div class="section-b">
-        <br>
-        <br>
-        <center> <h1 class= "the_best_sell"> The best seller </h1></center>
-        <div class="container">
-          <!-- Card 1 -->
-          <div class="card">
-            <div class="cardwrapper">
-              <img src="{% static 'admin/img/biryani.jpg' %}" alt="" srcset="" />
-              <h3>Chicken Biryani</h3>
-              <button class="btn btn-transparent">Read More</button>
-            </div>
-          </div>
-          <!-- Card 2 -->
-          <div class="card">
-            <div class="cardwrapper">
-              <img src="{% static 'admin/img/bread.jpg' %}" alt="" srcset="" />
-              <h3>Egg Toast</h3>
-              <button class="btn btn-transparent">Read More</button>
-            </div>
-          </div>
-          <!-- Card 3 -->
-          <div class="card">
-            <div class="cardwrapper">
-              <img src="{% static 'admin/img/buffet.jpg' %}" alt="" srcset="" />
-              <h3>Buffet Lunch</h3>
-              <button class="btn btn-transparent">Read More</button>
-            </div>
-          </div>
+  <!-- Section b -->
+  <div class="section-b">
+    <br>
+    <br>
+    <center> <h1 class= "the_best_sell"> The best seller </h1></center>
+    <div class="container">
+      <!-- Card 1 -->
+      <div class="card">
+        <div class="cardwrapper">
+          <img src="{% static 'admin/img/biryani.jpg' %}" alt="" srcset="" />
+          <h3>Chicken Biryani</h3>
+          <button class="btn btn-transparent">Read More</button>
         </div>
       </div>
-
-      <!-- Section c -->
-      <div class="section-c">
-        <div class="left"></div>
-        <div class="right">
-          <div class="content">
-            <h2>FAASOS ELITE</h2>
-            <p>
-              Faasos Elite is our loyalty programme to express our gratitude to
-              delight our power customers with prioritized delivery, facility to
-              pay once in 15 days, surprise complimentary freebies and more.
-            </p>
-            <div class="more">
-              Find More <i class="fas fa-chevron-right"></i>
-            </div>
-          </div>
+      <!-- Card 2 -->
+      <div class="card">
+        <div class="cardwrapper">
+          <img src="{% static 'admin/img/bread.jpg' %}" alt="" srcset="" />
+          <h3>Egg Toast</h3>
+          <button class="btn btn-transparent">Read More</button>
         </div>
       </div>
-
-      <!-- Section d -->
-      <div class="section-d">
-        <div class="container">
-          <div class="content">
-            Avail exclusive offers only on FAASOS app.
-            <br /><br />Get link to download the app NOW!
-          </div>
-          <div class="subscriptionbox">
-            <input type="text" name="prefix" class="prefix" value="+91" /><input
-              type="tel"
-              name="telephone"
-              class="telephone"
-              placeholder="Enter Mobile No."
-            /><button class="btn-light">Submit</button>
-          </div>
+      <!-- Card 3 -->
+      <div class="card">
+        <div class="cardwrapper">
+          <img src="{% static 'admin/img/buffet.jpg' %}" alt="" srcset="" />
+          <h3>Buffet Lunch</h3>
+          <button class="btn btn-transparent">Read More</button>
         </div>
       </div>
+    </div>
+  </div>
 
-      <!-- Section e -->
-      <div class="section-e">
-        <div class="container">
-          <img src="{% static 'admin/img/limelight-logo.png' %}" width="42" height="42" />
-          <h3>In The Limelight</h3>
-          <i class="fas fa-quote-left"></i>
-          <p>
-            Faasos has managed to seamlessly integrate the technology with the
-            physical process of bringing the food to a consumer's doorstep.
-          </p>
+  <!-- Section c -->
+  <div class="section-c">
+    <div class="left"></div>
+    <div class="right">
+      <div class="content">
+        <h2>FAASOS ELITE</h2>
+        <p>
+          Faasos Elite is our loyalty programme to express our gratitude to
+          delight our power customers with prioritized delivery, facility to
+          pay once in 15 days, surprise complimentary freebies and more.
+        </p>
+        <div class="more">
+          Find More <i class="fas fa-chevron-right"></i>
         </div>
       </div>
+    </div>
+  </div>
 
-      <!-- Section f -->
-      <div class="section-f">
-        <div class="container">
-          <ul>
-            <li><img class="first" src="{% static 'admin/img/economic-time.png' %}"
-                 alt="" /></li>
-            <li><img class="second" src="{% static 'admin/img/forbes.png' %}" alt="" /></li>
-            <li><img class="third" src="{% static 'admin/img/hindu.png' %}"
-                 alt="" /></li>
-          </ul>
-        </div>
+  <!-- Section d -->
+  <div class="section-d">
+    <div class="container">
+      <div class="content">
+        Avail exclusive offers only on FAASOS app.
+        <br /><br />Get link to download the app NOW!
       </div>
-
-      <!-- Section g -->
-      <div class="section-g">
-        <div class="container">
-          <div class="company">
-            <h3>The Company</h3>
-            <ul>
-              <li><a href="#">Careers</a></li>
-              <li><a href="#">Terms & Conditions</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-            </ul>
-          </div>
-          <div class="social">
-            <h2 class="followus">Follow us on</h2>
-            <ul class="sociallinks">
-              <li>
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-              </li>
-              <li>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-              </li>
-              <li>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-              </li>
-              <li>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-              </li>
-            </ul>
-            <h2 class="getintouch">Get in touch</h2>
-            <ul class="contact">
-              <li><i class="fas fa-phone-alt"></i> +91-7700020020</li>
-              <li><i class="fas fa-envelope"></i> crm@faasos.com</li>
-            </ul>
-          </div>
-          <div class="downloads">
-            <h2 class="download">Download our app at</h2>
-            <button class="btn">
-              <i class="fab fa-android"></i> Download from Google Play
-            </button>
-            <br />
-            <button class="btn">
-              <i class="fab fa-apple"></i> Download from Appstore
-            </button>
-            <br />
-            <p>Delivering in 15 cities across India</p>
-          </div>
-        </div>
+      <div class="subscriptionbox">
+        <input type="text" name="prefix" class="prefix" value="+91" /><input
+          type="tel"
+          name="telephone"
+          class="telephone"
+          placeholder="Enter Mobile No."
+        /><button class="btn-light">Submit</button>
       </div>
+    </div>
+  </div>
 
-      <!-- Footer  -->
-      <footer class="footer">
-        <div class="container">
-          <div class="left">
-            <i class="fas fa-motorcycle"></i>
-            Delivering at your doorstep
-          </div>
-          <div class="right">
-            2019 © Faasos Food Services Pvt. Ltd.
-          </div>
-        </div>
-      </footer>
-    </main>
+  <!-- Section e -->
+  <div class="section-e">
+    <div class="container">
+      <img src="{% static 'admin/img/limelight-logo.png' %}" width="42" height="42" />
+      <h3>In The Limelight</h3>
+      <i class="fas fa-quote-left"></i>
+      <p>
+        Faasos has managed to seamlessly integrate the technology with the
+        physical process of bringing the food to a consumer's doorstep.
+      </p>
+    </div>
+  </div>
 
-    <script src="js/main.js"></script>
-    <script src="/static/home/main.js"></script>
+  <!-- Section f -->
+  <div class="section-f">
+    <div class="container">
+      <ul>
+        <li><img class="first" src="{% static 'admin/img/economic-time.png' %}"
+             alt="" /></li>
+        <li><img class="second" src="{% static 'admin/img/forbes.png' %}" alt="" /></li>
+        <li><img class="third" src="{% static 'admin/img/hindu.png' %}"
+             alt="" /></li>
+      </ul>
+    </div>
+  </div>
 
-  </body>
-</html>
+  <!-- Section g -->
+  <div class="section-g">
+    <div class="container">
+      <div class="company">
+        <h3>The Company</h3>
+        <ul>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="social">
+        <h2 class="followus">Follow us on</h2>
+        <ul class="sociallinks">
+          <li>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </li>
+        </ul>
+        <h2 class="getintouch">Get in touch</h2>
+        <ul class="contact">
+          <li><i class="fas fa-phone-alt"></i> +91-7700020020</li>
+          <li><i class="fas fa-envelope"></i> crm@faasos.com</li>
+        </ul>
+      </div>
+      <div class="downloads">
+        <h2 class="download">Download our app at</h2>
+        <button class="btn">
+          <i class="fab fa-android"></i> Download from Google Play
+        </button>
+        <br />
+        <button class="btn">
+          <i class="fab fa-apple"></i> Download from Appstore
+        </button>
+        <br />
+        <p>Delivering in 15 cities across India</p>
+      </div>
+    </div>
+  </div>
+{% endblock%}

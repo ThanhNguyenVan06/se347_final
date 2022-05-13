@@ -31,7 +31,7 @@ class register(View):
         if (password == repassword):
             my_user_name = User.objects.create_user(user_name,my_email,password)
             my_user_name.save()
-            create_user = user.objects.create(fullname = full_name,user = my_user_name)
+            create_user = user.objects.create(fullname = full_name,user_name = my_user_name)
             create_user.save()
             return render(request, 'login.html')
         return HttpResponse("Error")

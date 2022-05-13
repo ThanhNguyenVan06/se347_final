@@ -1,4 +1,20 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
+{% block content %}
+<form action="{% url 'checkout:check_cart' %}" method="post">
+  {% csrf_token %}
+  <table class = "table_bill" border = "1">
+      <tr>
+        <th>Tên món</th>
+        <th>Số lượng</th>
+        <th>Giá</th>
+        <th></th>
+      </tr>
+  </table>
+  <h1 id="total"></h1><br>
+  <input type="submit" value="Submit" class="submit" name = "submit">
+</form>
+{% endblock %}
+<!-- <!DOCTYPE html>
 <html lang="en">
     {% load static %}
 <head>
@@ -25,4 +41,4 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src = "{% static 'admin/js/checkout.js' %}"></script>
 <script src="{% static 'admin/js/process_cart.js' %}"></script>
-</html>
+</html> -->

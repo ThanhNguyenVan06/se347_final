@@ -4,8 +4,8 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 class user(models.Model):
     fullname = models.CharField(max_length=255,default = '')
-    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    user_name = models.OneToOneField(User,on_delete=models.CASCADE)
     address = models.TextField(default='')    
-    def __str__(self):
-        return self.user.username
+    # def __str__(self):
+    #     return self.user_name  user.objects.get(user_name__)
     

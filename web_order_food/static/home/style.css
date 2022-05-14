@@ -1,0 +1,125 @@
+.navwrapper .menu {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  
+  .navwrapper .menu #avatar {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .navwrapper .menu .wp-user-logged {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .navwrapper .menu .wp-user-logged .info {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  
+  .navwrapper .menu .wp-user-logged .user-menu {
+    position: absolute;
+    left: 0;
+    top: 140%;
+    background-color: white;
+    width: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 0;
+    height: 0px;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+  }
+  
+  .navwrapper .menu .wp-user-logged .user-menu li {
+    padding: 15px 15px;
+    margin: 0;
+  }
+  
+  .navwrapper .menu .wp-user-logged .user-menu li:hover {
+    background-color: whitesmoke;
+    cursor: pointer;
+  }
+  
+  .navwrapper .menu .wp-user-logged .user-menu li a {
+    display: block;
+    width: 100%;
+    color: black;
+  }
+  
+  .navwrapper .menu .wp-user-logged .user-menu.active {
+    height: 150px;
+  }
+  
+  .navwrapper .menu .bell {
+    margin: 0 10px;
+  }
+  
+  .navwrapper #wp-menu-icon {
+    position: relative;
+  }
+  
+  .navwrapper #wp-menu-icon #menuIcon {
+    cursor: pointer;
+  }
+  
+  .navwrapper #wp-menu-icon #menu {
+    position: absolute;
+    left: -250%;
+    top: 200%;
+    background-color: white;
+    width: 230px;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 0;
+    height: 0px;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+  }
+  
+  .navwrapper #wp-menu-icon #menu li {
+    padding: 15px 15px;
+    margin: 0;
+  }
+  
+  .navwrapper #wp-menu-icon #menu li:hover {
+    background-color: whitesmoke;
+    cursor: pointer;
+  }
+  
+  .navwrapper #wp-menu-icon #menu li a {
+    display: block;
+    width: 100%;
+    color: black;
+  }
+  
+  .navwrapper #wp-menu-icon #menu.active {
+    height: 150px;
+  }

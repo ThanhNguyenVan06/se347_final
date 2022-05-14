@@ -10,7 +10,14 @@ $(document).ready(function() {
                 "button_value" : $(this).val(),
             },
             success: function(data){
-               $(".cart_count").html(data.count);
+                if (data.count != -1){
+
+                    $(".cart_count").html(data.count);
+                }
+                else {
+                    location.href = "http://127.0.0.1:8000/account/login/"
+                }
+                
             }
         })
     })

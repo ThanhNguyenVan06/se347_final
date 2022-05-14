@@ -1,9 +1,14 @@
+from django.dispatch import receiver
 from django.shortcuts import render
 from django.views import View
+from matplotlib.pyplot import title
 from menu.models import cart,food
+from discount.models import discounts
 from django.http import HttpResponse
 import collections
 from django.http import JsonResponse 
+from django.shortcuts import redirect
+from user.models import user
 # Create your views here.
 class check_cart(View):
     def get(self, request):
@@ -42,9 +47,69 @@ class check_cart(View):
         
         goods_user.update(id_foods = string_id_items)
         
-        return HttpResponse(string_id_items)
+        return redirect('checkout:confirm')
 class check_cart_html(View):
     def get(self, request):
         return render(request, 'checkout.html')
+class confirm_infor(View):
+    def get(self, request):
+        raw_price = 0
+        name = request.user.username
+        fullname_ = user.objects.get(user_name__username=name)
+        fullname = fullname_.fullname
+        goods_user = cart.objects.filter(user_name = name , active = 0)
+        if (goods_user.count() == 0):
+            return HttpResponse("Khong co san pham")
+        else:
+            arr_items= []
+            items = goods_user[0].id_foods
+            arr_id = items.split(",")
+            id_count = collections.Counter(arr_id)
+            for key,value in id_count.items():
+                item = food.objects.get(id = key)
+                raw_price += item.price*value
+                arr_items.append({'id_food':key,
+                                  'quantity':value,
+                                  'name_food' : item.name_food,
+                                  'price' : item.price,
+                                  'image_food': item.image})
+            goods_user.update(raw_price = raw_price, final_price = raw_price)  
+        return render(request, 'comfirm.html',{'fullname':fullname,'raw_price':raw_price})
+        # return HttpResponse(fullname)
+    
     def post(self, request):
-        return render(request, 'checkout.html')
+        name = request.user.username
+        # fullname_ = user.objects.get(user_name__username=name)
+        # fullname = fullname_.fullname
+        raw_price,final_price = 0,0
+        goods_user = cart.objects.filter(user_name = name , active = 0)
+        receiver = request.POST.get("receiver")
+        telephone_number = request.POST.get("nt")
+        address = request.POST.get("address")
+        discount = request.POST.get("discount")
+        if (len(discount)  == 0 ):
+            goods_user.update(receiver= receiver,number_telephone = telephone_number, address_ship = address)
+        elif discounts.objects.filter(title = discount).exists():
+            flag = 1
+            goods_user.update(receiver= receiver,number_telephone = telephone_number, address_ship = address,coupon_code = discount)
+            discount_percent = discounts.objects.filter(title = discount)[0].percent
+            raw_price = goods_user[0].raw_price
+            raw_prices = int(float(raw_price))
+            #raw_price = int(raw_price)
+            final_price = raw_prices*int(discount_percent)/100
+            goods_user.update(final_price = final_price)
+        else:
+            goods_user.update(receiver= receiver,number_telephone = telephone_number, address_ship = address)
+        return render(request, 'payment.html')
+def success( request):
+    name = request.user.username
+    goods_user = cart.objects.filter(user_name = name , active = 0)
+    goods_user.update(paid_bill = True,active = 1)
+    
+    return render(request, 'success.html')
+def success_v2(request):
+    name = request.user.username
+    goods_user = cart.objects.filter(user_name = name , active = 0)
+    goods_user.update(active = 1)
+    return render(request, 'success.html')
+    

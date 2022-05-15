@@ -4,7 +4,7 @@ class Command(BaseCommand):
     def handle(self,*args, **kwargs):
         conn= sqlite3.connect("./db.sqlite3")
         c= conn.cursor()
-        sql="DELETE FROM menu_food"
+        sql="DELETE FROM menu_cart"
         c.execute(sql)
         conn.commit()
         conn.close()

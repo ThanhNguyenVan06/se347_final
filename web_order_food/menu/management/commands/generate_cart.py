@@ -73,6 +73,9 @@ class Command(BaseCommand):
     def add_arguments(self, parser) -> None:
         parser.add_argument("number", type=int, default=50)
     def handle(self,*args, **kwargs):
+        """
+        you should disable the auto_now_add=True before generate mock data
+        """
         number= kwargs['number']
         faker= Faker()
         foods=get_random_food()
@@ -80,7 +83,7 @@ class Command(BaseCommand):
             id_foods, total_price= get_random_food_ids_price(foods)
             # paid bill and statement_bill depend on cart_active
             cart_active= get_random_active_choice()
-            cart.objects.create(
+            cart_object=cart.objects.create(
                 user_name= faker.name(),
                 id_foods= id_foods,
                 bill_code= str(uuid4()),
@@ -89,6 +92,7 @@ class Command(BaseCommand):
                 number_telephone= faker.phone_number(),
                 receiver= get_random_receiver(faker),
                 coupon_code= get_random_coupon_code(),
+                date_created=faker.date_time_between(start_date='-3y', end_date='now'), 
                 raw_price= total_price,
                 final_price= total_price,
                 statement_bill= get_random_bill_choice(cart_active),

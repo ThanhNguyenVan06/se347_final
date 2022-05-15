@@ -355,36 +355,19 @@
                                 </p>
                                 <div class="progress ">
                                     <div role="progressbar" style="width: {{categories_sold.chicken}}%; height:8px;"
-                                        class="progress-bar bg-danger wow animated progress-animated"> <span
-                                            class="sr-only">60% Complete</span> </div>
+                                        class="progress-bar bg-info wow animated progress-animated"> <span
+                                            class="sr-only">{{categories_sold.chicken}}% Complete</span> </div>
                                 </div>
-                                <p>{{categories_sold.items}}</p>
-                                <!-- <p class="m-t-30 f-w-600">{{k}}<span class="pull-right">{{v}}</span></p>
+                                {% for k,v in categories_sold.items %}
+                                {% if k != "chicken" %}
+                                <p class="m-t-30 f-w-600">{{k}}<span class="pull-right">{{v}}%</span></p>
                                 <div class="progress">
                                     <div role="progressbar" style="width: {{v}}%; height:8px;"
                                         class="progress-bar bg-info wow animated progress-animated"> <span
                                             class="sr-only">{{v}}% Complete</span> </div>
-                                </div> -->
-                                <!-- <p class="m-t-30 f-w-600">iPhone<span class="pull-right">65%</span></p>
-                                <div class="progress">
-                                    <div role="progressbar" style="width: 65%; height:8px;"
-                                        class="progress-bar bg-success wow animated progress-animated"> <span
-                                            class="sr-only">60% Complete</span> </div>
                                 </div>
-
-                                <p class="m-t-30 f-w-600">Samsung<span class="pull-right">65%</span></p>
-                                <div class="progress">
-                                    <div role="progressbar" style="width: 65%; height:8px;"
-                                        class="progress-bar bg-warning wow animated progress-animated"> <span
-                                            class="sr-only">60% Complete</span> </div>
-                                </div>
-
-                                <p class="m-t-30 f-w-600">android<span class="pull-right">65%</span></p>
-                                <div class="progress m-b-30">
-                                    <div role="progressbar" style="width: 65%; height:8px;"
-                                        class="progress-bar bg-success wow animated progress-animated"> <span
-                                            class="sr-only">60% Complete</span> </div>
-                                </div> -->
+                                {% endif %}
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -403,47 +386,25 @@
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Product</th>
-                                                <th>quantity</th>
+                                                <th>Price</th>
                                                 <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {% for cart in pending_cart_list %}
                                             <tr>
-                                                <td>John Abraham</td>
-                                                <td><span>iBook</span></td>
-                                                <td><span>456 pcs</span></td>
-                                                <td><span class="badge badge-success">Done</span></td>
+                                                <td>{{cart.user_name}}</td>
+                                                <td><span>{{cart.food_bought}}</span></td>
+                                                <td><span>{{cart.total_price}}</span></td>
+                                                {% if cart.status == "pending" %}
+                                                <td><span class="badge badge-danger">{{cart.status}}</span></td>
+                                                {% elif cart.status == "delivering" %}
+                                                <td><span class="badge badge-warning">{{cart.status}}</span></td>
+                                                {% else %}
+                                                <td><span class="badge badge-success">{{cart.status}}</span></td>
+                                                {% endif %}
                                             </tr>
-                                            <tr>
-                                                <td>John Abraham</td>
-                                                <td><span>iBook</span></td>
-                                                <td><span>456 pcs</span></td>
-                                                <td><span class="badge badge-success">Done</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>John Abraham</td>
-                                                <td><span>iBook</span></td>
-                                                <td><span>456 pcs</span></td>
-                                                <td><span class="badge badge-success">Done</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>John Abraham</td>
-                                                <td><span>iBook</span></td>
-                                                <td><span>456 pcs</span></td>
-                                                <td><span class="badge badge-success">Done</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>John Abraham</td>
-                                                <td><span>iBook</span></td>
-                                                <td><span>456 pcs</span></td>
-                                                <td><span class="badge badge-danger">pending</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>John Abraham</td>
-                                                <td><span>iBook</span></td>
-                                                <td><span>456 pcs</span></td>
-                                                <td><span class="badge badge-success">Done</span></td>
-                                            </tr>
+                                            {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
@@ -456,50 +417,6 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="card">
-                                    <div class="card-title">
-                                        <h4>Message </h4>
-                                    </div>
-                                    <div class="recent-comment">
-                                        <div class="media">
-
-                                            <div class="media-body">
-                                                <h4 class="media-heading">john doe</h4>
-                                                <p>Cras sit amet nibh libero, in gravida nulla. </p>
-                                                <p class="comment-date">October 21, 2018</p>
-                                            </div>
-                                        </div>
-                                        <div class="media">
-
-                                            <div class="media-body">
-                                                <h4 class="media-heading">john doe</h4>
-                                                <p>Cras sit amet nibh libero, in gravida nulla. </p>
-                                                <p class="comment-date">October 21, 2018</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="media">
-
-                                            <div class="media-body">
-                                                <h4 class="media-heading">john doe</h4>
-                                                <p>Cras sit amet nibh libero, in gravida nulla. </p>
-                                                <p class="comment-date">October 21, 2018</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="media no-border">
-
-                                            <div class="media-body">
-                                                <h4 class="media-heading">Mr. Michael</h4>
-                                                <p>Cras sit amet nibh libero, in gravida nulla. </p>
-                                                <div class="comment-date">October 21, 2018</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /# card -->
-                            </div>
                             <!-- /# column -->
                             <div class="col-lg-6">
                                 <div class="card">
@@ -508,8 +425,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
 

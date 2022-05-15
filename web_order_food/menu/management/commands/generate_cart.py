@@ -18,6 +18,7 @@ def get_random_food():
     foods= c.fetchall()
     conn.close()
     return foods
+
 def get_random_food_ids_price(foods):
     food_bought_number= random.randrange(1, len(foods))
     food_bought=random.choices(foods,k= food_bought_number)
@@ -27,19 +28,35 @@ def get_random_food_ids_price(foods):
         food_ids.append(str(i[0]))
         total_price+= i[1]
     return ",".join(f for f in food_ids), total_price
-def get_random_bill_choice():
-    statement_bill_choice= random.randrange(1,3)
-    return str(statement_bill_choice)
+
+def get_random_bill_choice(active):
+    """
+    based on the active
+    active =1 -> delivering or delivered
+    active =0 -> pending
+    """
+    if active ==1:
+        return random.choices([1,2], weights=[1,2], k=1)[0]
+    return 0 
+
 def get_random_receiver(faker):
     is_empty= bool(random.getrandbits(1))
     if is_empty:
         return ""
     else:
         return faker.name()
-def get_random_paid_bill():
-    return bool(random.getrandbits(1))
+
+def get_random_paid_bill(active):
+    """
+    an inactive cart can be paid1
+    """
+    if active ==0:
+        return False 
+    return random.choices([False,True], weights=[1,2])[0]
+
 def get_random_active_choice():
-    return random.randrange(0,1)
+    return random.choices([0,1], weights=[2,8], k=1)[0]
+    
 def get_random_coupon_code():
     """
     We have 4 type of coupon code:
@@ -61,17 +78,19 @@ class Command(BaseCommand):
         foods=get_random_food()
         for _ in tqdm(range(number)):
             id_foods, total_price= get_random_food_ids_price(foods)
+            # paid bill and statement_bill depend on cart_active
+            cart_active= get_random_active_choice()
             cart.objects.create(
                 user_name= faker.name(),
                 id_foods= id_foods,
                 bill_code= str(uuid4()),
-                active= get_random_active_choice(),
+                active= cart_active,
                 address_ship= faker.address(),
                 number_telephone= faker.phone_number(),
                 receiver= get_random_receiver(faker),
                 coupon_code= get_random_coupon_code(),
                 raw_price= total_price,
                 final_price= total_price,
-                statement_bill= get_random_bill_choice(),
-                paid_bill= get_random_paid_bill()
+                statement_bill= get_random_bill_choice(cart_active),
+                paid_bill= get_random_paid_bill(cart_active)
             ).save()

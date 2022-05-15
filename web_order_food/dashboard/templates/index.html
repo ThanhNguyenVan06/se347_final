@@ -21,6 +21,9 @@
     <link href="{% static 'dashboard/css/lib/owl.theme.default.min.css' %}" rel="stylesheet">
     <link href="{% static 'dashboard/css/helper.css' %}" rel="stylesheet">
     <link href="{% static 'dashboard/css/style.css' %}" rel="stylesheet">
+    <script src="{% static 'dashboard/js/lib/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'dashboard/js/lib/morris-chart/raphael-min.js' %}"></script>
+    <script src="{% static 'dashboard/js/lib/morris-chart/morris.js' %}"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
     <!--[if lt IE 9]>
@@ -300,6 +303,7 @@
                                 </div>
                                 <div class="media-body media-text-right">
                                     <h2>{{total_customer}}</h2>
+                                    <h2>{{extra_area_chart_var_dicts}}</h2>
                                     <p class="m-b-0">Customer</p>
                                 </div>
                             </div>
@@ -315,6 +319,29 @@
                             <div class="card-body">
                                 <h4 class="card-title">Extra Area Chart</h4>
                                 <div id="extra-area-chart"></div>
+                                <script>
+                                    var data_list = {{ extra_area_chart_var_list | safe }};
+                                    var categoryList = {{ category_list | safe}}
+                                    // Extra chart
+                                    Morris.Area({
+                                        element: 'extra-area-chart',
+                                        data: data_list,
+                                        lineColors: ['#26DAD2', '#fc6180', '#62d1f3', '#ffb64d', '#4680ff'],
+                                        xkey: 'period',
+                                        ykeys: categoryList,
+                                        labels: categoryList,
+                                        pointSize: 0,
+                                        lineWidth: 0,
+                                        resize: true,
+                                        fillOpacity: 0.8,
+                                        behaveLikeLine: true,
+                                        gridLineColor: '#e0e0e0',
+                                        hideHover: 'auto'
+
+                                    });
+
+
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -324,21 +351,21 @@
                     <div class="col-lg-4">
                         <div class="card">
                             <div class="card-body browser">
-                                <p class="f-w-600">iMacs <span class="pull-right">85%</span></p>
+                                <p class="f-w-600">chicken<span class="pull-right">{{categories_sold.chicken}}%</span>
+                                </p>
                                 <div class="progress ">
-                                    <div role="progressbar" style="width: 85%; height:8px;"
+                                    <div role="progressbar" style="width: {{categories_sold.chicken}}%; height:8px;"
                                         class="progress-bar bg-danger wow animated progress-animated"> <span
                                             class="sr-only">60% Complete</span> </div>
                                 </div>
-
-                                <p class="m-t-30 f-w-600">iBooks<span class="pull-right">90%</span></p>
+                                <p>{{categories_sold.items}}</p>
+                                <!-- <p class="m-t-30 f-w-600">{{k}}<span class="pull-right">{{v}}</span></p>
                                 <div class="progress">
-                                    <div role="progressbar" style="width: 90%; height:8px;"
+                                    <div role="progressbar" style="width: {{v}}%; height:8px;"
                                         class="progress-bar bg-info wow animated progress-animated"> <span
-                                            class="sr-only">60% Complete</span> </div>
-                                </div>
-
-                                <p class="m-t-30 f-w-600">iPhone<span class="pull-right">65%</span></p>
+                                            class="sr-only">{{v}}% Complete</span> </div>
+                                </div> -->
+                                <!-- <p class="m-t-30 f-w-600">iPhone<span class="pull-right">65%</span></p>
                                 <div class="progress">
                                     <div role="progressbar" style="width: 65%; height:8px;"
                                         class="progress-bar bg-success wow animated progress-animated"> <span
@@ -357,7 +384,7 @@
                                     <div role="progressbar" style="width: 65%; height:8px;"
                                         class="progress-bar bg-success wow animated progress-animated"> <span
                                             class="sr-only">60% Complete</span> </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -575,7 +602,8 @@
     <!-- Amchart -->
     <script src="{% static 'dashboard/js/lib/morris-chart/raphael-min.js' %}"></script>
     <script src="{% static 'dashboard/js/lib/morris-chart/morris.js' %}"></script>
-    <script src="{% static 'dashboard/js/lib/morris-chart/dashboard1-init.js' %}"></script>
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script> -->
+    <!-- <script src="{% static 'dashboard/js/lib/morris-chart/dashboard1-init.js' %}"></script> -->
 
 
     <script src="{% static 'dashboard/js/lib/calendar-2/moment.latest.min.js' %}"></script>

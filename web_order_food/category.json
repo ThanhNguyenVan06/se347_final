@@ -1,0 +1,114 @@
+[
+  {
+    "name_food": "chicken",
+    "category_food_id": 5,
+    "description": "chicken",
+    "image": "..asd",
+    "price": 50,
+    "active": 1
+  },
+  {
+    "name_food": "combo_chicken",
+    "category_food_id": 5,
+    "description": "combo_chicken",
+    "image": "..asd",
+    "price": 100,
+    "active": 1
+  },
+  {
+    "name_food": "fried-chicken",
+    "category_food_id": 5,
+    "description": "fried-chicken",
+    "image": "..asd",
+    "price": 150,
+    "active": 1
+  },
+  {
+    "name_food": "nuggest",
+    "category_food_id": 5,
+    "description": "nuggest",
+    "image": "..asd",
+    "price": 200,
+    "active": 1
+  },
+  {
+    "name_food": "whole-chicken",
+    "category_food_id": 5,
+    "description": "whole-chicken",
+    "image": "..asd",
+    "price": 150,
+    "active": 1
+  },
+  {
+    "name_food": "cereal",
+    "category_food_id": 4,
+    "description": "cereal",
+    "image": "..asd",
+    "price": 50,
+    "active": 1
+  },
+  {
+    "name_food": "chocolate-cake",
+    "category_food_id": 4,
+    "description": "chocolate-cake",
+    "image": "..asd",
+    "price": 50,
+    "active": 1
+  },
+  {
+    "name_food": "cupcake",
+    "category_food_id": 4,
+    "description": "cupcake",
+    "image": "..asd",
+    "price": 50,
+    "active": 1
+  },
+  {
+    "name_food": "dessert",
+    "category_food_id": 4,
+    "description": "dessert",
+    "image": "..asd",
+    "price": 50,
+    "active": 1
+  },
+  {
+    "name_food": "ice-cream",
+    "category_food_id": 4,
+    "description": "ice-cream",
+    "image": "..asd",
+    "price": 50,
+    "active": 1
+  },
+  {
+    "name_food": "pancake",
+    "category_food_id": 4,
+    "description": "pancake",
+    "image": "..asd",
+    "price": 50,
+    "active": 1
+  },
+  {
+    "name_food": "waffles",
+    "category_food_id": 4,
+    "description": "waffles",
+    "image": "..asd",
+    "price": 50,
+    "active": 1
+  },
+  {
+    "name_food": "drinks",
+    "category_food_id": 4,
+    "description": "drinks",
+    "image": "..asd",
+    "price": 20,
+    "active": 1
+  },
+  {
+    "name_food": "orange-juices",
+    "category_food_id": 4,
+    "description": "orange-juices",
+    "image": "..asd",
+    "price": 30,
+    "active": 1
+  }
+]

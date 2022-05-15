@@ -1,0 +1,90 @@
+.navwrapper{
+    .menu{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        #avatar{
+            width: 40px;
+            height: 40px;
+        }
+        .wp-user-logged{
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            cursor: pointer;
+            position: relative;
+            .info{
+                display: flex;
+                align-items: center;
+                flex-direction: row;
+            }
+          
+            .user-menu{
+                position: absolute;
+                left: 0;
+                top: 140%;
+                background-color: white;
+                width: 200px;
+                border-radius: 10px;
+                overflow: hidden;
+                padding: 0;
+                height: 0px;
+                transition: all 0.5s ease-in-out;
+                li{
+                    padding: 15px 15px;
+                    margin: 0;
+                    &:hover{
+                        background-color: whitesmoke;
+                        cursor: pointer;
+                    }
+                    a{
+                        display: block;
+                        width: 100%;
+                        color: black;
+                    }
+                }
+                &.active{
+                    height: 150px;
+                }
+            }
+        }
+        .bell{
+            margin: 0 10px;
+        }
+    }
+    #wp-menu-icon {
+        position: relative;
+        #menuIcon{
+           cursor: pointer;
+        }
+        #menu {
+            position: absolute;
+            left: -250%;
+            top: 200%;
+            background-color: white;
+            width: 230px;
+            border-radius: 10px;
+            overflow: hidden;
+            padding: 0;
+            height: 0px;
+            transition: all 0.5s ease-in-out;
+            li{
+                padding: 15px 15px;
+                margin: 0;
+                &:hover{
+                    background-color: whitesmoke;
+                    cursor: pointer;
+                }
+                a{
+                    display: block;
+                    width: 100%;
+                    color: black;
+                }
+            }
+            &.active{
+                height: 150px;
+            }
+        }
+    }
+
+}

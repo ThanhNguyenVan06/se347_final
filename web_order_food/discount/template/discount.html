@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    {% load static %}
     <title>dinh son </title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="vocher.css">
@@ -9,7 +10,7 @@
     
     <!-- modify -->
     <div class="bound-container">
-
+      {% for coupon in page.object_list %}
       <div class="container" id="box">
         <div class="left-box">
           <img src="https://bestpac.lk/wp-content/uploads/2021/09/voucher.png" alt="">
@@ -17,40 +18,23 @@
   
         <div class="right-box">
           <div class="content">
-            <h3>Vocher Đời Sống</h3>
-            <p>Mã giảm giá 25%</p>
+            <h3>{{ coupon.title }}</h3>
+            <p>Mã giảm giá {{coupon.percent}}%</p>
           </div>
         </div>
       </div>
 
-      <div class="container" id="box">
-        <div class="left-box">
-          <img src="https://bestpac.lk/wp-content/uploads/2021/09/voucher.png" alt="">
-        </div>
-  
-        <div class="right-box">
-          <div class="content">
-            <h3>Vocher Thời Trang</h3>
-            <p>Mã giảm giá 50%</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="container" id="box">
-        <div class="left-box">
-          <img src="https://bestpac.lk/wp-content/uploads/2021/09/voucher.png" alt="">
-        </div>
-  
-        <div class="right-box">
-          <div class="content">
-            <h3>Vocher Đồ Điện Tử</h3>
-            <p>Mã giảm giá 100%</p>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
 
     </div>
-
+    <div class="">
+      {% if page.has_previous %}
+          <a href="{% url 'discount:renderDiscount' %}?page={{page.previous_page_number}}" class=""> previous number</a>
+      {% endif %}
+      {% if page.has_next %}
+          <a href="{% url 'discount:renderDiscount' %}?page={{ page.next_page_number }}" class=""> Next number</a>
+      {% endif %}
+    </div>
 
     <!-- end -->
   </body>

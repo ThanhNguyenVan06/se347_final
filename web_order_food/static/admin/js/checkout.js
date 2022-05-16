@@ -3,17 +3,24 @@ $(document).ready(function() {
         url:'checkout_process/',
         type:'GET',
         success: function(data){
-            var total = 0;
-            for (var i=0; i<data.arr_items.length; i++){
-                $(".table_bill").append("<tr class = \""+i+"\">"+
-                "<td class = \"name_food\">"+data.arr_items[i].name_food+"</td>"+
-                "<td class = \"quantity\">"+"<input type=\"number\" class=\"quantity_\" name=\""+data.arr_items[i].id_food+"\" min=\"1\"  value = \""+data.arr_items[i].quantity +"\">"+"</td>"+
-                "<td class = \"price\">"+data.arr_items[i].quantity * data.arr_items[i].price+"</td>"+
-                "<td><button class=\"btnDelete\">Delete</button></td>"
-                +"</tr>"               
-                );
-                total += data.arr_items[i].quantity * data.arr_items[i].price
+            if (data == 0){
+                window.location = "http://127.0.0.1:8000/checkout/emptycart"; 
             }
+            function cart_not_empty(){
+            var total = 0;
+            // function set_table(total){
+                for (var i=0; i<data.arr_items.length; i++){
+                    $(".table_bill").append("<tr class = \""+i+"\">"+
+                    "<td class = \"name_food\">"+data.arr_items[i].name_food+"</td>"+
+                    "<td class = \"quantity\">"+"<input type=\"number\" class=\"quantity_\" name=\""+data.arr_items[i].id_food+"\" min=\"1\"  value = \""+data.arr_items[i].quantity +"\">"+"</td>"+
+                    "<td class = \"price\">"+data.arr_items[i].quantity * data.arr_items[i].price+"</td>"+
+                    "<td><button class=\"btnDelete\">Delete</button></td>"
+                    +"</tr>"               
+                    );
+                    total += data.arr_items[i].quantity * data.arr_items[i].price
+                }
+            // }
+            //setTimeout(set_table,500,total);
 
             var total_text = document.getElementById("total");
             total_text.innerHTML = total;
@@ -59,6 +66,9 @@ $(document).ready(function() {
                 total_text.innerHTML = total;
             })
         }
+        setTimeout(cart_not_empty,100)
+    }
+    
     }); 
        
 })

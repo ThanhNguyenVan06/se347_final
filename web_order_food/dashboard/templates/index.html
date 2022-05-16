@@ -303,14 +303,66 @@
                                 </div>
                                 <div class="media-body media-text-right">
                                     <h2>{{total_customer}}</h2>
-                                    <h2>{{extra_area_chart_var_dicts}}</h2>
                                     <p class="m-b-0">Customer</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card p-30">
+                            <div class="media">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2>{{total_revenue_year}}VND</h2>
+                                    <p class="m-b-0">Total revenue year {{curr_year}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card p-30">
+                            <div class="media">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2>{{total_revenue_season}}VND</h2>
+                                    <p class="m-b-0">Total revenue season {{curr_season}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card p-30">
+                            <div class="media">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2>{{total_revenue_month}}VND</h2>
+                                    <p class="m-b-0">Total revenue month {{curr_month}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card p-30">
+                            <div class="media">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2>{{total_revenue_week_up_to_now}}VND</h2>
+                                    <p class="m-b-0">Total week {{curr_week}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row bg-white m-l-0 m-r-0 box-shadow ">
 
                     <!-- column -->
@@ -373,45 +425,7 @@
                     </div>
                     <!-- column -->
                 </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>Recent Orders </h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Product</th>
-                                                <th>Price</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for cart in pending_cart_list %}
-                                            <tr>
-                                                <td>{{cart.user_name}}</td>
-                                                <td><span>{{cart.food_bought}}</span></td>
-                                                <td><span>{{cart.total_price}}</span></td>
-                                                {% if cart.status == "pending" %}
-                                                <td><span class="badge badge-danger">{{cart.status}}</span></td>
-                                                {% elif cart.status == "delivering" %}
-                                                <td><span class="badge badge-warning">{{cart.status}}</span></td>
-                                                {% else %}
-                                                <td><span class="badge badge-success">{{cart.status}}</span></td>
-                                                {% endif %}
-                                            </tr>
-                                            {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
 
 
                 <div class="row">

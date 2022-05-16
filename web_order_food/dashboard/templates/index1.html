@@ -20,6 +20,11 @@
     <link href="{% static 'dashboard/css/lib/chartist/chartist.min.css' %}" rel="stylesheet">
     <link href="{% static 'dashboard/css/helper.css' %}" rel="stylesheet">
     <link href="{% static 'dashboard/css/style.css' %}" rel="stylesheet">
+    <script src="{% static 'dashboard/js/lib/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'dashboard/js/lib/chartist/chartist.min.js' %}"></script>
+    <script src="{% static 'dashboard/js/lib/chartist/chartist-plugin-tooltip.min.js' %}"></script>
+    <script src="{% static 'dashboard/js/lib/chartist/chartist-init.js' %}"></script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
     <!--[if lt IE 9]>
@@ -258,63 +263,49 @@
             </div>
             <!-- End Bread crumb -->
             <!-- Container fluid  -->
-            <div class="container-fluid">
+            <class="container-fluid">
                 <!-- Start Page Content -->
                 <div class="row">
-                    <div class="col-md-3">
-                        <div class="card bg-primary p-20">
+                    <div class="col-md-4">
+                        <div class="card bg-danger p-20">
                             <div class="media widget-ten">
                                 <div class="media-left meida media-middle">
                                     <span><i class="ti-bag f-s-40"></i></span>
                                 </div>
                                 <div class="media-body media-text-right">
-                                    <h2 class="color-white">{{total_revenue_year}}</h2>
-                                    <p class="m-b-0">Total Revenue {{curr_year}}</p>
+                                    <h2 class="color-white">{{order_statuses.0}}</h2>
+                                    <p class="m-b-0">Pending orders</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="card bg-pink p-20">
+                    <div class="col-md-4">
+                        <div class="card bg-warning p-20">
                             <div class="media widget-ten">
                                 <div class="media-left meida media-middle">
-                                    <span><i class="ti-comment f-s-40"></i></span>
+                                    <span><i class="ti-truck f-s-40"></i></span>
                                 </div>
                                 <div class="media-body media-text-right">
-                                    <h2 class="color-white">${{total_revenue_month}}</h2>
-                                    <p class="m-b-0">Total revenue month {{curr_month}}</p>
+                                    <h2 class="color-white">{{order_statuses.1}}</h2>
+                                    <p class="m-b-0">Delivering orders</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="card bg-success p-20">
                             <div class="media widget-ten">
                                 <div class="media-left meida media-middle">
                                     <span><i class="ti-vector f-s-40"></i></span>
                                 </div>
                                 <div class="media-body media-text-right">
-                                    <h2 class="color-white">${{total_revenue_season}}</h2>
-                                    <p class="m-b-0">Total revenue season {{curr_season}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card bg-danger p-20">
-                            <div class="media widget-ten">
-                                <div class="media-left meida media-middle">
-                                    <span><i class="ti-location-pin f-s-40"></i></span>
-                                </div>
-                                <div class="media-body media-text-right">
-                                    <h2 class="color-white">${{total_revenue_week_up_to_now}}</h2>
-                                    <p class="m-b-0">Total revenue week</p>
+                                    <h2 class="color-white">{{order_statuses.2}}</h2>
+                                    <p class="m-b-0">Delivered Orders</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="card">
@@ -322,241 +313,138 @@
                                 <h4>Sales</h4>
                             </div>
                             <div class="sales-chart">
-                                <div class="ct-bar-chart" style="height:350px"></div>
+                                <div class="ct-bar-chart2" style="height:435px"></div>
+                                <script>
+                                    var labels = {{ month_list | safe}};
+                                    var series = {{ categories_sold_months | safe }}
+                                    var data = {
+                                        labels: labels,
+                                        series: [series],
+                                    };
+                                    var options = {
+                                        seriesBarDistance: 10,
+                                    };
+
+                                    var responsiveOptions = [
+                                        ['screen and (max-width: 640px)', {
+                                            seriesBarDistance: 5,
+
+                                            axisX: {
+                                                labelInterpolationFnc: function (value) {
+                                                    return value[0];
+                                                }
+                                            }
+                                        }]
+                                    ];
+
+                                    new Chartist.Bar('.ct-bar-chart2', data, options, responsiveOptions);
+                                </script>
+
                             </div>
                         </div>
                         <!-- /# card -->
                     </div>
-                    <!-- /# column -->
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>Visitor in Device</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover ">
-                                        <thead>
-                                            <tr>
-                                                <th>Device</th>
-                                                <th>Visits</th>
-                                                <th>Avg. time</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Unknown</td>
-                                                <td>2,456</td>
-                                                <td>00:02:36</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Apple iPad</td>
-                                                <td>1,006</td>
-                                                <td>00:03:41</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Apple iPhone</td>
-                                                <td>68</td>
-                                                <td>00:04:10</td>
-                                            </tr>
-                                            <tr>
-                                                <td>HTC Desire</td>
-                                                <td>38</td>
-                                                <td>00:01:40</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Samsung</td>
-                                                <td>20</td>
-                                                <td>00:04:54</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Apple iPad</td>
-                                                <td>1,006</td>
-                                                <td>00:03:41</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="card nestable-cart">
-                            <div class="card-title">
-                                <h4>World Map</h4>
-
-                            </div>
-                            <div class="datamap">
-                                <div id="world-datamap"></div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-block">
-                                <h4 class="card-title">Visitor</h4>
+                                <h4 class="card-title">Visitor</h4>2
                                 <div class="ct-svg-chart" style="height:420px"></div>
                             </div>
                         </div>
                     </div>
                     <!-- /# column -->
                 </div>
-                <!-- /# row -->
-
                 <div class="row">
-
-                    <div class="col-lg-4">
+                    <div class="col-lg-12">
                         <div class="card">
                             <div class="card-title">
-                                <h4>Project</h4>
+                                <h4>Recent Orders </h4>
                             </div>
                             <div class="card-body">
-                                <div class="current-progress">
-                                    <div class="progress-content">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="progress-text">Website</div>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="current-progressbar">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-primary w-40"
-                                                            role="progressbar" aria-valuenow="40" aria-valuemin="0"
-                                                            aria-valuemax="100">
-                                                            40%
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-content">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="progress-text">Android</div>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="current-progressbar">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-primary w-60"
-                                                            role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                                            aria-valuemax="100">
-                                                            60%
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-content">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="progress-text">Ios</div>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="current-progressbar">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-primary w-70"
-                                                            role="progressbar" aria-valuenow="70" aria-valuemin="0"
-                                                            aria-valuemax="100">
-                                                            70%
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-content">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="progress-text">Mobile</div>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="current-progressbar">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-primary w-90"
-                                                            role="progressbar" aria-valuenow="90" aria-valuemin="0"
-                                                            aria-valuemax="100">
-                                                            90%
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-content">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="progress-text">Android</div>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="current-progressbar">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-primary w-60"
-                                                            role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                                            aria-valuemax="100">
-                                                            60%
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-content">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="progress-text">Ios</div>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="current-progressbar">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-primary w-70"
-                                                            role="progressbar" aria-valuenow="70" aria-valuemin="0"
-                                                            aria-valuemax="100">
-                                                            70%
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-content">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="progress-text">Mobile</div>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="current-progressbar">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-primary w-90"
-                                                            role="progressbar" aria-valuenow="90" aria-valuemin="0"
-                                                            aria-valuemax="100">
-                                                            90%
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Product</th>
+                                                <th>Price</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for cart in cart_list %}
+                                            <tr>
+                                                <td>{{cart.user_name}}</td>
+                                                <td><span>{{cart.food_bought}}</span></td>
+                                                <td><span>{{cart.total_price}}</span></td>
+                                                {% if cart.status == "pending" %}
+                                                <td><span class="badge badge-danger">{{cart.status}}</span></td>
+                                                {% elif cart.status == "delivering" %}
+                                                <td><span class="badge badge-warning">{{cart.status}}</span></td>
+                                                {% else %}
+                                                <td><span class="badge badge-success">{{cart.status}}</span></td>
+                                                {% endif %}
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
+
                     </div>
-                    <!-- /# column -->
+                    <div class="col-lg-12">
+                        <nav aria-label="Page navigation">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-center">
+                                    {% if page_cart.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page=1" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">begin</span>
+                                        </a>
+                                    </li> {% endif %}
+
+                                    {% for n in page_cart.paginator.page_range %}
+                                    {% if page_cart.number == n %}
+                                    <li class="page-item active">
+                                        <span class="page-link">{{ n }}<span class="sr-only">(current)</span></span>
+                                    </li>
+                                    {% elif n > page_cart.number|add:'-3' and n < page_cart.number|add:'3' %} <li
+                                        class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+                                        {% endif %}
+                                        {% endfor %}
+
+                                        {% if page_cart.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_cart.paginator.num_pages }}"
+                                                aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                                <span class="sr-only">end</span>
+                                            </a>
+                                        </li>
+                                        {% endif %}
+                                </ul>
+                            </nav>
+                        </nav>
+                    </div>
                 </div>
 
-            </div>
 
+                <!-- /# row -->
 
-            <!-- End PAge Content -->
+                <!-- /# column -->
+                </class>
         </div>
-        <!-- End Container fluid  -->
-        <!-- footer -->
-        <footer class="footer"> © 2018 All rights reserved. Template designed by <a
-                href="https://colorlib.com">Colorlib</a></footer>
-        <!-- End footer -->
+
+
+        <!-- End PAge Content -->
+    </div>
+    <!-- End Container fluid  -->
+    <!-- footer -->
+    <footer class="footer"> © 2018 All rights reserved. Template designed by <a href="https://colorlib.com">Colorlib</a>
+    </footer>
+    <!-- End footer -->
     </div>
     <!-- End Page wrapper  -->
     </div>
@@ -573,18 +461,18 @@
 
     <script src="{% static 'dashboard/js/lib/datamap/d3.min.js' %}"></script>
     <script src="{% static 'dashboard/js/lib/datamap/topojson.js' %}"></script>
-    <script src="{% static 'dashboard/js/lib/datamap/datamaps.world.min.js' %}"></script>
-    <script src="{% static 'dashboard/js/lib/datamap/datamap-init.js' %}"></script>
+    <!-- <script src="{% static 'dashboard/js/lib/datamap/datamaps.world.min.js' %}"></script> -->
+    <!-- <script src="{% static 'dashboard/js/lib/datamap/datamap-init.js' %}"></script> -->
 
     <script src="{% static 'dashboard/js/lib/weather/jquery.simpleWeather.min.js' %}"></script>
     <script src="{% static 'dashboard/js/lib/weather/weather-init.js' %}"></script>
     <script src="{% static 'dashboard/js/lib/owl-carousel/owl.carousel.min.js' %}"></script>
     <script src="{% static 'dashboard/js/lib/owl-carousel/owl.carousel-init.js' %}"></script>
-
-
     <script src="{% static 'dashboard/js/lib/chartist/chartist.min.js' %}"></script>
     <script src="{% static 'dashboard/js/lib/chartist/chartist-plugin-tooltip.min.js' %}"></script>
     <script src="{% static 'dashboard/js/lib/chartist/chartist-init.js' %}"></script>
+
+
     <!--Custom JavaScript -->
     <script src="{% static 'dashboard/js/custom.min.js' %}"></script>
 </body>

@@ -1,8 +1,8 @@
 from django.core.management.base import BaseCommand
-from django.dispatch import receiver
 from faker import Faker
 from tqdm import tqdm
 from uuid import uuid4
+import pytz
 from menu.models import cart
 import sqlite3
 import random
@@ -83,7 +83,8 @@ class Command(BaseCommand):
             id_foods, total_price= get_random_food_ids_price(foods)
             # paid bill and statement_bill depend on cart_active
             cart_active= get_random_active_choice()
-            cart_object=cart.objects.create(
+            utc = pytz.timezone('UTC')
+            cart.objects.create(
                 user_name= faker.name(),
                 id_foods= id_foods,
                 bill_code= str(uuid4()),
@@ -92,7 +93,7 @@ class Command(BaseCommand):
                 number_telephone= faker.phone_number(),
                 receiver= get_random_receiver(faker),
                 coupon_code= get_random_coupon_code(),
-                date_created=faker.date_time_between(start_date='-3y', end_date='now'), 
+                date_created=faker.date_time_between(start_date='-3y', end_date='now',tzinfo=utc), 
                 raw_price= total_price,
                 final_price= total_price,
                 statement_bill= get_random_bill_choice(cart_active),

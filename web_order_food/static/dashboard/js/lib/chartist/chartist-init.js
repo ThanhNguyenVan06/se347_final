@@ -1,126 +1,126 @@
 
 (function ($) {
-    "use strict";
+  "use strict";
 
 
-    var chart = new Chartist.Line('.ct-chart', {
-        labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-        series: [
-                [16, 9, 7, 8, 5, 4, 6, 2, 3, 3, 4, 6],
-                [4, 5, 3, 7, 3, 5, 5, 3, 4, 4, 5, 5],
-                [5, 3, 4, 5, 6, 3, 3, 4, 5, 6, 3, 4],
-                [3, 4, 5, 6, 7, 6, 4, 5, 6, 7, 6, 3]
-            ]
-    }, {
-        low: 0,
-    });
+  var chart = new Chartist.Line('.ct-chart', {
+    labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+    series: [
+      [16, 9, 7, 8, 5, 4, 6, 2, 3, 3, 4, 6],
+      [4, 5, 3, 7, 3, 5, 5, 3, 4, 4, 5, 5],
+      [5, 3, 4, 5, 6, 3, 3, 4, 5, 6, 3, 4],
+      [3, 4, 5, 6, 7, 6, 4, 5, 6, 7, 6, 3]
+    ]
+  }, {
+    low: 0,
+  });
 
 
-    /*-----------------------------*/
+  /*-----------------------------*/
 
 
-    var data = {
-        labels: ['facebook', 'twitter', 'youtube', 'google plus'],
-        series: [{
-                value: 20,
-                className: "bg-facebook"
+  var data = {
+    labels: ['facebook', 'twitter', 'youtube', 'google plus'],
+    series: [{
+      value: 20,
+      className: "bg-facebook"
     },
-            {
-                value: 10,
-                className: "bg-twitter"
+    {
+      value: 10,
+      className: "bg-twitter"
     },
-            {
-                value: 30,
-                className: "bg-youtube"
+    {
+      value: 30,
+      className: "bg-youtube"
     },
-            {
-                value: 40,
-                className: "bg-google-plus"
+    {
+      value: 40,
+      className: "bg-google-plus"
     }]
-        //        colors: ["#333", "#222", "#111"]
-    };
+    //        colors: ["#333", "#222", "#111"]
+  };
 
-    var options = {
+  var options = {
+    labelInterpolationFnc: function (value) {
+      return value[0]
+    }
+  };
+
+  var responsiveOptions = [
+    ['screen and (min-width: 640px)', {
+      chartPadding: 30,
+      labelOffset: 100,
+      labelDirection: 'explode',
+      labelInterpolationFnc: function (value) {
+        return value;
+      }
+    }],
+    ['screen and (min-width: 1024px)', {
+      labelOffset: 80,
+      chartPadding: 20
+    }]
+  ];
+
+  new Chartist.Pie('.ct-pie-chart', data, options, responsiveOptions);
+
+  /*------------------------------------*/
+
+  var chart = new Chartist.Line('.ct-svg-chart', {
+    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    series: [
+      [1, 5, 2, 5, 4, 3],
+      [2, 3, 4, 8, 1, 2],
+      [5, 4, 3, 2, 1, 0.5]
+    ]
+  }, {
+    low: 0,
+    showArea: true,
+    showPoint: false,
+    fullWidth: true
+  });
+
+  chart.on('draw', function (data) {
+    if (data.type === 'line' || data.type === 'area') {
+      data.element.animate({
+        d: {
+          begin: 2000 * data.index,
+          dur: 2000,
+          from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
+          to: data.path.clone().stringify(),
+          easing: Chartist.Svg.Easing.easeOutQuint
+        }
+      });
+    }
+  });
+
+
+  /*----------------------------------*/
+
+  var data = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    series: [
+      [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
+      [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4],
+      [4, 6, 3, 9, 6, 5, 2, 8, 3, , 5, 4],
+    ]
+  };
+
+  var options = {
+    seriesBarDistance: 10
+  };
+
+  var responsiveOptions = [
+    ['screen and (max-width: 640px)', {
+      seriesBarDistance: 5,
+      axisX: {
         labelInterpolationFnc: function (value) {
-            return value[0]
+          return value[0];
         }
-    };
+      }
+    }]
+  ];
 
-    var responsiveOptions = [
-  ['screen and (min-width: 640px)', {
-            chartPadding: 30,
-            labelOffset: 100,
-            labelDirection: 'explode',
-            labelInterpolationFnc: function (value) {
-                return value;
-            }
-  }],
-  ['screen and (min-width: 1024px)', {
-            labelOffset: 80,
-            chartPadding: 20
-  }]
-];
-
-    new Chartist.Pie('.ct-pie-chart', data, options, responsiveOptions);
-
-    /*------------------------------------*/
-
-    var chart = new Chartist.Line('.ct-svg-chart', {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-        series: [
-    [1, 5, 2, 5, 4, 3],
-    [2, 3, 4, 8, 1, 2],
-    [5, 4, 3, 2, 1, 0.5]
-  ]
-    }, {
-        low: 0,
-        showArea: true,
-        showPoint: false,
-        fullWidth: true
-    });
-
-    chart.on('draw', function (data) {
-        if (data.type === 'line' || data.type === 'area') {
-            data.element.animate({
-                d: {
-                    begin: 2000 * data.index,
-                    dur: 2000,
-                    from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
-                    to: data.path.clone().stringify(),
-                    easing: Chartist.Svg.Easing.easeOutQuint
-                }
-            });
-        }
-    });
-
-    
-    /*----------------------------------*/
-
-    var data = {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        series: [
-    [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
-    [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4],
-    [4, 6, 3, 9, 6, 5, 2, 8, 3, , 5, 4],
-  ]
-    };
-
-    var options = {
-        seriesBarDistance: 10
-    };
-
-    var responsiveOptions = [
-  ['screen and (max-width: 640px)', {
-            seriesBarDistance: 5,
-            axisX: {
-                labelInterpolationFnc: function (value) {
-                    return value[0];
-                }
-            }
-  }]
-];
-
-    new Chartist.Bar('.ct-bar-chart', data, options, responsiveOptions);
+  new Chartist.Bar('.ct-bar-chart', data, options, responsiveOptions);
 
 
 
@@ -152,7 +152,7 @@ new Chartist.Line('.ct-sm-line-chart', {
   ]
 }, {
   fullWidth: true,
-  
+
   plugins: [
     Chartist.plugins.tooltip()
   ],
@@ -191,7 +191,7 @@ new Chartist.Line('#ct-polar-chart', {
   low: -3,
   chartPadding: {
     left: -20,
-    top:10,
+    top: 10,
   },
   showArea: true,
   showLine: false,
@@ -216,8 +216,8 @@ var chart = new Chartist.Line('.ct-animation-chart', {
   labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
   series: [
     [12, 9, 7, 8, 5, 4, 6, 2, 3, 3, 4, 6],
-    [4,  5, 3, 7, 3, 5, 5, 3, 4, 4, 5, 5],
-    [5,  3, 4, 5, 6, 3, 3, 4, 5, 6, 3, 4]
+    [4, 5, 3, 7, 3, 5, 5, 3, 4, 4, 5, 5],
+    [5, 3, 4, 5, 6, 3, 3, 4, 5, 6, 3, 4]
   ]
 }, {
   low: 0
@@ -229,15 +229,15 @@ var seq = 0,
   durations = 500;
 
 // Once the chart is fully created we reset the sequence
-chart.on('created', function() {
+chart.on('created', function () {
   seq = 0;
 });
 
 // On each drawn element by Chartist we use the Chartist.Svg API to trigger SMIL animations
-chart.on('draw', function(data) {
+chart.on('draw', function (data) {
   seq++;
 
-  if(data.type === 'line') {
+  if (data.type === 'line') {
     // If the drawn element is a line we do a simple opacity fade in. This could also be achieved using CSS3 animations.
     data.element.animate({
       opacity: {
@@ -251,7 +251,7 @@ chart.on('draw', function(data) {
         to: 1
       }
     });
-  } else if(data.type === 'label' && data.axis === 'x') {
+  } else if (data.type === 'label' && data.axis === 'x') {
     data.element.animate({
       y: {
         begin: seq * delays,
@@ -262,7 +262,7 @@ chart.on('draw', function(data) {
         easing: 'easeOutQuart'
       }
     });
-  } else if(data.type === 'label' && data.axis === 'y') {
+  } else if (data.type === 'label' && data.axis === 'y') {
     data.element.animate({
       x: {
         begin: seq * delays,
@@ -272,7 +272,7 @@ chart.on('draw', function(data) {
         easing: 'easeOutQuart'
       }
     });
-  } else if(data.type === 'point') {
+  } else if (data.type === 'point') {
     data.element.animate({
       x1: {
         begin: seq * delays,
@@ -296,7 +296,7 @@ chart.on('draw', function(data) {
         easing: 'easeOutQuart'
       }
     });
-  } else if(data.type === 'grid') {
+  } else if (data.type === 'grid') {
     // Using data.axis we get x or y which we can use to construct our animation definition objects
     var pos1Animation = {
       begin: seq * delays,
@@ -330,8 +330,8 @@ chart.on('draw', function(data) {
 });
 
 // For the sake of the example we update the chart every time it's created with a delay of 10 seconds
-chart.on('created', function() {
-  if(window.__exampleAnimateTimeout) {
+chart.on('created', function () {
+  if (window.__exampleAnimateTimeout) {
     clearTimeout(window.__exampleAnimateTimeout);
     window.__exampleAnimateTimeout = null;
   }
@@ -353,8 +353,8 @@ var chart = new Chartist.Line('.ct-svg-chart', {
   fullWidth: true
 });
 
-chart.on('draw', function(data) {
-  if(data.type === 'line' || data.type === 'area') {
+chart.on('draw', function (data) {
+  if (data.type === 'line' || data.type === 'area') {
     data.element.animate({
       d: {
         begin: 2000 * data.index,
@@ -367,33 +367,33 @@ chart.on('draw', function(data) {
   }
 });
 
-// Bar chart
+// // Bar chart
 
-var data = {
-  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-  series: [
-    [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
-    [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4]
-  ]
-};
+// var data = {
+//   labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+//   series: [
+//     [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
+//     [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4]
+//   ]
+// };
 
-var options = {
-  seriesBarDistance: 10
-};
+// var options = {
+//   seriesBarDistance: 10
+// };
 
-var responsiveOptions = [
-  ['screen and (max-width: 640px)', {
-    seriesBarDistance: 5,
+// var responsiveOptions = [
+//   ['screen and (max-width: 640px)', {
+//     seriesBarDistance: 5,
 
-    axisX: {
-      labelInterpolationFnc: function (value) {
-        return value[0];
-      }
-    }
-  }]
-];
+//     axisX: {
+//       labelInterpolationFnc: function (value) {
+//         return value[0];
+//       }
+//     }
+//   }]
+// ];
 
-new Chartist.Bar('.ct-bar-chart', data, options, responsiveOptions);
+// new Chartist.Bar('.ct-bar-chart', data, options, responsiveOptions);
 
 
 // ct-gauge-chart
@@ -405,7 +405,7 @@ new Chartist.Pie('.ct-gauge-chart', {
   donutWidth: 60,
   startAngle: 270,
   total: 200,
-  low:0,
+  low: 0,
   showLabel: false
 });
 
@@ -418,8 +418,8 @@ var chart = new Chartist.Pie('.ct-donute-chart', {
   showLabel: false
 });
 
-chart.on('draw', function(data) {
-  if(data.type === 'slice') {
+chart.on('draw', function (data) {
+  if (data.type === 'slice') {
     // Get the total path length in order to use for dash array animation
     var pathLength = data.element._node.getTotalLength();
 
@@ -434,7 +434,7 @@ chart.on('draw', function(data) {
         id: 'anim' + data.index,
         dur: 1000,
         from: -pathLength + 'px',
-        to:  '0px',
+        to: '0px',
         easing: Chartist.Svg.Easing.easeOutQuint,
         // We need to use `fill: 'freeze'` otherwise our animation will fall back to initial (not visible)
         fill: 'freeze'
@@ -442,7 +442,7 @@ chart.on('draw', function(data) {
     };
 
     // If this was not the first slice, we need to time the animation so that it uses the end sync event of the previous animation
-    if(data.index !== 0) {
+    if (data.index !== 0) {
       animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
     }
 
@@ -458,8 +458,8 @@ chart.on('draw', function(data) {
 });
 
 // For the sake of the example we update the chart every time it's created with a delay of 8 seconds
-chart.on('created', function() {
-  if(window.__anim21278907124) {
+chart.on('created', function () {
+  if (window.__anim21278907124) {
     clearTimeout(window.__anim21278907124);
     window.__anim21278907124 = null;
   }

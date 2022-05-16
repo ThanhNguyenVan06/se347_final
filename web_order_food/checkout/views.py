@@ -4,7 +4,7 @@ from django.views import View
 from matplotlib.pyplot import title
 from menu.models import cart,food
 from discount.models import discounts
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 import collections
 from django.http import JsonResponse 
 from django.shortcuts import redirect
@@ -15,7 +15,9 @@ class check_cart(View):
         user = request.user.username
         goods_user = cart.objects.filter(user_name = user , active = 0)
         if (goods_user.count() == 0):
-            return HttpResponse("Khong co san pham")
+            return HttpResponse(0)
+        elif(len(goods_user[0].id_foods.split(",")) == 0):
+            return HttpResponse(0)
         else:
             arr_items= []
             items = goods_user[0].id_foods
@@ -112,4 +114,6 @@ def success_v2(request):
     goods_user = cart.objects.filter(user_name = name , active = 0)
     goods_user.update(active = 1)
     return render(request, 'success.html')
+def emptycart( request):
+    return render(request, 'empty_cart.html')
     

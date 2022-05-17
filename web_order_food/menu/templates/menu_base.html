@@ -85,8 +85,16 @@
                 </div>
             </div>
             {% endfor %}
-            <div class="clearfix"></div>
 
+            <div class="clearfix"></div>
+            <div class="">
+                {% if all_food.has_previous %}
+                    <a href="{% url 'menu:menu' %}?page={{all_food.previous_page_number}}" class=""> previous number</a>
+                {% endif %}
+                {% if all_food.has_next %}
+                    <a href="{% url 'menu:menu' %}?page={{all_food.next_page_number }}" class=""> Next number</a>
+                {% endif %}
+              </div>
             
 
         </div>

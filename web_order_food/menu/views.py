@@ -7,18 +7,22 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 import time 
 # Create your views here.
 class menu(View):
     def get(self,request):
         user = request.user.username
         all_food = food.objects.all()
+        all_food_panigation = Paginator(all_food,1)
+        index_page = request.GET.get('page')
+        page = all_food_panigation.get_page(index_page)
         goods_user = cart.objects.filter(user_name = user , active = 0)
         if (goods_user.count() == 0):
             count_begin = ''
         else:
             count_begin = len(goods_user[0].id_foods.split(','))
-        return render(request, 'menu_base.html',{'all_food':all_food,'count_begin':count_begin})
+        return render(request, 'menu_base.html',{'all_food':page,'count_begin':count_begin})
     def post(self,request):
         return HttpResponse("hello")
 class add_to_cart(View):

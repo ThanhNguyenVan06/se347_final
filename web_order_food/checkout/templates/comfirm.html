@@ -1,21 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 {% load static %}
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% block style %}
+<link rel="stylesheet" href="{% static 'checkout/styles/checkout.css' %}">
+{% endblock %}
+{% block content %}
+<div class="wp-confirm-form card">
+    <h2 class="card-title">Thông tin người nhận</h1>
     <form action="{% url 'checkout:confirm' %}" method="post">
         {% csrf_token %}
-        <input type="text" name="receiver" id="receiver" placeholder="Tên người nhận" value = "{{ fullname }}" required><br>
-        <input type="number" name="nt" id="number_telephone" placeholder="Nhập số điện thoại" required><br>
-        <input type="text" name="address" id="address" placeholder="Nhập địa chỉ" required><br>
-        <input type="text" name="discount" id="discount" placeholder = "Nhập mã khuyến mãi"><br>
-        <h1> Tổng tiền :  <p class="total_cost" > {{ raw_price }} </p> </p></h1><br>
-        <input type="submit" value="submit">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Tên người nhận</label>
+            <input type="text" class="form-control" name="receiver" id="receiver" placeholder="Tên người nhận"
+                value="{{fullname}}" required>
+        </div>
+        <div class="mb-3">
+            <label for="number_telephone" class="form-label">Số điện thoại</label>
+            <input type="text" class="form-control" name="nt" id="number_telephone" placeholder="Nhập số điện thoại"
+                required>
+        </div>
+        <div class="mb-3">
+            <label for="number_telephone" class="form-label">Địa chỉ</label>
+            <input type="text" class="form-control" name="address" id="address" placeholder="Nhập địa chỉ" required>
+        </div>
+        <div class="mb-3">
+            <label for="discount" class="form-label">Mã giảm giá</label>
+            <input type="text" class="form-control" name="discount" id="discount" placeholder="Nhập mã giảm giá"
+                required>
+        </div>
+        <!-- <input type="text" name="receiver" id="receiver" placeholder="Tên người nhận" value = "{{ fullname }}" required><br> -->
+        <!-- <input type="number" name="nt" id="number_telephone" placeholder="Nhập số điện thoại" required><br> -->
+        <!-- <input type="text" name="address" id="address" placeholder="Nhập địa chỉ" required><br> -->
+        <!-- <input type="text" name="discount" id="discount" placeholder = "Nhập mã khuyến mãi"><br> -->
+        <!-- <h1> Tổng tiền :  <p class="total_cost" > {{ raw_price }} </p> </p></h1><br> -->
+        <div class="wp-total">
+            <h1>Tổng tiền: </h1>
+            <h1>{{raw_price}}</h1>
+        </div>
+        <div class="wp-btn">
+            <input type="submit" value="Submit" class="btn btn-success">
+        </div>
     </form>
-</body>
-</html>
+</div>
+{% endblock%}

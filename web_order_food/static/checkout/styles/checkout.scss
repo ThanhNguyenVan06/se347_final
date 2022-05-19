@@ -1,0 +1,79 @@
+.wp-shopping-cart{
+    padding: 20px 30px;
+    .title{
+        text-align: center;
+    }
+    input{
+        width: 100px
+    }
+    .btnDelete{
+        background-color: red;
+        border-radius: 5px;
+        border: none;
+        color: white;
+    }
+    // .wp-table-cart {
+    //     padding: 10px 30px;
+    // }
+    .wp-btn{
+        display: flex;
+        justify-content: center;
+        .back-to-menu{
+            margin-right: 5px;
+        }
+    }
+    .wp-total{
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+.wp-confirm-form{
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    width: 500px;
+    padding: 20px 20px;
+    .wp-btn{
+        display: flex;
+        justify-content: center;
+    }
+    .wp-total{
+        display: flex;
+        justify-content: flex-start;
+    }
+
+}
+.wp-payment-method{
+    width: 100%;
+    text-align: center;
+    .wp-btn-pay-cash{
+        // display: block;
+        width: 750px!important;
+        height: 55px!important;
+        margin-bottom: 17px;
+    }
+    .cash_on_receipt_contain{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        i{
+            font-size: 20px;
+        }
+        .cash_on_receipt{
+            text-align: center;
+            margin: 0;
+            line-height: 1.5;
+            margin-left: 5px;
+        }
+    }
+}
+.wp-checkout-success{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0px;
+    img{
+        width: 300px;
+
+    }
+}

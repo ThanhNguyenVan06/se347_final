@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from matplotlib.style import context
 from . import views
 from django.views import View
 from django.http import HttpResponse
@@ -7,6 +8,8 @@ from .models import user
 from django.contrib.auth.models import User
 import home
 from django.shortcuts import redirect
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 class login_func(View):
     def get(self,request):
          return render(request, 'login.html')
@@ -15,7 +18,8 @@ class login_func(View):
         user_password = request.POST.get('password')
         my_user = authenticate(username = user_name,password = user_password)
         if my_user is None:
-            return HttpResponse("User không tồn tại")
+            context = "Tài khoản hoặc mật khẩu không đúng"
+            return render(request, 'login.html', {'context':context})
         login(request,my_user)
         return redirect("home_page:home")
 class register(View):
@@ -28,10 +32,19 @@ class register(View):
         password = request.POST.get('password')
         repassword = request.POST.get('repassword')
         my_email = request.POST.get('email')
-        if (password == repassword):
-            my_user_name = User.objects.create_user(user_name,my_email,password)
-            my_user_name.save()
-            create_user = user.objects.create(fullname = full_name,user_name = my_user_name)
-            create_user.save()
-            return render(request, 'login.html')
-        return HttpResponse("Error")
+        context = {}
+        try: 
+            validate_email(my_email)
+            if (password == repassword):
+                my_user_name = User.objects.create_user(user_name,my_email,password)
+                my_user_name.save()
+                create_user = user.objects.create(fullname = full_name,user_name = my_user_name)
+                create_user.save()
+                return render(request, 'login.html')
+            context['repassword'] = "Mật khẩu không khớp"
+            return render(request, 'register.html' ,{'context' : context} )    
+        except ValidationError:
+            context['email'] = "Email không hợp lệ"
+        if (password != repassword):  
+            context['repassword'] = "Mật khẩu không khớp"
+        return render(request, 'register.html' ,context)

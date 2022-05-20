@@ -1,7 +1,6 @@
 from django.dispatch import receiver
 from django.shortcuts import render
 from django.views import View
-from matplotlib.pyplot import title
 from menu.models import cart,food
 from discount.models import discounts
 from django.http import HttpResponse, HttpResponseRedirect

@@ -44,4 +44,21 @@ class add_to_cart(View):
                 goods_user.update(id_foods=goods)
             count = len(goods_user[0].id_foods.split(','))
             return JsonResponse({'count':count,'id':id_food},status=200)
+def search(request):
+    content_search = request.GET.get('search')
+    
+    foods_search = food.objects.filter(name_food__contains = content_search) 
+    all_food_panigation = Paginator(foods_search,2)
+    index_page = request.GET.get('page')
+    page = all_food_panigation.get_page(index_page)
+    
+    user = request.user.username
+    
+    
+    goods_user = cart.objects.filter(user_name = user , active = 0)
+    if (goods_user.count() == 0):
+        count_begin = ''
+    else:
+        count_begin = len(goods_user[0].id_foods.split(','))
+    return render(request, 'menu_search.html',{'all_food':page,'search':content_search,'count_begin':count_begin})    
    

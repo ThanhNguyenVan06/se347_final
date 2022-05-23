@@ -1,4 +1,7 @@
+import json
+import pickle
 from datetime import  datetime
+import os
 from django.shortcuts import render
 from django.views import View
 from menu.models import food, cart, category
@@ -8,7 +11,6 @@ from django.db.models.functions import ExtractYear, ExtractMonth, ExtractDay
 from dashboard.service.food import food_service
 from dashboard.service.time import time_service
 from django.core.paginator import Paginator
-from dashboard.service.category import category_service
 # Create your views here.
 class dashboard(View):
     def get(self,request):
@@ -31,7 +33,6 @@ class dashboard(View):
         # get the total customer
         total_customer= cart.objects.values('user_name').distinct().count()
 
-        # filter out top 5 food sold weekly(up to that day)
         # total category sold for each period
         category_list=[]
         for query in category.objects.values("category"):
@@ -117,11 +118,16 @@ class dashboard(View):
                 })
 class analytic(View):
     def get(self,request): 
-        carts= cart.objects.all()
+        FOOD_NAME_COUNTS_CACHE_DIR="./dashboard/cache/food_name_counts_cache.json"
+        carts= cart.objects.filter(statement_bill__in=[0,1])
         paginator = Paginator(carts,10 ) # Show 25 contacts per page.
         page_number = request.GET.get('page',1)
         page_cart= paginator.get_page(page_number)
         cart_list=[]
+        # calculate best sellers
+        
+        food_name_counts= defaultdict(int)
+        int_to_status= {0: "pending", 1: "delivering", 2: "delivered"}
         for cart_item in page_cart:
             total_price=0
             name_food_boughts=[]
@@ -129,13 +135,25 @@ class analytic(View):
                 food_query= food.objects.get(id=id_food)
                 name_food_boughts.append(food_query.name_food)
                 total_price+=int(food_query.price)
-            pending_cart_item= {
+            cart_item_statuses= {
                 "user_name": cart_item.user_name,
                 "food_bought": ",".join(name for name in name_food_boughts),
                 "total_price": total_price ,
-                "status": cart.statement_bill_choice[0][1]
+                "status":  int_to_status[cart_item.statement_bill]
             }
-            cart_list.append(pending_cart_item)
+            cart_list.append(cart_item_statuses)
+        if os.path.exists(FOOD_NAME_COUNTS_CACHE_DIR):
+            with open(FOOD_NAME_COUNTS_CACHE_DIR, 'r') as j:
+                food_name_counts = json.loads(j.read())
+        else:
+            carts= cart.objects.all()
+            for cart_item in carts:
+                for id_food in cart_item.id_foods.split(","):
+                    food_query= food.objects.get(id=id_food)
+                    food_name_counts[food_query.name_food]+=1
+            food_name_counts = sorted(food_name_counts.items(),key=(lambda i: i[1]))
+            with open(FOOD_NAME_COUNTS_CACHE_DIR, "w") as f:
+                json.dump(food_name_counts, f)
         # get the total revenue of each category following months
         today= datetime.today
         curr_month= today().month
@@ -154,6 +172,9 @@ class analytic(View):
 
         return render(request, 'index1.html',
                     {
+                        "first_best_seller": {"name":food_name_counts[-1][0],"value":food_name_counts[-1][1]},
+                        "second_best_seller": {"name":food_name_counts[-2][0],"value":food_name_counts[-2][1]},
+                        "third_best_seller": {"name":food_name_counts[-3][0],"value":food_name_counts[-3][1]},
                         "order_statuses": order_statuses,
                         "cart_list": cart_list,
                         "page_cart": page_cart,

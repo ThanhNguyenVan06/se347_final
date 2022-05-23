@@ -26,6 +26,7 @@ urlpatterns = [
     path('menu/',include('menu.urls')), 
     path('checkout/',include('checkout.urls')),
     path('news/',include('news.urls')),
+    path('discount/',include('discount.urls'))
 ]
 
 

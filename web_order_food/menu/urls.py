@@ -7,5 +7,5 @@ urlpatterns = [
    
     path('',views.menu.as_view(),name='menu'),
     path('cart/',views.add_to_cart.as_view(),name='add_to_cart'),
-
+    path('search/',views.search,name = 'search'),
 ]

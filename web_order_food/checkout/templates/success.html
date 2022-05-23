@@ -1,2 +1,12 @@
+{% extends "base.html" %}
 {% load static %}
-<h1>Mua hàng thành công</h1>
+{% block style %}
+<link rel="stylesheet" href="{% static 'checkout/styles/checkout.css' %}">
+{% endblock %}
+{% block content %}
+<div class="wp-checkout-success">
+    <img src="{% static 'checkout/images/check-icon.png' %}"/>
+    <h1>Mua hàng thành công</h1>
+    <a href="/menu" class="btn btn-outline-warning back-to-menu">Back to menu</a>
+</div>
+{% endblock%}

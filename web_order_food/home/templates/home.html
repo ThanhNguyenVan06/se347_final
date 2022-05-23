@@ -7,15 +7,18 @@
     <div class="searchbox">
       <h3 class="slogun">Finding your favorite food now!</h3>
       <div class="inputwrapper">
-        <div class="searchwrapper">
-          <input type="text" name="" class="search" />
-        </div>
-        <div class="orderwrapper">
-          <button class="order">Search</button>
-        </div>
+        <form action="{% url 'menu:search' %}" method="GET">
+          <div class="searchwrapper">
+            <input type="text" name="search" class="search" />
+          </div>
+          <div class="orderwrapper">
+            <input type="submit" class="order" value="Search">
+          </div>
+        </form>
       </div>
     </div>
   </div>
+</div>
 </div>
 
 <!-- Section b -->

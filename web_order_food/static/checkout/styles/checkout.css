@@ -1,0 +1,123 @@
+.wp-shopping-cart {
+  padding: 20px 30px;
+}
+
+.wp-shopping-cart .title {
+  text-align: center;
+}
+
+.wp-shopping-cart input {
+  width: 100px;
+}
+
+.wp-shopping-cart .btnDelete {
+  background-color: red;
+  border-radius: 5px;
+  border: none;
+  color: white;
+}
+
+.wp-shopping-cart .wp-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.wp-shopping-cart .wp-btn .back-to-menu {
+  margin-right: 5px;
+}
+
+.wp-shopping-cart .wp-total {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.wp-confirm-form {
+  margin: 20px auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 500px;
+  padding: 20px 20px;
+}
+
+.wp-confirm-form .wp-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.wp-confirm-form .wp-total {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.wp-payment-method {
+  width: 100%;
+  text-align: center;
+}
+
+.wp-payment-method .wp-btn-pay-cash {
+  width: 750px !important;
+  height: 55px !important;
+  margin-bottom: 17px;
+}
+
+.wp-payment-method .cash_on_receipt_contain {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.wp-payment-method .cash_on_receipt_contain i {
+  font-size: 20px;
+}
+
+.wp-payment-method .cash_on_receipt_contain .cash_on_receipt {
+  text-align: center;
+  margin: 0;
+  line-height: 1.5;
+  margin-left: 5px;
+}
+
+.wp-checkout-success {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 20px 0px;
+}
+
+.wp-checkout-success img {
+  width: 300px;
+}
+/*# sourceMappingURL=checkout.css.map */

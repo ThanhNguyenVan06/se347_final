@@ -1,7 +1,6 @@
 from django.dispatch import receiver
 from django.shortcuts import render
 from django.views import View
-from matplotlib.pyplot import title
 from menu.models import cart,food
 from discount.models import discounts
 from django.http import HttpResponse, HttpResponseRedirect
@@ -12,6 +11,7 @@ from user.models import user
 # Create your views here.
 class check_cart(View):
     def get(self, request):
+        
         user = request.user.username
         goods_user = cart.objects.filter(user_name = user , active = 0)
         if (goods_user.count() == 0):
@@ -52,6 +52,8 @@ class check_cart(View):
         return redirect('checkout:confirm')
 class check_cart_html(View):
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('user:login')
         return render(request, 'checkout.html')
 class confirm_infor(View):
     def get(self, request):

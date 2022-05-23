@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-
+import smtplib
+s = smtplib.SMTP('smtp.gmail.com', 587)
+s.starttls()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
@@ -133,3 +135,12 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media'
+
+DEFAULT_FROM_EMAIL = 'tenytdhn01@gmail.com'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'tenytdhn01@gmail.com'
+EMAIL_HOST_PASSWORD = 'nguyenvanthanh130601'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

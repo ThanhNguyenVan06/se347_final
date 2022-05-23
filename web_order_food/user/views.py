@@ -10,6 +10,8 @@ import home
 from django.shortcuts import redirect
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
+from django.core.mail import send_mail
+import random
 class login_func(View):
     def get(self,request):
          return render(request, 'login.html')
@@ -48,3 +50,18 @@ class register(View):
         if (password != repassword):  
             context['repassword'] = "Mật khẩu không khớp"
         return render(request, 'register.html' ,context)
+class reset(View):
+    def get(self, request):
+        return render(request, 'reset_password.html')
+    def post(self, request):
+        content = request.POST.get('username_or_email')
+        if (User.objects.filter(username=content).exists()):
+            user_reset  = User.objects.get(username=content)
+            email = user_reset.email
+            password = str(random.randint(100000, 999999))
+            user_reset.set_password(password)
+            
+            a=send_mail('Reset your password','Your password: ' + password,'tenytdhn01@gmail.com',[str(email)])
+            return render(request,'sendmail.html')
+
+        return HttpResponse("haha")

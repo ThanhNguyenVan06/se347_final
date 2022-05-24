@@ -578,6 +578,7 @@
                         if (prevStatus === "delivering") {
                             status = "delivered"
                             btnClass = "btn btn-primary switch " + value
+                            $("." + value).attr("disabled", true)
                         }
                         else if (prevStatus === "pending") {
                             status = "delivering"
@@ -585,9 +586,6 @@
                         }
                         $("." + value).text(status)
                         $("." + value).removeClass(prevClass).addClass(btnClass)
-                        if (prevStatus === "delivered") {
-                            $("." + value).attr("disabled", true)
-                        }
                     }
                 })
             })

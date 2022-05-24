@@ -1,7 +1,6 @@
 
-from django.urls import path,include
+from django.urls import path
 from . import views
-from .views import dashboard, analytic
 app_name = 'admin-dashboard'
 urlpatterns = [
     path('dashboard/',views.dashboard.as_view(),name='main'),

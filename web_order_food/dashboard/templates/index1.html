@@ -421,11 +421,19 @@
                                                 <td><span>{{cart.food_bought}}</span></td>
                                                 <td><span>{{cart.total_price}}</span></td>
                                                 {% if cart.status == "pending" %}
-                                                <td><span class="badge badge-danger">{{cart.status}}</span></td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger switch {{cart.id }}"
+                                                        value="{{ cart.id }}">
+                                                        {{cart.status}}
+                                                    </button>
+                                                </td>
                                                 {% elif cart.status == "delivering" %}
-                                                <td><span class="badge badge-warning">{{cart.status}}</span></td>
-                                                {% else %}
-                                                <td><span class="badge badge-success">{{cart.status}}</span></td>
+                                                <td>
+                                                    <button type="button" class="btn btn-warning switch {{cart.id }}"
+                                                        value="{{ cart.id }}">
+                                                        {{cart.status}}
+                                                    </button>
+                                                </td>
                                                 {% endif %}
                                             </tr>
                                             {% endfor %}
@@ -491,6 +499,7 @@
     </div>
     <!-- End Page wrapper  -->
     </div>
+
     <script src="{% static 'dashboard/js/lib/jquery/jquery.min.js' %}"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{% static 'dashboard/js/lib/bootstrap/js/popper.min.js' %}"></script>
@@ -518,6 +527,42 @@
 
     <!--Custom JavaScript -->
     <script src="{% static 'dashboard/js/custom.min.js' %}"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            $(".switch").click(function () {
+                var value = $(this).val()
+                $.ajax({
+                    url: "",
+                    type: "Get",
+                    data: {
+                        "button_value": value,
+                    },
+                    success: function (data) {
+                        var status = "";
+                        var btnClass = "";
+                        var prevClass = $("." + value).attr("class")
+                        var prevStatus = $("." + value).text().trim()
+                        console.log($("." + value).text().trim())
+                        if (prevStatus === "delivering") {
+                            status = "delivered"
+                            btnClass = "btn btn-primary switch " + value
+                        }
+                        else if (prevStatus === "pending") {
+                            status = "delivering"
+                            btnClass = "btn btn-warning switch " + value
+                        }
+                        $("." + value).text(status)
+                        $("." + value).removeClass(prevClass).addClass(btnClass)
+                        if (prevStatus === "delivered") {
+                            $("." + value).attr("disabled", true)
+                        }
+                    }
+                })
+            })
+        })
+    </script>
 </body>
 
 </html>

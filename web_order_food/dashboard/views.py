@@ -2,6 +2,7 @@ import json
 import pickle
 from datetime import  datetime
 import os
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
 from menu.models import food, cart, category
@@ -117,10 +118,11 @@ class dashboard(View):
                     "total_revenue_season": total_revenue_season,
                 })
 class analytic(View):
-    def get(self,request): 
+    def get(self,request):
         FOOD_NAME_COUNTS_CACHE_DIR="./dashboard/cache/food_name_counts_cache.json"
         carts= cart.objects.filter(statement_bill__in=[0,1])
         paginator = Paginator(carts,10 ) # Show 25 contacts per page.
+        toggle_id=request.GET.get("button_value")
         page_number = request.GET.get('page',1)
         page_cart= paginator.get_page(page_number)
         cart_list=[]
@@ -135,7 +137,11 @@ class analytic(View):
                 food_query= food.objects.get(id=id_food)
                 name_food_boughts.append(food_query.name_food)
                 total_price+=int(food_query.price)
+            if toggle_id != None and int(toggle_id)== cart_item.id:
+                cart_item.statement_bill+=1
+                cart_item.save()
             cart_item_statuses= {
+                "id": cart_item.id,
                 "user_name": cart_item.user_name,
                 "food_bought": ",".join(name for name in name_food_boughts),
                 "total_price": total_price ,

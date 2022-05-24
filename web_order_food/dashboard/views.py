@@ -119,8 +119,15 @@ class dashboard(View):
                 })
 class analytic(View):
     def get(self,request):
+        carts=None
+        filter_value= request.GET.get("filter_value")
+        if filter_value == None or int(filter_value) == "1" :
+            carts= cart.objects.filter(statement_bill__in=[0,1])
+        elif filter_value =="2":
+            carts= cart.objects.filter(statement_bill=0)
+        elif filter_value =="3":
+            carts= cart.objects.filter(statement_bill=1)
         FOOD_NAME_COUNTS_CACHE_DIR="./dashboard/cache/food_name_counts_cache.json"
-        carts= cart.objects.filter(statement_bill__in=[0,1])
         paginator = Paginator(carts,10 ) # Show 25 contacts per page.
         toggle_id=request.GET.get("button_value")
         page_number = request.GET.get('page',1)
@@ -185,5 +192,6 @@ class analytic(View):
                         "cart_list": cart_list,
                         "page_cart": page_cart,
                         "categories_sold_months": categories_sold_months,
-                        "month_list": [m for m in range(1,curr_month+1)]
+                        "month_list": [m for m in range(1,curr_month+1)],
+                        "filter_value": filter_value
                     })

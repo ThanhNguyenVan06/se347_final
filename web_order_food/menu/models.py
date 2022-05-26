@@ -14,6 +14,9 @@ class food(models.Model):
     image = models.ImageField()
     price = models.DecimalField(max_digits = 200,decimal_places = 2)
     active = models.IntegerField(choices=active_choice,default=1)
+    
+    def __str__(self):
+        return self.name_food
 class cart(models.Model):
     active_choice = ((0,"no"),(1,"yes"))
     statement_bill_choice = ((0,"pending"),(1,"delivering"),(2,"delivered"))

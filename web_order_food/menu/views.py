@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse,HttpResponseRedirect
-from .models import food,cart
+from .models import food,cart,category
 from django.http import JsonResponse 
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -12,8 +12,18 @@ import time
 # Create your views here.
 class menu(View):
     def get(self,request):
+        # try:
+        #     
+        #     all_food = food.objects.filter(category_food=category)
+        # except: 
+        #     all_food = food.objects.all()
+        category_name = request.GET.get('category')
+        if category_name is not None and category_name != 'all':
+            all_food = food.objects.filter(category_food__category=category_name)
+        else:
+            all_food = food.objects.all()   
         user = request.user.username
-        all_food = food.objects.all()
+        
         all_food_panigation = Paginator(all_food,1)
         index_page = request.GET.get('page')
         page = all_food_panigation.get_page(index_page)
@@ -22,7 +32,8 @@ class menu(View):
             count_begin = ''
         else:
             count_begin = len(goods_user[0].id_foods.split(','))
-        return render(request, 'menu_base.html',{'all_food':page,'count_begin':count_begin})
+        categories = category.objects.all()
+        return render(request, 'menu_base.html',{'categories':categories,'all_food':page,'count_begin':count_begin,'category_name':category_name})
     def post(self,request):
         return HttpResponse("hello")
 class add_to_cart(View):
@@ -53,7 +64,6 @@ def search(request):
     page = all_food_panigation.get_page(index_page)
     
     user = request.user.username
-    
     
     goods_user = cart.objects.filter(user_name = user , active = 0)
     if (goods_user.count() == 0):

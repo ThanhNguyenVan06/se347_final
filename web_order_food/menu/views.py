@@ -21,17 +21,20 @@ class menu(View):
         if category_name is not None and category_name != 'all':
             all_food = food.objects.filter(category_food__category=category_name)
         else:
-            all_food = food.objects.all()   
+            all_food = food.objects.all() 
+            category_name = 'all'  
         user = request.user.username
         
         all_food_panigation = Paginator(all_food,1)
         index_page = request.GET.get('page')
         page = all_food_panigation.get_page(index_page)
         goods_user = cart.objects.filter(user_name = user , active = 0)
-        if (goods_user.count() == 0):
+        if (goods_user.count() == 0) or goods_user[0].id_foods == '' :
             count_begin = ''
+            
         else:
             count_begin = len(goods_user[0].id_foods.split(','))
+            
         categories = category.objects.all()
         return render(request, 'menu_base.html',{'categories':categories,'all_food':page,'count_begin':count_begin,'category_name':category_name})
     def post(self,request):

@@ -69,6 +69,7 @@ class confirm_infor(View):
             items = goods_user[0].id_foods
             arr_id = items.split(",")
             id_count = collections.Counter(arr_id)
+            print(id_count)
             for key,value in id_count.items():
                 item = food.objects.get(id = key)
                 raw_price += item.price*value
@@ -118,4 +119,14 @@ def success_v2(request):
     return render(request, 'success.html')
 def emptycart( request):
     return render(request, 'empty_cart.html')
-    
+def delete_item( request):
+    id_del = request.POST['id']
+    name = request.user.username
+    goods_user = cart.objects.filter(user_name = name , active = 0)
+    arr_items= []
+    items = goods_user[0].id_foods
+    arr_id = items.split(",") 
+    arr_items = [arr_id for item in arr_id if item != id_del]
+    string_id_items =','.join(arr_items)
+    goods_user.update(id_foods = string_id_items)
+    return HttpResponse(status = 200)

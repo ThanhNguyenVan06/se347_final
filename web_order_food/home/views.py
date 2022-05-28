@@ -28,6 +28,8 @@ def purchase_user(request):
 def profile (request):
     user_name = request.user.username
     profile = user.objects.filter(user_name__username=user_name)
+    loggedUser = User.objects.get(username = user_name)
+    profile[0].email = loggedUser.email
     return render(request, 'profile.html', {'profile':profile[0]})
     # return HttpResponse(profile[0])
 class changePassword(View):
@@ -42,9 +44,10 @@ class changePassword(View):
             user_current.save()
             my_user = authenticate(username = user_name,password = new_password)
             login(request,my_user)
-            return render(request, 'changepass.html')
+            return JsonResponse({'message': 'Cập nhật mật khẩu thành công', 'status': 'success'},status=200)
         else:
-            return HttpResponse("Sai password")
+            # return HttpResponse("Sai password")
+            return JsonResponse({'message': 'Sai mật khẩu', 'status': 'fail'},status=403)
     def get(self,request):
         current_password = request.POST.get('current_password')
         new_password = request.POST.get('new_password')
@@ -78,9 +81,20 @@ def detail_bill(request):
 def change_profile(request):
     fullname = request.POST.get('fullname') 
     address = request.POST.get('address')
+    email = request.POST.get('email')
+    print("fullname: ", fullname);
+    print("address: ", address )
     old_profile = user.objects.get(user_name__username = request.user.username)
-    old_profile['address'] = address
-    old_profile['fullname'] = fullname
+    user_reset  = User.objects.get(username= request.user.username)
+
+    old_profile.address = address
+    old_profile.fullname = fullname
+    user_reset.email = email
     old_profile.save()
-    return HttpResponse("Update thành công")
+    user_reset.save()
+    # return HttpResponse("Update thành công")
+    # return redirect("home_page:home")
+    return JsonResponse({'message': 'Cập nhật thông tin thành công', 'status': 'success'},status=403)
+
+
                    

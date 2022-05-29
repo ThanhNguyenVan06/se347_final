@@ -24,7 +24,9 @@
     <script src="{% static 'dashboard/js/lib/chartist/chartist.min.js' %}"></script>
     <script src="{% static 'dashboard/js/lib/chartist/chartist-plugin-tooltip.min.js' %}"></script>
     <script src="{% static 'dashboard/js/lib/chartist/chartist-init.js' %}"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
     <!--[if lt IE 9]>
@@ -307,6 +309,47 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-4">
+                        <div class="card bg-info p-20">
+                            <div class="media widget-ten">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="fa-solid fa-1 fa-3x"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2 class="color-white">{{first_best_seller.name}}</h2>
+                                    <p class="m-b-0">{{first_best_seller.value}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-info p-20">
+                            <div class="media widget-ten">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="fa-solid fa-2 fa-3x"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2 class="color-white">{{second_best_seller.name}}</h2>
+                                    <p class="m-b-0">{{second_best_seller.value}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-info p-20">
+                            <div class="media widget-ten">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="fa-solid fa-3 fa-3x"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2 class="color-white">{{third_best_seller.name}}</h2>
+                                    <p class="m-b-0">{{third_best_seller.value}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-title">
@@ -358,7 +401,40 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-title">
-                                <h4>Recent Orders </h4>
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <h4>Recent Orders </h4>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <div class="row">
+                                            <label for="text" class="mr-3">Status</label>
+                                            <select class="filter">
+                                                {% if filter_value == "1" or filter_value == None %}
+                                                <option value="1" selected>All </option>
+                                                <option value="2">Pending
+                                                </option>
+                                                <option value="3">Delivering
+                                                </option>
+                                                {% endif %}
+                                                {% if filter_value == "2" %}
+                                                <option value="2" selected>Pending </option>
+                                                <option value="1">All
+                                                </option>
+                                                <option value="3">Delivering
+                                                </option>
+                                                {% endif %}
+                                                {% if filter_value == "3" %}
+                                                <option value="3" selected>Delivering </option>
+                                                <option value="1">All
+                                                </option>
+                                                <option value="2">Delivering
+                                                </option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -378,11 +454,19 @@
                                                 <td><span>{{cart.food_bought}}</span></td>
                                                 <td><span>{{cart.total_price}}</span></td>
                                                 {% if cart.status == "pending" %}
-                                                <td><span class="badge badge-danger">{{cart.status}}</span></td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger switch {{cart.id }}"
+                                                        value="{{ cart.id }}">
+                                                        {{cart.status}}
+                                                    </button>
+                                                </td>
                                                 {% elif cart.status == "delivering" %}
-                                                <td><span class="badge badge-warning">{{cart.status}}</span></td>
-                                                {% else %}
-                                                <td><span class="badge badge-success">{{cart.status}}</span></td>
+                                                <td>
+                                                    <button type="button" class="btn btn-warning switch {{cart.id }}"
+                                                        value="{{ cart.id }}">
+                                                        {{cart.status}}
+                                                    </button>
+                                                </td>
                                                 {% endif %}
                                             </tr>
                                             {% endfor %}
@@ -448,6 +532,7 @@
     </div>
     <!-- End Page wrapper  -->
     </div>
+
     <script src="{% static 'dashboard/js/lib/jquery/jquery.min.js' %}"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{% static 'dashboard/js/lib/bootstrap/js/popper.min.js' %}"></script>
@@ -464,8 +549,6 @@
     <!-- <script src="{% static 'dashboard/js/lib/datamap/datamaps.world.min.js' %}"></script> -->
     <!-- <script src="{% static 'dashboard/js/lib/datamap/datamap-init.js' %}"></script> -->
 
-    <script src="{% static 'dashboard/js/lib/weather/jquery.simpleWeather.min.js' %}"></script>
-    <script src="{% static 'dashboard/js/lib/weather/weather-init.js' %}"></script>
     <script src="{% static 'dashboard/js/lib/owl-carousel/owl.carousel.min.js' %}"></script>
     <script src="{% static 'dashboard/js/lib/owl-carousel/owl.carousel-init.js' %}"></script>
     <script src="{% static 'dashboard/js/lib/chartist/chartist.min.js' %}"></script>
@@ -475,6 +558,46 @@
 
     <!--Custom JavaScript -->
     <script src="{% static 'dashboard/js/custom.min.js' %}"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            $(".switch").click(function () {
+                var value = $(this).val()
+                $.ajax({
+                    url: "",
+                    type: "Get",
+                    data: {
+                        "button_value": value,
+                    },
+                    success: function (data) {
+                        var status = "";
+                        var btnClass = "";
+                        var prevClass = $("." + value).attr("class")
+                        var prevStatus = $("." + value).text().trim()
+                        if (prevStatus === "delivering") {
+                            status = "delivered"
+                            btnClass = "btn btn-primary switch " + value
+                            $("." + value).attr("disabled", true)
+                        }
+                        else if (prevStatus === "pending") {
+                            status = "delivering"
+                            btnClass = "btn btn-warning switch " + value
+                        }
+                        $("." + value).text(status)
+                        $("." + value).removeClass(prevClass).addClass(btnClass)
+                    }
+                })
+            })
+        })
+        $(document).ready(function () {
+
+            $(".filter").on('change', function () {
+                var value = $(this).val()
+                window.location.href = "?page=1&filter_value=" + value
+            })
+        })
+    </script>
 </body>
 
 </html>

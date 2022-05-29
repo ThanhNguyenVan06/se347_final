@@ -115,6 +115,7 @@ class dashboard(View):
                     "total_revenue_week_up_to_now": total_revenue_week_up_to_now,
                     "total_revenue_season": total_revenue_season,
                 })
+
 class analytic(View):
     def get(self,request):
         carts=None
@@ -195,3 +196,18 @@ class analytic(View):
                         "month_list": [m for m in range(1,curr_month+1)],
                         "filter_value": filter_value
                     })
+
+
+class get_3_best_sellers(View):
+    def get(self):
+        carts= cart.objects.all()
+        for cart_item in carts:
+            for id_food in cart_item.id_foods.split(","):
+                food_query= food.objects.get(id=id_food)
+                food_name_counts[food_query.name_food]+=1
+        food_name_counts = sorted(food_name_counts.items(),key=(lambda i: i[1]))
+        {
+            "first_best_seller": {"name":food_name_counts[-1][0],"value":food_name_counts[-1][1]},
+            "second_best_seller": {"name":food_name_counts[-2][0],"value":food_name_counts[-2][1]},
+            "third_best_seller": {"name":food_name_counts[-3][0],"value":food_name_counts[-3][1]},
+        }

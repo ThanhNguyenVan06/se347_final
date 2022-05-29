@@ -1,8 +1,6 @@
 import json
-import pickle
 from datetime import  datetime
 import os
-from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
 from menu.models import food, cart, category
@@ -120,41 +118,43 @@ class dashboard(View):
 class analytic(View):
     def get(self,request):
         carts=None
+        cart_list=None
+        page_cart=None
         filter_value= request.GET.get("filter_value")
-        if filter_value == None or int(filter_value) == "1" :
+        if filter_value == None or filter_value == "1" :
             carts= cart.objects.filter(statement_bill__in=[0,1])
         elif filter_value =="2":
             carts= cart.objects.filter(statement_bill=0)
         elif filter_value =="3":
             carts= cart.objects.filter(statement_bill=1)
         FOOD_NAME_COUNTS_CACHE_DIR="./dashboard/cache/food_name_counts_cache.json"
-        paginator = Paginator(carts,10 ) # Show 25 contacts per page.
-        toggle_id=request.GET.get("button_value")
-        page_number = request.GET.get('page',1)
-        page_cart= paginator.get_page(page_number)
-        cart_list=[]
-        # calculate best sellers
-        
-        food_name_counts= defaultdict(int)
-        int_to_status= {0: "pending", 1: "delivering", 2: "delivered"}
-        for cart_item in page_cart:
-            total_price=0
-            name_food_boughts=[]
-            for id_food in cart_item.id_foods.split(","):
-                food_query= food.objects.get(id=id_food)
-                name_food_boughts.append(food_query.name_food)
-                total_price+=int(food_query.price)
-            if toggle_id != None and int(toggle_id)== cart_item.id:
-                cart_item.statement_bill+=1
-                cart_item.save()
-            cart_item_statuses= {
-                "id": cart_item.id,
-                "user_name": cart_item.user_name,
-                "food_bought": ",".join(name for name in name_food_boughts),
-                "total_price": total_price ,
-                "status":  int_to_status[cart_item.statement_bill]
-            }
-            cart_list.append(cart_item_statuses)
+        if carts:
+            paginator = Paginator(carts,10 ) # Show 25 contacts per page.
+            toggle_id=request.GET.get("button_value")
+            page_number = request.GET.get('page',1)
+            page_cart= paginator.get_page(page_number)
+            cart_list=[]
+            food_name_counts= defaultdict(int)
+            int_to_status= {0: "pending", 1: "delivering", 2: "delivered"}
+            for cart_item in page_cart:
+                total_price=0
+                name_food_boughts=[]
+                for id_food in cart_item.id_foods.split(","):
+                    food_query= food.objects.get(id=id_food)
+                    name_food_boughts.append(food_query.name_food)
+                    total_price+=int(food_query.price)
+                if toggle_id != None and int(toggle_id)== cart_item.id:
+                    cart_item.statement_bill+=1
+                    cart_item.save()
+                cart_item_statuses= {
+                    "id": cart_item.id,
+                    "user_name": cart_item.user_name,
+                    "food_bought": ",".join(name for name in name_food_boughts),
+                    "total_price": total_price ,
+                    "status":  int_to_status[cart_item.statement_bill],
+                    "paid_bill": cart_item.paid_bill
+                }
+                cart_list.append(cart_item_statuses)
         if os.path.exists(FOOD_NAME_COUNTS_CACHE_DIR):
             with open(FOOD_NAME_COUNTS_CACHE_DIR, 'r') as j:
                 food_name_counts = json.loads(j.read())

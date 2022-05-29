@@ -445,6 +445,7 @@
                                                 <th>Product</th>
                                                 <th>Price</th>
                                                 <th>Status</th>
+                                                <th>Paid</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -468,6 +469,13 @@
                                                     </button>
                                                 </td>
                                                 {% endif %}
+                                                <td>
+                                                    {% if cart.paid_bill %}
+                                                    <span class="badge badge-success">Paid</span>
+                                                    {% else %}
+                                                    <span class="badge badge-danger">Not Paid</span>
+                                                    {% endif %}
+                                                </td>
                                             </tr>
                                             {% endfor %}
                                         </tbody>
@@ -483,7 +491,8 @@
                                 <ul class="pagination justify-content-center">
                                     {% if page_cart.has_previous %}
                                     <li class="page-item">
-                                        <a class="page-link" href="?page=1" aria-label="Previous">
+                                        <a class="page-link" href="?page=1&filter_value={{ filter_value }}"
+                                            aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                             <span class="sr-only">begin</span>
                                         </a>
@@ -495,13 +504,15 @@
                                         <span class="page-link">{{ n }}<span class="sr-only">(current)</span></span>
                                     </li>
                                     {% elif n > page_cart.number|add:'-3' and n < page_cart.number|add:'3' %} <li
-                                        class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+                                        class="page-item"><a class="page-link"
+                                            href="?page={{ n }}&filter_value={{ filter_value}}">{{ n }}</a></li>
                                         {% endif %}
                                         {% endfor %}
 
                                         {% if page_cart.has_next %}
                                         <li class="page-item">
-                                            <a class="page-link" href="?page={{ page_cart.paginator.num_pages }}"
+                                            <a class="page-link"
+                                                href="?page={{ page_cart.paginator.num_pages }}&filter_value={{ filter_value }}"
                                                 aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
                                                 <span class="sr-only">end</span>

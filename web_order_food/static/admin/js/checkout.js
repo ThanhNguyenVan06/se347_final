@@ -94,9 +94,13 @@ $(document).ready(function () {
 
             });
             $(".quantity_").on("change", function () {
+                console.log('data', data.price);
                 index = parseInt(this.name)
+                console.log(index);
+                console.log(this.name);
+                console.log(data.arr_items[0]);
                 //price[index-1].innerHTML = data.arr_items[index-1].price*this.value;
-                console.log(data.arr_items[index - 1].price * this.value)
+                // console.log(data.arr_items[index - 1].price * this.value)
                 $(this).closest('tr').find(".price").text(data.arr_items[index - 1].price * this.value)
                 console.log($(this).closest('tr').find(".price").text(data.arr_items[index - 1].price * this.value));
                 total = 0

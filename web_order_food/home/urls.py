@@ -13,6 +13,6 @@ urlpatterns = [
     path('profile/password/',views.changePassword.as_view(),name = 'change_password'),
     #listed bill 
     path('listbill/',views.all_bill,name='listbill'),
-    #detail bill(url:listbill/detail/?billcode=(billcode))
+    #detail bill(url:listbill/detail/?billCode=(billcode))
     path('listbill/detail/',views.detail_bill,name='detailbill'),
 ]

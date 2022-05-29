@@ -16,8 +16,10 @@ class check_cart(View):
         goods_user = cart.objects.filter(user_name = user , active = 0)
         if (goods_user.count() == 0):
             return HttpResponse(0)
-        elif(len(goods_user[0].id_foods.split(",")) == 0):
+        elif(len(goods_user[0].id_foods) == 0):
+            goods_user[0].delete()
             return HttpResponse(0)
+        
         else:
             arr_items= []
             items = goods_user[0].id_foods
@@ -30,10 +32,14 @@ class check_cart(View):
                                   'quantity':value,
                                   'name_food' : item.name_food,
                                   'price' : item.price })
+            
             return JsonResponse({'arr_items': arr_items},status=200)
+        
     def post(self, request):
         user = request.user.username
         goods_user = cart.objects.filter(user_name = user , active = 0)
+        if (goods_user.count() == 0):
+            return render(request, 'empty_cart.html')
         items = goods_user[0].id_foods
         arr_id = items.split(",")
         item_set = set(arr_id)
@@ -46,10 +52,14 @@ class check_cart(View):
                 for j in range(int(request.POST[str(i+1)])):
                     arr_items += str(i+1)
                     string_id_items =','.join(arr_items)
-        
-        goods_user.update(id_foods = string_id_items)
-        
-        return redirect('checkout:confirm')
+                    string_id_items =','.join(arr_items)
+        if (string_id_items.isspace()):
+            goods_user[0].delete()
+            print(string_id_items)
+            return render(request, 'empty_cart.html')
+        else :
+            goods_user.update(id_foods = string_id_items)   
+            return redirect('checkout:confirm')
 class check_cart_html(View):
     def get(self, request):
         if not request.user.is_authenticated:
@@ -64,9 +74,13 @@ class confirm_infor(View):
         goods_user = cart.objects.filter(user_name = name , active = 0)
         if (goods_user.count() == 0):
             return HttpResponse("Khong co san pham")
+        # elif(goods_user[])
         else:
             arr_items= []
             items = goods_user[0].id_foods
+            if(len(goods_user[0].id_foods) == 0):
+                goods_user[0].delete()
+                return render(request,'empty_cart.html')
             arr_id = items.split(",")
             id_count = collections.Counter(arr_id)
             print(id_count)

@@ -19,11 +19,11 @@
                     <!-- {% csrf_token %} -->
                     <div>
                         <p>Họ và tên</p>
-                        <input type="text" class="form-control" name="fullname" value="{{profile.fullname}}">
+                        <input type="text" class="form-control" name="fullname" value="{{profile.fullname}}"  disabled >
                     </div>
                     <div>
                         <p>Email</p>
-                        <input type="text" class="form-control" name="email" value="{{user.email}}">
+                        <input type="text" class="form-control" name="email" value="{{user.email}}"  disabled>
                     </div>
                     <div>
                         <p>Địa chỉ</p>
@@ -39,15 +39,15 @@
                     {% csrf_token %}
                     <div>
                         <p>Mật khẩu hiện tại</p>
-                        <input type="text" class="form-control" name="current_password">
+                        <input type="password" name="password" class="form-control" name="current_password">
                     </div>
                     <div>
                         <p>Mật khẩu mới</p>
-                        <input type="text" class="form-control" name="new_password">
+                        <input type="password" name="password" class="form-control" name="new_password">
                     </div>
                     <div>
                         <p>Nhập lại mật khẩu</p>
-                        <input type="text" class="form-control" name="confirm_password">
+                        <input type="password" name="password" class="form-control" name="confirm_password">
                         <span id="error_confirm_pass" class="error"></span>
                     </div>
                     <button class="btn btn-success mt-3">Cập nhật</button>

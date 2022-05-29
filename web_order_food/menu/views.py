@@ -73,5 +73,6 @@ def search(request):
         count_begin = ''
     else:
         count_begin = len(goods_user[0].id_foods.split(','))
-    return render(request, 'menu_search.html',{'all_food':page,'search':content_search,'count_begin':count_begin})    
+    categories = category.objects.all()
+    return render(request, 'menu_search.html',{'all_food':page,'search':content_search,'count_begin':count_begin,'categories':categories})    
    

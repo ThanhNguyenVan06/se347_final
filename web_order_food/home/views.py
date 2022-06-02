@@ -67,6 +67,16 @@ def detail_bill(request):
         arr_items= []
         if (detail_bill_code[0].user_name == request.user.username) :
             items = detail_bill_code[0].id_foods
+            address = detail_bill_code[0].address_ship
+            reciver = detail_bill_code[0].reciver
+            statement_bill = detail_bill_code[0].statement_bill
+            statement_bill_content = ""
+            if (statement_bill == 0):
+                statement_bill_content  = "Đang xác nhận"
+            elif (statement_bill == 1):
+                statement_bill_content = "Đang giao hàng"
+            else:
+                statement_bill_content = "Đã giao hàng"
             arr_id = items.split(",")
             id_count = collections.Counter(arr_id)
             for key,value in id_count.items():
@@ -77,7 +87,7 @@ def detail_bill(request):
                                   'name_food' : item.name_food,
                                   'image_url': item.image.url,
                                   'price' : item.price })
-            return JsonResponse({'arr_items': arr_items},status=200)
+            return JsonResponse({'arr_items': arr_items,'reciver':reciver,'address':address,'statement_bill_content':statement_bill_content},status=200)
 def change_profile(request):
     fullname = request.POST.get('fullname') 
     address = request.POST.get('address')
@@ -96,5 +106,5 @@ def change_profile(request):
     # return redirect("home_page:home")
     return JsonResponse({'message': 'Cập nhật thông tin thành công', 'status': 'success'},status=403)
 
-
+# def bestSeller(self, request):
                    

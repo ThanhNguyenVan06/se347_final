@@ -29,12 +29,16 @@ class register(View):
     def get(self,request):
          return render(request, 'register.html')
     def post(self,request):
+        context = {}
         full_name = request.POST.get('fullname')
         user_name = request.POST.get('username')
+        if (User.objects.filter(username = user_name).exists()):
+            context['error'] = "Tên đăng nhập đã tồn tại"
+            return render(request, 'register.html' ,{'context' : context})
         password = request.POST.get('password')
         repassword = request.POST.get('repassword')
         my_email = request.POST.get('email')
-        context = {}
+        
         try: 
             validate_email(my_email)
             if (password == repassword):
@@ -43,12 +47,12 @@ class register(View):
                 create_user = user.objects.create(fullname = full_name,user_name = my_user_name)
                 create_user.save()
                 return render(request, 'login.html')
-            context['repassword'] = "Mật khẩu không khớp"
+            context['error'] = "Mật khẩu không khớp"
             return render(request, 'register.html' ,{'context' : context} )    
         except ValidationError:
             context['email'] = "Email không hợp lệ"
         if (password != repassword):  
-            context['repassword'] = "Mật khẩu không khớp"
+            context['error'] = "Mật khẩu không khớp"
         return render(request, 'register.html' ,context)
 class reset(View):
     def get(self, request):

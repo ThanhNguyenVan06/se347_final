@@ -1,3 +1,4 @@
+from ast import Constant
 import collections
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
@@ -6,7 +7,9 @@ from django.views import View
 from menu.models import cart
 from user.models import user,User
 from django.contrib.auth import authenticate,login
+from django.core.paginator import Paginator
 
+NUM_BILL_PER_PAGE = 5
 from menu.models import food
 # Create your views here.
 def home(request):
@@ -55,28 +58,41 @@ class changePassword(View):
         return render(request, 'changepass.html',{'user_name':user_name})
 def all_bill(request):
     username = request.user.username
+    page = 1
+    if request.GET.get('page') != None:
+        page = request.GET.get('page')
+    else:
+        page = 1
+    # try: 
+    #     page = request.GET.get('page')
+    # except NameError:
+    #     page = 1
     bill_code_list = cart.objects.filter(user_name = username, active = 1)
-    dict_bill_code = {}
+    totalPage = bill_code_list.count();
+    p = Paginator(bill_code_list, NUM_BILL_PER_PAGE)
+    # print(p.count)
+    # print(p.num_pages)
+    # print(p.page(page).object_list)
+    print('============', page)
+    bill_code_list = p.page(page).object_list
+    dict_bill_code = []
     for i in range (len(bill_code_list)):
-        dict_bill_code[i] = bill_code_list[i].bill_code
-    return JsonResponse(dict_bill_code)
+        dict_bill_code.append({
+            'code': bill_code_list[i].bill_code,
+            'address': bill_code_list[i].address_ship,
+            'status': bill_code_list[i].statement_bill,
+            })
+    # return JsonResponse({'listBill': dict_bill_code })
+    pages = range(1, p.num_pages + 1)
+    return render(request, 'list_bill.html', {'listBill': dict_bill_code, 'totalPage': pages})
 def detail_bill(request):
     bill_code = request.GET.get('billCode')
     detail_bill_code = cart.objects.filter(bill_code=bill_code)
+
     if (detail_bill_code.count() > 0):
         arr_items= []
         if (detail_bill_code[0].user_name == request.user.username) :
             items = detail_bill_code[0].id_foods
-            address = detail_bill_code[0].address_ship
-            reciver = detail_bill_code[0].reciver
-            statement_bill = detail_bill_code[0].statement_bill
-            statement_bill_content = ""
-            if (statement_bill == 0):
-                statement_bill_content  = "Đang xác nhận"
-            elif (statement_bill == 1):
-                statement_bill_content = "Đang giao hàng"
-            else:
-                statement_bill_content = "Đã giao hàng"
             arr_id = items.split(",")
             id_count = collections.Counter(arr_id)
             for key,value in id_count.items():
@@ -87,7 +103,10 @@ def detail_bill(request):
                                   'name_food' : item.name_food,
                                   'image_url': item.image.url,
                                   'price' : item.price })
-            return JsonResponse({'arr_items': arr_items,'reciver':reciver,'address':address,'statement_bill_content':statement_bill_content},status=200)
+            return JsonResponse({'arr_items': arr_items,  
+            'billCode': bill_code,
+            'address': detail_bill_code[0].address_ship,
+            'status': detail_bill_code[0].statement_bill,},status=200)
 def change_profile(request):
     fullname = request.POST.get('fullname') 
     address = request.POST.get('address')

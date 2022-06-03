@@ -118,9 +118,10 @@
   display: block;
   width: 100%;
   color: black;
+  text-decoration: none;
 }
 
 .navwrapper #wp-menu-icon #menu.active {
-  height: 150px;
+  height: 230px;
 }
 /*# sourceMappingURL=style.css.map */

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container py-5 hstack gap-4 align-items-start">
+    <div class="col-md-7">
+      <h3 class="mb-4">Lịch sử mua hàng</h3>
+      {% if listBill|length == 0 %}
+        <img src="/static/home/image/no-data-2.png" style="width: 80%"/>
+      {% else %}
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Mã đơn hàng</th>
+              <th scope="col">Trạng thái</th>
+              <th scope="col"></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for bill in listBill  %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>
+                  <!-- <a href="#">{{ bill.code }}</a> -->
+                  {{bill.code}}
+              </td>
+              <td>
+                {% if bill.status == 0 %}
+                <span class="badge text-bg-secondary">Đang xử lí</span>
+                {% elif bill.status == 1 %}
+                <span class="badge text-bg-warning">Đang vận chuyển</span>
+                {% elif bill.status == 2 %}
+                <span class="badge text-bg-success">Đã giao hàng</span>
+                {% endif %} 
+              </td>
+              <td>
+                <button class="btn btn-primary detail_bill_btn" data-bill-code="{{bill.code}}">
+                  Chi tiết
+                  <i class="fa fa-info-circle ms-1" aria-hidden="true"></i>
+                </button>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+        {% if listBill|length > 0 %}
+        <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" aria-label="Previous" style="cursor:pointer">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            {% for page in totalPage %}
+              <li class="page-item page-item-number" data-page-number="{{page}}"><a class="page-link" href="http://127.0.0.1:8000/listbill?page={{page}}">{{page}}</a></li>
+            {% endfor %}
+            <!-- <li class="page-item"><a class="page-link" href="http://127.0.0.1:8000/listbill?page=2">2</a></li> -->
+            <!-- <li class="page-item"><a class="page-link" href="http://127.0.0.1:8000/listbill?page=3">3</a></li> -->
+            <li class="page-item">
+              <a class="page-link" aria-label="Next" style="cursor:pointer">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        {% endif %}
+      {% endif %}
+    </div>
+    <div class="col-md-5">
+        <h3 class="mb-4">Thông tin đơn hàng</h3>
+        <div class="wp_detail_bill">
+          <img src="/static/home/image/no-data-2.png" style="width: 80%"/>
+        </div>
+    </div>
+</div>
+<script src="/static/list-bill/main.js"></script>
+{% endblock %}

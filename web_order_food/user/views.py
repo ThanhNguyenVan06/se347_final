@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from matplotlib.style import context
+
 from . import views
 from django.views import View
 from django.http import HttpResponse

@@ -25,7 +25,7 @@ class menu(View):
             category_name = 'all'  
         user = request.user.username
         
-        all_food_panigation = Paginator(all_food,1)
+        all_food_panigation = Paginator(all_food,10)
         index_page = request.GET.get('page')
         page = all_food_panigation.get_page(index_page)
         goods_user = cart.objects.filter(user_name = user , active = 0)
@@ -39,6 +39,7 @@ class menu(View):
         return render(request, 'menu_base.html',{'categories':categories,'all_food':page,'count_begin':count_begin,'category_name':category_name})
     def post(self,request):
         return HttpResponse("hello")
+
 class add_to_cart(View):
     
     def get(self,request):
@@ -65,7 +66,7 @@ def search(request):
     all_food_panigation = Paginator(foods_search,2)
     index_page = request.GET.get('page')
     page = all_food_panigation.get_page(index_page)
-    
+   
     user = request.user.username
     
     goods_user = cart.objects.filter(user_name = user , active = 0)

@@ -7,9 +7,8 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 .container{
-    width: 80%;
+    width: 60%;
     margin: 0 auto;
-    padding: 1%;
 }
 .img-responsive{
     width: 100%;
@@ -43,21 +42,23 @@ a{
 a:hover{
     color: #ff4757;
 }
-
 .btn{
+    position: absolute;
+    margin-left: -200px;
+    margin-top: 500px;
     padding: 1%;
     border: none;
     font-size: 1rem;
     border-radius: 5px;
 }
 .btn-primary{
-    background-color: #ff6b81;
+    background-color:green;
     color: white;
     cursor: pointer;
 }
 .btn-primary:hover{
-    color: white;
-    background-color: #ff4757;
+    color: green;
+    background-color: white;
 }
 h2{
     color: #2f3542;
@@ -101,7 +102,35 @@ fieldset{
     padding: 1%;
     font-weight: bold;
 }
+/*
+CSS for Select Category
+*/
 
+.select_category ul {
+    list-style-type: none;
+    padding:0;
+    margin-left: 100px;
+    width:70%;
+    overflow: hidden;
+    background-color:  rgb(208, 208, 84);
+}
+.select_category li {
+    float: left;
+    padding:0 10px;
+}
+  
+.select_category li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+  
+  /* Change the link color to #111 (black) on hover */
+.select_category li a:hover {
+    background-color: #111;
+}
 
 /* CSS for Food SEarch Section */
 
@@ -136,27 +165,31 @@ fieldset{
 
 /* CSS for Food Menu */
 .food-menu{
-    background-color: #ececec;
+    background-color: rgb(208, 208, 84);
     padding: 4% 0;
 }
 .food-menu-box{
-    width: 43%;
+    width: 350px;
+    height: 600px;
     margin: 1%;
     padding: 2%;
     float: left;
+    text-align: center;
     background-color: white;
     border-radius: 15px;
 }
 
-.food-menu-img{
-    width: 20%;
+.food-menu-img img{
     float: left;
+    margin-left: 75px;
+    width: 60%;
+    height: 60%;
 }
 
 .food-menu-desc{
     width: 70%;
     float: left;
-    margin-left: 8%;
+    margin-left: 50px;
 }
 
 .food-price{
@@ -167,6 +200,24 @@ fieldset{
     font-size: 1rem;
     color: #747d8c;
 }
+/*Css for Pagination*/
+.pagination {
+    display: inline-block;
+  }
+  
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+  
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
 
 
 /* CSS for Social */

@@ -140,7 +140,8 @@ def delete_item( request):
     arr_items= []
     items = goods_user[0].id_foods
     arr_id = items.split(",") 
-    arr_items = [arr_id for item in arr_id if item != id_del]
+    arr_items = [item for item in arr_id if item != id_del]
     string_id_items =','.join(arr_items)
     goods_user.update(id_foods = string_id_items)
-    return HttpResponse(status = 200)
+    return HttpResponse(status=204)
+

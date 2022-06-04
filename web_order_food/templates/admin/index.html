@@ -1,0 +1,48 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | {% trans 'Some Organisation' %}{% endblock %}
+
+
+<h1 id="site-name">{% trans 'Admin Website' %}</h1>
+{% block header %}
+<div id="header">
+  <div id="branding">
+    {% block branding %}
+    <h1 id="site-name">{% trans 'Admin Website' %}</h1>
+    {% endblock %}
+  </div>
+  {% block usertools %}
+  {% if has_permission %}
+  <div id="user-tools">
+    {% block welcome-msg %}
+    {% translate 'Welcome,' %}
+    <strong>{% firstof user.get_short_name user.get_username %}</strong>.
+    {% endblock %}
+    {% block userlinks %}
+    {% if site_url %}
+    <a href="{{ site_url }}">{% translate 'View site' %}</a> /
+    {% endif %}
+    {% if site_url %}
+    <a href="/admin/dashboard">{% translate 'View dashboard' %}</a> /
+    {% endif %}
+    {% if user.is_active and user.is_staff %}
+    {% url 'django-admindocs-docroot' as docsroot %}
+    {% if docsroot %}
+    <a href="{{ docsroot }}">{% translate 'Documentation' %}</a> /
+    {% endif %}
+    {% endif %}
+    {% if user.has_usable_password %}
+    <a href="{% url 'admin:password_change' %}">{% translate 'Change password' %}</a> /
+    {% endif %}
+    <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
+      {% csrf_token %}
+      <button type="submit">{% translate 'Log out' %}</button>
+    </form>
+    {% endblock %}
+  </div>
+  {% endif %}
+  {% endblock %}
+  {% block nav-global %}{% endblock %}
+</div>
+{% endblock %}

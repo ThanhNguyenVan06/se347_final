@@ -110,30 +110,47 @@ CSS for Select Category
     list-style-type: none;
     padding:0;
     margin-left: 100px;
-    width:70%;
+    width:80%;
     overflow: hidden;
-    background-color:  rgb(208, 208, 84);
+    background-color:  #f4e377;
 }
 .select_category li {
     float: left;
-    padding:0 10px;
+    padding:0px 20px;
+    font-size: 20px;
 }
-  
 .select_category li a {
     display: block;
-    color: white;
+    color:black;
     text-align: center;
-    padding: 14px 16px;
+    padding: 20px 16px;
     text-decoration: none;
 }
   
   /* Change the link color to #111 (black) on hover */
 .select_category li a:hover {
-    background-color: #111;
+    background-color:  white;
 }
-
+/*Css for cart*/
+.notification {
+    width:100px;
+    height: 80%;
+    text-decoration: none;
+    padding: 15px 26px;
+    position: relative;
+    display: inline-block;
+    border-radius: 2px;
+}
+  
+.notification .cart_count {
+    position: absolute;
+    margin-top:-80px;
+    margin-left:20px;
+    padding: 5px 15px;
+    border-radius: 50%;
+    background-color: white;
+}
 /* CSS for Food SEarch Section */
-
 .food-search{
     background-image: url(../images/bg.jpg);
     background-size: cover;
@@ -165,7 +182,7 @@ CSS for Select Category
 
 /* CSS for Food Menu */
 .food-menu{
-    background-color: rgb(208, 208, 84);
+   background-color:  #f4e377;
     padding: 4% 0;
 }
 .food-menu-box{
@@ -175,15 +192,15 @@ CSS for Select Category
     padding: 2%;
     float: left;
     text-align: center;
-    background-color: white;
+    background-color:  white;
     border-radius: 15px;
 }
 
 .food-menu-img img{
     float: left;
     margin-left: 75px;
-    width: 60%;
-    height: 60%;
+    width: 200px;
+    height: 180px;
 }
 
 .food-menu-desc{

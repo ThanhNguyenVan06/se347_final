@@ -25,13 +25,12 @@ class menu(View):
             category_name = 'all'  
         user = request.user.username
         
-        all_food_panigation = Paginator(all_food,10)
+        all_food_panigation = Paginator(all_food,2)
         index_page = request.GET.get('page')
         page = all_food_panigation.get_page(index_page)
         goods_user = cart.objects.filter(user_name = user , active = 0)
         if (goods_user.count() == 0) or goods_user[0].id_foods == '' :
-            count_begin = ''
-            
+            count_begin = '0'
         else:
             count_begin = len(goods_user[0].id_foods.split(','))
             
@@ -71,7 +70,7 @@ def search(request):
     
     goods_user = cart.objects.filter(user_name = user , active = 0)
     if (goods_user.count() == 0):
-        count_begin = ''
+        count_begin = '0'
     else:
         count_begin = len(goods_user[0].id_foods.split(','))
     categories = category.objects.all()

@@ -1,1 +1,25 @@
-<img >
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <!-- Important to make website responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Website</title>
+
+    <!-- Link our CSS file -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'checkout/styles/checkout.css' %}">
+</head>
+<body>
+    <div class="box">
+        <center><img src="https://i.imgur.com/dCdflKN.png" width="130" height="130"></center>
+        <h3><strong>Your Cart is Empty</strong></h3>
+        <h4>Add something to make me happy :3</h4>
+        <a href="#" class="btn btn-primary cart-btn-transform m-3" data-abc="true">continue shopping</a>
+    </div>
+</body>
+{%endblock%}

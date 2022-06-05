@@ -132,6 +132,7 @@ class analytic(View):
         if carts:
             paginator = Paginator(carts,10 ) # Show 25 contacts per page.
             toggle_id=request.GET.get("button_value")
+            toggle_type=request.GET.get("type")
             page_number = request.GET.get('page',1)
             page_cart= paginator.get_page(page_number)
             cart_list=[]
@@ -145,7 +146,10 @@ class analytic(View):
                     name_food_boughts.append(food_query.name_food)
                     total_price+=int(food_query.price)
                 if toggle_id != None and int(toggle_id)== cart_item.id:
-                    cart_item.statement_bill+=1
+                    if toggle_type == "status":
+                        cart_item.statement_bill+=1
+                    else:
+                        cart_item.paid_bill=cart_item.paid_bill
                     cart_item.save()
                 cart_item_statuses= {
                     "id": cart_item.id,

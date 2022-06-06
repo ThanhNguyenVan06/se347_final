@@ -9,6 +9,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  margin: 0;
 }
 
 .navwrapper .menu #avatar {
@@ -72,6 +73,7 @@
   display: block;
   width: 100%;
   color: black;
+  text-decoration: none;
 }
 
 .navwrapper .menu .wp-user-logged .user-menu.active {

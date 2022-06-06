@@ -52,8 +52,12 @@
               <i class="fa fa-bell" aria-hidden="true"></i>
             </div> -->
             {% else %}
-            <li><a href="{% url 'user:register' %}" class="btn btn-darken">Register</a></li>
-            <li><a href="{% url 'user:login' %}" class="btn btn-transparent">Login</a></li>
+            <li><a href="{% url 'user:register' %}" class="authentication_link">
+              <span class="px-2">Register</span>
+            </a></li>
+            <li><a href="{% url 'user:login' %}" class="authentication_link">
+              <span class="px-2">Login</span>
+            </a></li>
             {% endif %}
             <li id="wp-menu-icon" class="ms-3">
               <a id="menuIcon">

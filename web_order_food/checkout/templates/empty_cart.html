@@ -1,1 +1,23 @@
-<h1>Không có sản phẩm</h1>
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- modify -->
+
+<div class="container_dia">
+    <div class="dialog" id="box">
+        <div class="image_dia">
+            <h1><b>Không tìm thấy trang phù hợp</b></h1>
+            <p class="zoom-area"> <b>Trang</b> tìm hiện tại ko có sẵn</p>
+
+            <img src="https://cdn2.iconfinder.com/data/icons/handyman-repairman-technician/254/worker-action-6-512.png" alt="">
+        </div>
+
+        <div class="link-container">
+            <a target="_blank" href="http://localhost:8000/" class="more-link">Quay lại trang trước</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

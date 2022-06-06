@@ -471,9 +471,17 @@
                                                 {% endif %}
                                                 <td>
                                                     {% if cart.paid_bill %}
-                                                    <span class="badge badge-success">Paid</span>
+                                                    <button type="button"
+                                                        class="btn btn-success switch_paid {{cart.id }}_paid"
+                                                        value="{{ cart.id }} paid">
+                                                        Paid
+                                                    </button>
                                                     {% else %}
-                                                    <span class="badge badge-danger">Not Paid</span>
+                                                    <button type="button"
+                                                        class="btn btn-danger switch_paid {{cart.id }}_paid"
+                                                        value="{{ cart.id }} paid">
+                                                        Not Paid
+                                                    </button>
                                                     {% endif %}
                                                 </td>
                                             </tr>
@@ -580,6 +588,7 @@
                     type: "Get",
                     data: {
                         "button_value": value,
+                        "type": "status"
                     },
                     success: function (data) {
                         var status = "";
@@ -597,6 +606,39 @@
                         }
                         $("." + value).text(status)
                         $("." + value).removeClass(prevClass).addClass(btnClass)
+                    }
+                })
+            })
+        })
+        $(document).ready(function () {
+
+            $(".switch_paid").click(function () {
+                var value = $(this).val()
+                value = value.split(" ")[0]
+                console.log(value)
+                $.ajax({
+                    url: "",
+                    type: "Get",
+                    data: {
+                        "button_value": value,
+                        "type": "bill"
+                    },
+                    success: function (data) {
+                        var status = "";
+                        var btnClass = "";
+                        var prevClass = $("." + value + "_paid").attr("class")
+                        var prevStatus = $("." + value + "_paid").text().trim()
+                        if (prevStatus === "paid") {
+                            status = "Not Paid"
+                            btnClass = "btn btn-danger switch_paid " + value
+                            $("." + value).attr("disabled", true)
+                        }
+                        else if (prevStatus === "Not Paid") {
+                            status = "Paid"
+                            btnClass = "btn btn-success switch_paid " + value
+                        }
+                        $("." + value + "_paid").text(status)
+                        $("." + value + "_paid").removeClass(prevClass).addClass(btnClass)
                     }
                 })
             })

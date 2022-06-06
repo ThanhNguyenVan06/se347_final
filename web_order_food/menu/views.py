@@ -25,7 +25,7 @@ class menu(View):
             category_name = 'all'  
         user = request.user.username
         
-        all_food_panigation = Paginator(all_food,2)
+        all_food_panigation = Paginator(all_food,10)
         index_page = request.GET.get('page')
         page = all_food_panigation.get_page(index_page)
         goods_user = cart.objects.filter(user_name = user , active = 0)

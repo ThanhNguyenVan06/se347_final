@@ -1,3 +1,5 @@
+const csrf = document.querySelectorAll("#cart_form input[name='csrfmiddlewaretoken']")[0]
+
 $(document).ready(function () {
     $.ajax({
         // url:'checkout_process/',
@@ -24,13 +26,13 @@ $(document).ready(function () {
         type: 'GET',
         success: function (data) {
             console.log('data', data);
-            if (data == 0){
-                window.location = "http://127.0.0.1:8000/checkout/emptycart"; 
+            if (data == 0) {
+                window.location = "http://127.0.0.1:8000/checkout/emptycart";
             }
             var total = 0;
             function cart_not_empty(data) {
 
-                let table_body='<tbody>';
+                let table_body = '<tbody>';
                 for (var i = 0; i < data.arr_items.length; i++) {
                     // $(".table_bill").append("<tr class = \"" + i + "\">" +
                     //     "<td>" + parseInt(i + 1, 10) + "</td>" +
@@ -43,26 +45,26 @@ $(document).ready(function () {
                     //         </button></td>"
                     //     + "</tr>"
                     // );
-                    table_body+="<tr class = \"" + i + "\">" +
+                    table_body += "<tr class = \"" + i + "\">" +
                         "<td>" + parseInt(i + 1, 10) + "</td>" +
                         "<td class = \"name_food\">" + data.arr_items[i].name_food + "</td>" +
                         "<td class = \"quantity\">" + "<input type=\"number\" class=\"form-control quantity_\" name=\"" + data.arr_items[i].id_food + "\" min=\"1\"  value = \"" + data.arr_items[i].quantity + "\">" + "</td>" +
                         "<td class = \"price\">" + data.arr_items[i].quantity * data.arr_items[i].price + "</td>" +
-                        "<td><button caption='btn' class=\"btnDelete btn btn-danger\">\
+                        "<td><button data-product-id=" + data.arr_items[i].id_food + " caption='btn' class=\"btnDelete btn btn-danger\">\
                             <i class='fa fa-trash-o' aria-hidden='true'></i>\
                             Delete\
                             </button></td>"
                         + "</tr>"
-                    ;
+                        ;
                     total += data.arr_items[i].quantity * data.arr_items[i].price
                 }
-                table_body+="</tbody>";
-            return {
-                table_body: table_body,
-                total: total
+                table_body += "</tbody>";
+                return {
+                    table_body: table_body,
+                    total: total
+                }
+
             }
-                
-        }
             let cartData = cart_not_empty(data)
             $(".table_bill").append(cartData.table_body)
             var total_text = document.getElementById("total");
@@ -79,19 +81,33 @@ $(document).ready(function () {
             //     })
             // }
 
-            $(".table_bill").on("click", '.btnDelete', function () {
-                $(this).closest("tr").remove();
-                var price = document.getElementsByClassName("price");
+            $(".table_bill").on("click", '.btnDelete', async function (e) {
+                // $(this).closest("tr").remove();
+                // var price = document.getElementsByClassName("price");
 
-                total = 0
-                for (let j = 0; j < price.length; j++) {
-                    item_temp = document.getElementsByClassName("price")[j]
-                    total += parseInt(item_temp.innerHTML);
+                // total = 0
+                // for (let j = 0; j < price.length; j++) {
+                //     item_temp = document.getElementsByClassName("price")[j]
+                //     total += parseInt(item_temp.innerHTML);
 
-                    console.log(total);
-                }
-                total_text.innerHTML = total;
-
+                //     console.log(total);
+                // }
+                // total_text.innerHTML = total;
+                e.preventDefault();
+                let id_food = $(this).data('productId')
+                const csrfToken = csrf.value
+                let dataForm = new FormData();
+                dataForm.append('id', id_food);
+                dataForm.append('csrfmiddlewaretoken', csrfToken);
+                try {
+                    let response= await fetch('delete/', {
+                        method: "POST",
+                        body: dataForm
+                    })
+                    location.reload();
+                    console.log('response', response)
+                    // location.reload();
+                } catch (error) { }
             });
             $(".quantity_").on("change", function () {
                 console.log('data', data.price);

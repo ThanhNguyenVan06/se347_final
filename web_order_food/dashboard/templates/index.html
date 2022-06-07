@@ -70,15 +70,6 @@
                     </ul>
                     <!-- User profile and search -->
                     <ul class="navbar-nav my-lg-0">
-
-                        <!-- Search -->
-                        <li class="nav-item hidden-sm-down search-box"> <a class="nav-link hidden-sm-down text-muted  "
-                                href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <form class="app-search">
-                                <input type="text" class="form-control" placeholder="Search here"> <a class="srh-btn"><i
-                                        class="ti-close"></i></a>
-                            </form>
-                        </li>
                         <!-- Comment -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted text-muted  " href="#" data-toggle="dropdown"
@@ -101,35 +92,7 @@
                                                         admin!</span> <span class="time">9:30 AM</span>
                                                 </div>
                                             </a>
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="btn btn-success btn-circle m-r-10"><i
-                                                        class="ti-calendar"></i></div>
-                                                <div class="mail-contnet">
-                                                    <h5>This is another title</h5> <span class="mail-desc">Just a
-                                                        reminder that you have event</span> <span class="time">9:10
-                                                        AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="btn btn-info btn-circle m-r-10"><i class="ti-settings"></i>
-                                                </div>
-                                                <div class="mail-contnet">
-                                                    <h5>This is title</h5> <span class="mail-desc">You can customize
-                                                        this template as you want</span> <span class="time">9:08
-                                                        AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="btn btn-primary btn-circle m-r-10"><i class="ti-user"></i>
-                                                </div>
-                                                <div class="mail-contnet">
-                                                    <h5>This is another title</h5> <span class="mail-desc">Just see the
-                                                        my admin!</span> <span class="time">9:02 AM</span>
-                                                </div>
-                                            </a>
+
                                         </div>
                                     </li>
                                     <li>
@@ -146,35 +109,13 @@
                                 aria-haspopup="true" aria-expanded="false"> <i class="fa fa-envelope"></i>
                                 <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn" aria-labelledby="2">
+                            <!-- <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn" aria-labelledby="2">
                                 <ul>
                                     <li>
                                         <div class="drop-title">You have 4 new messages</div>
                                     </li>
                                     <li>
                                         <div class="message-center">
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="mail-contnet">
-                                                    <h5>Michael Qin</h5> <span class="mail-desc">Just see the my
-                                                        admin!</span> <span class="time">9:30 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="mail-contnet">
-                                                    <h5>Michael Qin</h5> <span class="mail-desc">Just see the my
-                                                        admin!</span> <span class="time">9:30 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="mail-contnet">
-                                                    <h5>Michael Qin</h5> <span class="mail-desc">Just see the my
-                                                        admin!</span> <span class="time">9:30 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
                                             <a href="#">
                                                 <div class="mail-contnet">
                                                     <h5>Michael Qin</h5> <span class="mail-desc">Just see the my
@@ -189,7 +130,7 @@
                                                 e-Mails</strong> <i class="fa fa-angle-right"></i> </a>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> -->
                         </li>
                         <!-- End Messages -->
                         <!-- Profile -->
@@ -223,11 +164,11 @@
                         <li class="nav-devider"></li>
                         <li class="nav-label">Home</li>
                         <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span
-                                    class="hide-menu">Dashboard <span
+                                    class="hide-menu">Bảng điều khiển <span
                                         class="label label-rouded label-primary pull-right">2</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="{% url 'admin-dashboard:main' %}">Ecommerce </a></li>
-                                <li><a href="{% url 'admin-dashboard:analytics' %}">Analytics </a></li>
+                                <li><a href="{% url 'admin-dashboard:main' %}">Tổng quan </a></li>
+                                <li><a href="{% url 'admin-dashboard:analytics' %}">Bảng phân tích </a></li>
                             </ul>
                         </li>
                     </ul>
@@ -242,12 +183,12 @@
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">Dashboard</h3>
+                    <h3 class="text-primary">Bảng điều khiển</h3>
                 </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard</li>
+                        <li class="breadcrumb-item active">Bảng điều khiển</li>
                     </ol>
                 </div>
             </div>
@@ -264,7 +205,7 @@
                                 </div>
                                 <div class="media-body media-text-right">
                                     <h2>{{total_revenue}}.00VNĐ</h2>
-                                    <p class="m-b-0">Total Revenue</p>
+                                    <p class="m-b-0">Tổng thu</p>
                                 </div>
                             </div>
                         </div>
@@ -277,7 +218,7 @@
                                 </div>
                                 <div class="media-body media-text-right">
                                     <h2>{{total_food_sold}}</h2>
-                                    <p class="m-b-0">Sales</p>
+                                    <p class="m-b-0">Số lượng đơn hàng</p>
                                 </div>
                             </div>
                         </div>
@@ -290,7 +231,7 @@
                                 </div>
                                 <div class="media-body media-text-right">
                                     <h2>{{total_category}}</h2>
-                                    <p class="m-b-0">Stores</p>
+                                    <p class="m-b-0">Số loại món</p>
                                 </div>
                             </div>
                         </div>
@@ -303,7 +244,7 @@
                                 </div>
                                 <div class="media-body media-text-right">
                                     <h2>{{total_customer}}</h2>
-                                    <p class="m-b-0">Customer</p>
+                                    <p class="m-b-0">Khách mua</p>
                                 </div>
                             </div>
                         </div>
@@ -318,7 +259,7 @@
                                 </div>
                                 <div class="media-body media-text-right">
                                     <h2>{{total_revenue_year}}VND</h2>
-                                    <p class="m-b-0">Total revenue year {{curr_year}}</p>
+                                    <p class="m-b-0">Tổng thu năm {{curr_year}}</p>
                                 </div>
                             </div>
                         </div>
@@ -331,7 +272,7 @@
                                 </div>
                                 <div class="media-body media-text-right">
                                     <h2>{{total_revenue_season}}VND</h2>
-                                    <p class="m-b-0">Total revenue season {{curr_season}}</p>
+                                    <p class="m-b-0">Tổng thu quý {{curr_season}}</p>
                                 </div>
                             </div>
                         </div>
@@ -344,7 +285,7 @@
                                 </div>
                                 <div class="media-body media-text-right">
                                     <h2>{{total_revenue_month}}VND</h2>
-                                    <p class="m-b-0">Total revenue month {{curr_month}}</p>
+                                    <p class="m-b-0">Tổng thu tháng {{curr_month}}</p>
                                 </div>
                             </div>
                         </div>
@@ -357,7 +298,7 @@
                                 </div>
                                 <div class="media-body media-text-right">
                                     <h2>{{total_revenue_week_up_to_now}}VND</h2>
-                                    <p class="m-b-0">Total week {{curr_week}}</p>
+                                    <p class="m-b-0">Tổng thu tuần {{curr_week}}</p>
                                 </div>
                             </div>
                         </div>
@@ -370,7 +311,7 @@
                     <div class="col-lg-8">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Extra Area Chart</h4>
+                                <h4 class="card-title">Biểu đồ doanh thu</h4>
                                 <div id="extra-area-chart"></div>
                                 <script>
                                     var data_list = {{ extra_area_chart_var_list | safe }};
@@ -504,8 +445,7 @@
             </div>
             <!-- End Container fluid  -->
             <!-- footer -->
-            <footer class="footer"> © 2018 All rights reserved. Template designed by <a
-                    href="https://colorlib.com">Colorlib</a></footer>
+            <footer class="footer"></footer>
             <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->

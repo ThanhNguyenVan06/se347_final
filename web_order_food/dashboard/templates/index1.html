@@ -51,11 +51,12 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html">
                         <!-- Logo icon -->
-                        <b><img src="{% static 'dashboard/images/logo.png' %}" alt="homepage" class="dark-logo" /></b>
+                        <!-- <b><img src="{% static 'dashboard/images/logo.png' %}" alt="homepage" class="dark-logo" /></b> -->
                         <!--End Logo icon -->
                         <!-- Logo text -->
-                        <span><img src="{% static 'dashboard/images/logo-text.png' %}" alt="homepage"
-                                class="dark-logo" /></span>
+                        <!-- <span><img src="{% static 'dashboard/images/logo-text.png' %}" alt="homepage"
+                        class="dark-logo" /></span> -->
+                        <span>Báo cáo</span>
                     </a>
                 </div>
                 <!-- End Logo -->
@@ -73,14 +74,6 @@
                     <!-- User profile and search -->
                     <ul class="navbar-nav my-lg-0">
 
-                        <!-- Search -->
-                        <li class="nav-item hidden-sm-down search-box"> <a class="nav-link hidden-sm-down text-muted  "
-                                href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <form class="app-search">
-                                <input type="text" class="form-control" placeholder="Search here"> <a class="srh-btn"><i
-                                        class="ti-close"></i></a>
-                            </form>
-                        </li>
                         <!-- Comment -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted text-muted  " href="#" data-toggle="dropdown"
@@ -101,35 +94,6 @@
                                                 <div class="mail-contnet">
                                                     <h5>This is title</h5> <span class="mail-desc">Just see the my new
                                                         admin!</span> <span class="time">9:30 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="btn btn-success btn-circle m-r-10"><i
-                                                        class="ti-calendar"></i></div>
-                                                <div class="mail-contnet">
-                                                    <h5>This is another title</h5> <span class="mail-desc">Just a
-                                                        reminder that you have event</span> <span class="time">9:10
-                                                        AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="btn btn-info btn-circle m-r-10"><i class="ti-settings"></i>
-                                                </div>
-                                                <div class="mail-contnet">
-                                                    <h5>This is title</h5> <span class="mail-desc">You can customize
-                                                        this template as you want</span> <span class="time">9:08
-                                                        AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="btn btn-primary btn-circle m-r-10"><i class="ti-user"></i>
-                                                </div>
-                                                <div class="mail-contnet">
-                                                    <h5>This is another title</h5> <span class="mail-desc">Just see the
-                                                        my admin!</span> <span class="time">9:02 AM</span>
                                                 </div>
                                             </a>
                                         </div>
@@ -163,36 +127,6 @@
                                                 <div class="mail-contnet">
                                                     <h5>Michael Qin</h5> <span class="mail-desc">Just see the my
                                                         admin!</span> <span class="time">9:30 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="user-img"> <img src="images/users/2.jpg" alt="user"
-                                                        class="img-circle"> <span
-                                                        class="profile-status busy pull-right"></span> </div>
-                                                <div class="mail-contnet">
-                                                    <h5>John Doe</h5> <span class="mail-desc">I've sung a song! See you
-                                                        at</span> <span class="time">9:10 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="user-img"> <img src="images/users/3.jpg" alt="user"
-                                                        class="img-circle"> <span
-                                                        class="profile-status away pull-right"></span> </div>
-                                                <div class="mail-contnet">
-                                                    <h5>Mr. John</h5> <span class="mail-desc">I am a singer!</span>
-                                                    <span class="time">9:08 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="user-img"> <img src="images/users/4.jpg" alt="user"
-                                                        class="img-circle"> <span
-                                                        class="profile-status offline pull-right"></span> </div>
-                                                <div class="mail-contnet">
-                                                    <h5>Michael Qin</h5> <span class="mail-desc">Just see the my
-                                                        admin!</span> <span class="time">9:02 AM</span>
                                                 </div>
                                             </a>
                                         </div>
@@ -235,11 +169,11 @@
                         <li class="nav-devider"></li>
                         <li class="nav-label">Home</li>
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span
-                                    class="hide-menu">Dashboard <span
+                                    class="hide-menu">Bảng điều khiển <span
                                         class="label label-rouded label-primary pull-right">2</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="{% url 'admin-dashboard:main' %}">Ecommerce </a></li>
-                                <li><a href="{% url 'admin-dashboard:analytics' %}">Analytics </a></li>
+                                <li><a href="{% url 'admin-dashboard:main' %}">Tổng quan </a></li>
+                                <li><a href="{% url 'admin-dashboard:analytics' %}">Bảng Phân tích </a></li>
                             </ul>
                         </li>
                     </ul>
@@ -254,12 +188,12 @@
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">Dashboard</h3>
+                    <h3 class="text-primary">Bảng điều khiển</h3>
                 </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard</li>
+                        <li class="breadcrumb-item active">Bảng điều khiển</li>
                     </ol>
                 </div>
             </div>
@@ -276,7 +210,7 @@
                                 </div>
                                 <div class="media-body media-text-right">
                                     <h2 class="color-white">{{order_statuses.0}}</h2>
-                                    <p class="m-b-0">Pending orders</p>
+                                    <p class="m-b-0">Đơn hàng đợi</p>
                                 </div>
                             </div>
                         </div>
@@ -289,7 +223,7 @@
                                 </div>
                                 <div class="media-body media-text-right">
                                     <h2 class="color-white">{{order_statuses.1}}</h2>
-                                    <p class="m-b-0">Delivering orders</p>
+                                    <p class="m-b-0">Đơn hàng đang vận chuyển</p>
                                 </div>
                             </div>
                         </div>
@@ -302,7 +236,7 @@
                                 </div>
                                 <div class="media-body media-text-right">
                                     <h2 class="color-white">{{order_statuses.2}}</h2>
-                                    <p class="m-b-0">Delivered Orders</p>
+                                    <p class="m-b-0">Đơn hàng đã giao</p>
                                 </div>
                             </div>
                         </div>
@@ -353,7 +287,7 @@
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-title">
-                                <h4>Sales</h4>
+                                <h4>Doanh số</h4>
                             </div>
                             <div class="sales-chart">
                                 <div class="ct-bar-chart2" style="height:435px"></div>
@@ -390,7 +324,7 @@
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-block">
-                                <h4 class="card-title">Visitor</h4>2
+                                <h4 class="card-title">Lượt truy cập</h4>2
                                 <div class="ct-svg-chart" style="height:420px"></div>
                             </div>
                         </div>
@@ -403,32 +337,32 @@
                             <div class="card-title">
                                 <div class="row">
                                     <div class="col-lg-8">
-                                        <h4>Recent Orders </h4>
+                                        <h4>Đơn hàng gần đây</h4>
                                     </div>
 
                                     <div class="col-lg-4">
                                         <div class="row">
-                                            <label for="text" class="mr-3">Status</label>
+                                            <label for="text" class="mr-3">Trạng thái</label>
                                             <select class="filter">
                                                 {% if filter_value == "1" or filter_value == None %}
-                                                <option value="1" selected>All </option>
-                                                <option value="2">Pending
+                                                <option value="1" selected>Tất cả </option>
+                                                <option value="2">Đang chờ
                                                 </option>
-                                                <option value="3">Delivering
+                                                <option value="3">Đang giao
                                                 </option>
                                                 {% endif %}
                                                 {% if filter_value == "2" %}
-                                                <option value="2" selected>Pending </option>
-                                                <option value="1">All
+                                                <option value="2" selected>Đang chờ </option>
+                                                <option value="1">Tất cả
                                                 </option>
-                                                <option value="3">Delivering
+                                                <option value="3">Đang vận chuyển
                                                 </option>
                                                 {% endif %}
                                                 {% if filter_value == "3" %}
-                                                <option value="3" selected>Delivering </option>
-                                                <option value="1">All
+                                                <option value="3" selected>Đang vận chuyển </option>
+                                                <option value="1">Tất cả
                                                 </option>
-                                                <option value="2">Delivering
+                                                <option value="2">Đang chờ
                                                 </option>
                                                 {% endif %}
                                             </select>
@@ -441,11 +375,11 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Product</th>
-                                                <th>Price</th>
-                                                <th>Status</th>
-                                                <th>Paid</th>
+                                                <th>Tên khách</th>
+                                                <th>Món ăn</th>
+                                                <th>Giá tiền</th>
+                                                <th>Trạng thái</th>
+                                                <th>Thanh toán</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -458,14 +392,14 @@
                                                 <td>
                                                     <button type="button" class="btn btn-danger switch {{cart.id }}"
                                                         value="{{ cart.id }}">
-                                                        {{cart.status}}
+                                                        Đang chờ
                                                     </button>
                                                 </td>
                                                 {% elif cart.status == "delivering" %}
                                                 <td>
                                                     <button type="button" class="btn btn-warning switch {{cart.id }}"
                                                         value="{{ cart.id }}">
-                                                        {{cart.status}}
+                                                        Đang giao hàng
                                                     </button>
                                                 </td>
                                                 {% endif %}
@@ -474,13 +408,13 @@
                                                     <button type="button"
                                                         class="btn btn-success switch_paid {{cart.id }}_paid"
                                                         value="{{ cart.id }} paid">
-                                                        Paid
+                                                        Đã thanh toán
                                                     </button>
                                                     {% else %}
                                                     <button type="button"
                                                         class="btn btn-danger switch_paid {{cart.id }}_paid"
                                                         value="{{ cart.id }} paid">
-                                                        Not Paid
+                                                        Chưa thanh toán
                                                     </button>
                                                     {% endif %}
                                                 </td>
@@ -545,7 +479,7 @@
     </div>
     <!-- End Container fluid  -->
     <!-- footer -->
-    <footer class="footer"> © 2018 All rights reserved. Template designed by <a href="https://colorlib.com">Colorlib</a>
+    <footer class="footer"> </a>
     </footer>
     <!-- End footer -->
     </div>
@@ -595,13 +529,13 @@
                         var btnClass = "";
                         var prevClass = $("." + value).attr("class")
                         var prevStatus = $("." + value).text().trim()
-                        if (prevStatus === "delivering") {
-                            status = "delivered"
+                        if (prevStatus === "Đang giao hàng") {
+                            status = "Đã giao"
                             btnClass = "btn btn-primary switch " + value
                             $("." + value).attr("disabled", true)
                         }
-                        else if (prevStatus === "pending") {
-                            status = "delivering"
+                        else if (prevStatus === "Đang chờ") {
+                            status = "đang giao hàng"
                             btnClass = "btn btn-warning switch " + value
                         }
                         $("." + value).text(status)
@@ -615,7 +549,6 @@
             $(".switch_paid").click(function () {
                 var value = $(this).val()
                 value = value.split(" ")[0]
-                console.log(value)
                 $.ajax({
                     url: "",
                     type: "Get",
@@ -628,13 +561,13 @@
                         var btnClass = "";
                         var prevClass = $("." + value + "_paid").attr("class")
                         var prevStatus = $("." + value + "_paid").text().trim()
-                        if (prevStatus === "paid") {
-                            status = "Not Paid"
+                        if (prevStatus === "Đã thanh toán") {
+                            status = "Chưa thanh toán"
                             btnClass = "btn btn-danger switch_paid " + value
                             $("." + value).attr("disabled", true)
                         }
-                        else if (prevStatus === "Not Paid") {
-                            status = "Paid"
+                        else if (prevStatus === "Chưa thanh toán") {
+                            status = "Đã thanh toán"
                             btnClass = "btn btn-success switch_paid " + value
                         }
                         $("." + value + "_paid").text(status)

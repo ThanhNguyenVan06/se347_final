@@ -12,6 +12,7 @@ urlpatterns = [
     path('confirm/success_v2/',views.success_v2,name = 'buy_success'),
     path('emptycart/',views.emptycart,name = 'empty_cart'),
     #delete item in checkout
-    path('delete/',views.delete_item,name = 'delete_item')
+    path('delete/',views.delete_item,name = 'delete_item'),
+    path('changegood/',views.change_good,name = 'change_good')
     
 ]

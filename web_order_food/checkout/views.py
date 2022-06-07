@@ -57,9 +57,9 @@ class check_cart(View):
             goods_user[0].delete()
             print(string_id_items)
             return render(request, 'empty_cart.html')
-        else :
-            goods_user.update(id_foods = string_id_items)   
-            return redirect('checkout:confirm')
+        # else :
+        #     goods_user.update(id_foods = string_id_items)   
+        return redirect('checkout:confirm')
 class check_cart_html(View):
     def get(self, request):
         if not request.user.is_authenticated:
@@ -134,13 +134,40 @@ def success_v2(request):
 def emptycart( request):
     return render(request, 'empty_cart.html')
 def delete_item( request):
-    id_del = request.POST['id']
+    id_del = request.GET['id']
     name = request.user.username
     goods_user = cart.objects.filter(user_name = name , active = 0)
     arr_items= []
     items = goods_user[0].id_foods
     arr_id = items.split(",") 
-    arr_items = [arr_id for item in arr_id if item != id_del]
+    arr_items = [item for item in arr_id if item != id_del]
     string_id_items =','.join(arr_items)
     goods_user.update(id_foods = string_id_items)
-    return HttpResponse(status = 200)
+    return HttpResponse("SUcces")
+def change_good(request):
+    id_food = request.GET['name']
+    quantity = request.GET['amount']
+    name = request.user.username
+    goods_user = cart.objects.filter(user_name = name , active = 0)
+    arr_items= []
+    items = goods_user[0].id_foods
+    arr_id = items.split(",") 
+    arr_items = [item for item in arr_id if item != id_food]
+    for i in range(int(quantity)):
+        arr_items.append(id_food)
+    string_id_items =','.join(arr_items)
+    goods_user.update(id_foods = string_id_items)
+    food_price = food.objects.get(id = id_food).price
+    total = int(quantity)*int(food_price)
+    content = {
+        'id':id_food,
+        'price':food_price,
+        "total" : total,
+    }
+    
+    return JsonResponse ({
+        'id':id_food,
+        'price':food_price,
+        "total" : total,
+    })
+

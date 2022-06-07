@@ -47,8 +47,8 @@ $(document).ready(function () {
                         "<td>" + parseInt(i + 1, 10) + "</td>" +
                         "<td class = \"name_food\">" + data.arr_items[i].name_food + "</td>" +
                         "<td class = \"quantity\">" + "<input type=\"number\" class=\"form-control quantity_\" name=\"" + data.arr_items[i].id_food + "\" min=\"1\"  value = \"" + data.arr_items[i].quantity + "\">" + "</td>" +
-                        "<td class = \"price\">" + data.arr_items[i].quantity * data.arr_items[i].price + "</td>" +
-                        "<td><button caption='btn' class=\"btnDelete btn btn-danger\">\
+                        "<td class = \"price price_"+data.arr_items[i].id_food+"\">" + data.arr_items[i].quantity * data.arr_items[i].price + "</td>" +
+                        "<td><button caption='btn' value = \""+data.arr_items[i].id_food+"\"class=\"btnDelete btn btn-danger\">\
                             <i class='fa fa-trash-o' aria-hidden='true'></i>\
                             Delete\
                             </button></td>"
@@ -80,6 +80,16 @@ $(document).ready(function () {
             // }
 
             $(".table_bill").on("click", '.btnDelete', function () {
+                
+                $.ajax({
+                    url :'delete/',
+                    type: 'GET',
+                    data: {'id':this.value},
+                    success: function (data) {
+                        
+                    }
+                })
+                
                 $(this).closest("tr").remove();
                 var price = document.getElementsByClassName("price");
 
@@ -93,24 +103,51 @@ $(document).ready(function () {
                 total_text.innerHTML = total;
 
             });
-            $(".quantity_").on("change", function () {
-                console.log('data', data.price);
-                index = parseInt(this.name)
-                console.log(index);
-                console.log(this.name);
-                console.log(data.arr_items[0]);
-                //price[index-1].innerHTML = data.arr_items[index-1].price*this.value;
-                // console.log(data.arr_items[index - 1].price * this.value)
-                $(this).closest('tr').find(".price").text(data.arr_items[index - 1].price * this.value)
-                console.log($(this).closest('tr').find(".price").text(data.arr_items[index - 1].price * this.value));
-                total = 0
-                for (let j = 0; j < price.length; j++) {
-                    item_temp = document.getElementsByClassName("price")[j]
-                    total += parseInt(item_temp.innerHTML);
+            // $(".quantity_").on("change", function () {
+            //     console.log('data', data.price);
+            //     index = parseInt(this.name)
+            //     console.log(index);
+            //     console.log(this.name);
+            //     console.log(data.arr_items[0]);
+            //     //price[index-1].innerHTML = data.arr_items[index-1].price*this.value;
+            //     // console.log(data.arr_items[index - 1].price * this.value)
+            //     $(this).closest('tr').find(".price").text(data.arr_items[index - 1].price * this.value)
+            //     console.log($(this).closest('tr').find(".price").text(data.arr_items[index - 1].price * this.value));
+            //     total = 0
+                // for (let j = 0; j < price.length; j++) {
+                //     item_temp = document.getElementsByClassName("price")[j]
+                //     total += parseInt(item_temp.innerHTML);
 
-                    console.log(total);
-                }
-                total_text.innerHTML = total;
+                //     console.log(total);
+                // }
+                // total_text.innerHTML = total;
+            // })
+            $(".quantity_").on("change", function () {
+                pre_amount = this.value
+                $.ajax({
+                    url :'changegood/',
+                    type: 'GET',
+                    data: {'name':this.name,
+                            'amount':this.value,
+                
+                },
+                    success: function (data) {
+                    //     alert(data["total"])
+                       class_name  = "price_" + data.id
+                       var a = document.getElementsByClassName(class_name)
+                       a[0].innerHTML = data.total
+                       pre_total = document.getElementById("total").innerHTML
+                       total = 0
+                        for (let j = 0; j < price.length; j++) {
+                            item_temp = document.getElementsByClassName("price")[j]
+                            total += parseInt(item_temp.innerHTML);
+        
+                            console.log(total);
+                        }
+                        total_text.innerHTML = total;
+                        
+                    }
+                })
             })
         }
     });

@@ -15,6 +15,9 @@
 
     <link rel="stylesheet" href="{% static 'admin/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'home/style.css' %}">
+    <link rel="stylesheet" href="{% static 'news/news.css' %}">
+    <link rel="stylesheet" href="{% static 'empty_card/empty_card.css' %}">
+    <link rel="stylesheet" href="{% static 'discount/discountt.css' %}">
     {% block style %} {% endblock %}
     <title>Order Food Online</title>
   </head>
@@ -49,8 +52,12 @@
               <i class="fa fa-bell" aria-hidden="true"></i>
             </div> -->
             {% else %}
-            <li><a href="{% url 'user:register' %}" class="btn btn-darken">Register</a></li>
-            <li><a href="{% url 'user:login' %}" class="btn btn-transparent">Login</a></li>
+            <li><a href="{% url 'user:register' %}" class="authentication_link">
+              <span class="px-2">Register</span>
+            </a></li>
+            <li><a href="{% url 'user:login' %}" class="authentication_link">
+              <span class="px-2">Login</span>
+            </a></li>
             {% endif %}
             <li id="wp-menu-icon" class="ms-3">
               <a id="menuIcon">

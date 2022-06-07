@@ -1,4 +1,5 @@
-
+{% extends "base.html" %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,44 +16,10 @@
 
 <body>
     <!-- Navbar Section Starts Here -->
-    <section class="navbar">
-        <div class="container">
-            <div class="logo">
-                <a href="#" title="Logo">
-                    <img src="{% static 'admin/img/logo.png' %}" alt="Restaurant Logo" class="img-responsive">
-                </a>
-            </div>
 
-            <div class="menu text-right">
-                <ul>
-                    <li>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li>
-                        <a href="categories.html">Categories</a>
-                    </li>
-                    <li>
-                        <a href="foods.html">Foods</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="clearfix"></div>
-        </div>
-    </section>
     <!-- Navbar Section Ends Here -->
 
     <!-- fOOD sEARCH Section Starts Here -->
-    <section class="food-search text-center">
-        <div class="container">
-            
-            <h2>Foods on <a href="#" class="text-white">"Category"</a></h2>
-
-        </div>
-    </section>
     <!-- fOOD sEARCH Section Ends Here -->
 
 
@@ -63,17 +30,18 @@
             <ul class = "select_category">
                 <li class = "selected"><a href = "http://127.0.0.1:8000/menu/?category=all">Tất cả</a></li>
                 {% for item in categories %}
-                <li><a href = "http://127.0.0.1:8000/menu/?category={{item.category}}">{{item.category}}</a></li>
-                
+                    <li><a href = "http://127.0.0.1:8000/menu/?category={{item.category}}">{{item.category}}</a></li>
                 {%endfor%}
             </ul>
         </div>
-        <div class="icon_cart">
-            <a href="{% url 'checkout:check_cart_html' %}"> 
-            <svg xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20%;" viewBox="0 0 576 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M96 0C107.5 0 117.4 8.19 119.6 19.51L121.1 32H541.8C562.1 32 578.3 52.25 572.6 72.66L518.6 264.7C514.7 278.5 502.1 288 487.8 288H170.7L179.9 336H488C501.3 336 512 346.7 512 360C512 373.3 501.3 384 488 384H159.1C148.5 384 138.6 375.8 136.4 364.5L76.14 48H24C10.75 48 0 37.25 0 24C0 10.75 10.75 0 24 0H96zM128 464C128 437.5 149.5 416 176 416C202.5 416 224 437.5 224 464C224 490.5 202.5 512 176 512C149.5 512 128 490.5 128 464zM512 464C512 490.5 490.5 512 464 512C437.5 512 416 490.5 416 464C416 437.5 437.5 416 464 416C490.5 416 512 437.5 512 464z"/></svg>
+        <!--Cart-->
+        <div class="icon_cart" >
+          <a href="{% url 'checkout:check_cart_html' %}" class="notification"> 
+            <svg xmlns="http://www.w3.org/2000/svg"viewBox="0 0 576 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M96 0C107.5 0 117.4 8.19 119.6 19.51L121.1 32H541.8C562.1 32 578.3 52.25 572.6 72.66L518.6 264.7C514.7 278.5 502.1 288 487.8 288H170.7L179.9 336H488C501.3 336 512 346.7 512 360C512 373.3 501.3 384 488 384H159.1C148.5 384 138.6 375.8 136.4 364.5L76.14 48H24C10.75 48 0 37.25 0 24C0 10.75 10.75 0 24 0H96zM128 464C128 437.5 149.5 416 176 416C202.5 416 224 437.5 224 464C224 490.5 202.5 512 176 512C149.5 512 128 490.5 128 464zM512 464C512 490.5 490.5 512 464 512C437.5 512 416 490.5 416 464C416 437.5 437.5 416 464 416C490.5 416 512 437.5 512 464z"/></svg>
             <h2 class = "cart_count">{{count_begin}}</h2>
-            </a>
-        </div>
+          </a>
+      </div>
+      <!--Food menu-->
         <div class="container">
             <h2 class="text-center">Food Menu</h2>
             {% for item in all_food %}
@@ -81,7 +49,6 @@
                 <div class="food-menu-img">
                     <img src="{{ item.image.url }}" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
                 </div>
-
                 <div class="food-menu-desc">
                     <h4>{{ item.name_food }}</h4>
                     <p class="food-price">{{ item.price }}VNĐ</p>
@@ -90,12 +57,13 @@
                     </p>
                     <br>
                     {% csrf_token %}
-                    <button type= "button" class="btn btn-primary" value="{{ item.id }}">Add to cart</button>
                 </div>
+                <button type= "button" class="btn btn-primary" value="{{ item.id }}">Add to cart</button>
             </div>
             {% endfor %}
 
-            <div class="clearfix"></div>
+       
+            <!--
             <div class="">
                 {% if all_food.has_previous %}
                     <a href="{% url 'menu:search' %}?page={{all_food.previous_page_number}}&search={{search}}" class=""> previous number</a>
@@ -104,37 +72,39 @@
                     <a href="{% url 'menu:search' %}?page={{all_food.next_page_number }}&search={{search}}" class=""> Next number</a>
                 {% endif %}
               </div>
-            
-
+            </div>
+        -->
+        <div class="clearfix"></div>
+            {% if all_food.has_other_pages %}
+            <div class="pagination">
+                {% if all_food.has_previous %}
+                    <a href="{% url 'menu:search' %}?page={{all_food.previous_page_number}}&search={{search}}" class=""> &laquo;</a>
+                {% else %}
+                    <a class="disabled"><span>&laquo;</span></a>
+                {% endif %}
+                {% for i in all_food.paginator.page_range %}
+                    {% if all_food.number == i %}
+                        <a class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></a>
+                    {% else %}
+                        <a href="{% url 'menu:search' %}?page={{ i }}&search={{search}}">{{ i }}</a>
+                    {% endif %}
+                {% endfor %}
+                {% if all_food.has_next %}
+                    <a href="{% url 'menu:search' %}?page={{all_food.next_page_number }}&search={{search}}" class=""> &raquo;</a>
+                {% else %}
+                    <a class="disabled"><span>&raquo;</span></a>
+                {% endif %}
+            </div>
+            {% endif %}
         </div>
-
+    
     </section>
     <!-- fOOD Menu Section Ends Here -->
 
     <!-- social Section Starts Here -->
-    <section class="social">
-        <div class="container text-center">
-            <ul>
-                <li>
-                    <a href="#"><img src="https://img.icons8.com/fluent/50/000000/facebook-new.png"/></a>
-                </li>
-                <li>
-                    <a href="#"><img src="https://img.icons8.com/fluent/48/000000/instagram-new.png"/></a>
-                </li>
-                <li>
-                    <a href="#"><img src="https://img.icons8.com/fluent/48/000000/twitter.png"/></a>
-                </li>
-            </ul>
-        </div>
-    </section>
     <!-- social Section Ends Here -->
 
     <!-- footer Section Starts Here -->
-    <section class="footer">
-        <div class="container text-center">
-            <p>All rights reserved. Designed By <a href="#">Vijay Thapa</a></p>
-        </div>
-    </section>
     <!-- footer Section Ends Here -->
 
 </body>
@@ -165,3 +135,4 @@ $(document).ready(function() {
 </script>
 
 </html>
+{% endblock %}

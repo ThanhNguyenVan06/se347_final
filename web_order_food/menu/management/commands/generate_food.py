@@ -3,7 +3,7 @@ from tqdm import tqdm
 from menu.models import food, category
 from faker import Faker
 import json
-file= open("category.json")
+file= open("category.json", encoding='utf8')
 data= json.load(file)
 def generate_category():
     category.objects.create(id=1,category="pizza").save()

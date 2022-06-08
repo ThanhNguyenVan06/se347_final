@@ -42,7 +42,7 @@
   {
     "name_food": "ngũ cốc",
     "category_food_id": 4,
-    "descriptn": "ngũ cốc",
+    "description": "ngũ cốc",
     "image": "..asd",
     "price": 25000,
     "active": 1

@@ -37,7 +37,7 @@ def get_random_bill_choice(active):
     """
     if active ==1:
         return random.choices([1,2], weights=[1,2], k=1)[0]
-    return 0 
+    return 0
 
 def get_random_receiver(faker):
     is_empty= bool(random.getrandbits(1))
@@ -51,16 +51,16 @@ def get_random_paid_bill(active):
     an inactive cart can be paid1
     """
     if active ==0:
-        return False 
+        return False
     return random.choices([False,True], weights=[1,2])[0]
 
 def get_random_active_choice():
     return random.choices([0,1], weights=[2,8], k=1)[0]
-    
+
 def get_random_coupon_code():
     """
     We have 4 type of coupon code:
-    - empty 
+    - empty
     - 100
     - 101
     - 102
@@ -93,9 +93,10 @@ class Command(BaseCommand):
                 number_telephone= faker.phone_number(),
                 receiver= get_random_receiver(faker),
                 coupon_code= get_random_coupon_code(),
-                date_created=faker.date_time_between(start_date='-3y', end_date='now',tzinfo=utc), 
+                date_created=faker.date_time_between(start_date='-3y', end_date='now',tzinfo=utc),
                 raw_price= total_price,
                 final_price= total_price,
                 statement_bill= get_random_bill_choice(cart_active),
                 paid_bill= get_random_paid_bill(cart_active)
             ).save()
+        print("WARNING: you must disable the auto_now_add = True in menu order, otherwise the cart will be created with the now datetime")

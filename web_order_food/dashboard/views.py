@@ -1,16 +1,24 @@
 import json
 from datetime import  datetime
+import locale
 import os
 from django.shortcuts import render
 from django.views import View
 from menu.models import food, cart, category
+from django.contrib.auth.models import User
 from collections import defaultdict
 from django.db.models.functions import ExtractYear, ExtractMonth, ExtractDay
 
 from dashboard.service.food import food_service
 from dashboard.service.time import time_service
 from django.core.paginator import Paginator
+
+DEFAULT_AVATAR="/static/home/image/default-user.png"
 # Create your views here.
+locale.setlocale(locale.LC_ALL, 'en_US')
+def convert_currency(number):
+    return locale.format("%d", number, grouping=True)
+
 class dashboard(View):
     def get(self,request):
         # get the total profit weekly up to that date, monthly, seasonaly
@@ -25,7 +33,7 @@ class dashboard(View):
                 price=int(query.price)
                 total_revenue +=price
                 total_food_sold+=1
-                categories_sold[query.category_food.category]+= 1 
+                categories_sold[query.category_food.category]+= 1
         # get the total category
         total_category= category.objects.count()
         # get the total food sold item
@@ -43,7 +51,7 @@ class dashboard(View):
             if cart_item['year'] not in extra_area_chart_var_dict.keys():
                 extra_area_chart_var_dict[cart_item['year']]=defaultdict(int)
             for id_food in cart_item["id_foods"].split(","):
-                    query= food.objects.get(id=id_food)    
+                    query= food.objects.get(id=id_food)
                     extra_area_chart_var_dict[cart_item['year']][query.category_food.category]+=1
                     total_category_sold+=1
         extra_area_chart_var_list=[]
@@ -51,7 +59,7 @@ class dashboard(View):
             var_dict= {
                 "period": str(i)
             }
-            for k,v in extra_area_chart_var_dict[i].items(): 
+            for k,v in extra_area_chart_var_dict[i].items():
                 var_dict[k]=v
             for category_item in category_list:
                 if category_item not in var_dict.keys():
@@ -60,7 +68,7 @@ class dashboard(View):
         # calculate the percentage of category sold
         for category_ in category_list:
             categories_sold[category_]= round((categories_sold[category_] / total_category_sold) * 100)
-        
+
             # total revenure
         season_map={
             1: range(1,4),
@@ -84,7 +92,7 @@ class dashboard(View):
         total_revenue_week_up_to_now=0
         total_revenue_month=0
         total_revenue_season=0
-        
+
         total_cart_year= cart.objects.annotate(year= ExtractYear("date_created")).filter(year = curr_year)
         total_revenue_year= food_service.get_total_price_from_queryset(total_cart_year)
 
@@ -98,10 +106,12 @@ class dashboard(View):
         for month in curr_season:
             total_cart_season= cart.objects.annotate(month= ExtractMonth("date_created"), year= ExtractYear("date_created")).filter(month = month, year= curr_year, paid_bill=True)
             total_revenue_season+= food_service.get_total_price_from_queryset(total_cart_season)
+
+        # user=User.objects.filter(username = request.user)
         return render(request, 'index.html',
                 {
-                    "total_revenue": total_revenue,
-                    "total_food_sold": total_food_sold,
+                    "total_revenue": convert_currency(total_revenue),
+                    "total_food_sold": convert_currency(total_food_sold),
                     "total_category": total_category,
                     "total_customer": total_customer,
                     "extra_area_chart_var_list": extra_area_chart_var_list,
@@ -110,10 +120,12 @@ class dashboard(View):
                     "curr_year": curr_year,
                     "curr_month": curr_month,
                     "curr_season": curr_season_num,
-                    "total_revenue_year": total_revenue_year,
-                    "total_revenue_month": total_revenue_month,
-                    "total_revenue_week_up_to_now": total_revenue_week_up_to_now,
-                    "total_revenue_season": total_revenue_season,
+                    "total_revenue_year": convert_currency(total_revenue_year),
+                    "total_revenue_month": convert_currency(total_revenue_month),
+                    "total_revenue_week_up_to_now": convert_currency(total_revenue_week_up_to_now),
+                    "total_revenue_season": convert_currency(total_revenue_season),
+                    "user_name": request.user,
+                    "user_avatar": DEFAULT_AVATAR # will fix when user have avatar attribute
                 })
 
 class analytic(View):
@@ -128,7 +140,6 @@ class analytic(View):
             carts= cart.objects.filter(statement_bill=0)
         elif filter_value =="3":
             carts= cart.objects.filter(statement_bill=1)
-        FOOD_NAME_COUNTS_CACHE_DIR="./dashboard/cache/food_name_counts_cache.json"
         if carts:
             paginator = Paginator(carts,10 ) # Show 25 contacts per page.
             toggle_id=request.GET.get("button_value")
@@ -155,28 +166,22 @@ class analytic(View):
                     "id": cart_item.id,
                     "user_name": cart_item.user_name,
                     "food_bought": ",".join(name for name in name_food_boughts),
-                    "total_price": total_price ,
+                    "total_price": convert_currency(total_price) ,
                     "status":  int_to_status[cart_item.statement_bill],
                     "paid_bill": cart_item.paid_bill
                 }
                 cart_list.append(cart_item_statuses)
-        if os.path.exists(FOOD_NAME_COUNTS_CACHE_DIR):
-            with open(FOOD_NAME_COUNTS_CACHE_DIR, 'r') as j:
-                food_name_counts = json.loads(j.read())
-        else:
             carts= cart.objects.all()
             for cart_item in carts:
                 for id_food in cart_item.id_foods.split(","):
                     food_query= food.objects.get(id=id_food)
                     food_name_counts[food_query.name_food]+=1
             food_name_counts = sorted(food_name_counts.items(),key=(lambda i: i[1]))
-            with open(FOOD_NAME_COUNTS_CACHE_DIR, "w") as f:
-                json.dump(food_name_counts, f)
         # get the total revenue of each category following months
         today= datetime.today
         curr_month= today().month
         curr_year= today().year
-        categories_sold_months=[0 for _ in range(0, curr_month)] 
+        categories_sold_months=[0 for _ in range(0, curr_month)]
         query_set= cart.objects.annotate(year= ExtractYear("date_created"), month= ExtractMonth("date_created")).filter(year=curr_year, month__in=[m for m in range(1, curr_month+1)])
         for query in query_set:
             categories_sold_months[query.month-1]+= len(query.id_foods.split(","))
@@ -187,7 +192,6 @@ class analytic(View):
         }
         for k in order_statuses.keys():
             order_statuses[k]= cart.objects.filter(statement_bill=k).count()
-
         return render(request, 'index1.html',
                     {
                         "first_best_seller": {"name":food_name_counts[-1][0],"value":food_name_counts[-1][1]},
@@ -198,20 +202,24 @@ class analytic(View):
                         "page_cart": page_cart,
                         "categories_sold_months": categories_sold_months,
                         "month_list": [m for m in range(1,curr_month+1)],
-                        "filter_value": filter_value
+                        "filter_value": filter_value,
+                        "user_name": request.user,
+                        "user_avatar": DEFAULT_AVATAR # will fix when user have avatar attribute
                     })
 
-
-class get_3_best_sellers(View):
-    def get(self):
-        carts= cart.objects.all()
-        for cart_item in carts:
-            for id_food in cart_item.id_foods.split(","):
-                food_query= food.objects.get(id=id_food)
-                food_name_counts[food_query.name_food]+=1
-        food_name_counts = sorted(food_name_counts.items(),key=(lambda i: i[1]))
-        {
-            "first_best_seller": {"name":food_name_counts[-1][0],"value":food_name_counts[-1][1]},
-            "second_best_seller": {"name":food_name_counts[-2][0],"value":food_name_counts[-2][1]},
-            "third_best_seller": {"name":food_name_counts[-3][0],"value":food_name_counts[-3][1]},
-        }
+def get_3_best_sellers():
+    """
+    The function here is only for reference
+    Not use for web
+    """
+    carts= cart.objects.all()
+    for cart_item in carts:
+        for id_food in cart_item.id_foods.split(","):
+            food_query= food.objects.get(id=id_food)
+            food_name_counts[food_query.name_food]+=1
+    food_name_counts = sorted(food_name_counts.items(),key=(lambda i: i[1]))
+    {
+        "first_best_seller": {"name":food_name_counts[-1][0],"value":food_name_counts[-1][1]},
+        "second_best_seller": {"name":food_name_counts[-2][0],"value":food_name_counts[-2][1]},
+        "third_best_seller": {"name":food_name_counts[-3][0],"value":food_name_counts[-3][1]},
+    }

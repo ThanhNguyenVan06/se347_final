@@ -76,7 +76,7 @@
             {% if all_food.has_other_pages %}
               <div class="pagination">
                   {% if all_food.has_previous %}
-                    <a href="?page={{ all_food.previous_page_number }}">&laquo;</a>
+                    <a href="?page={{ all_food.previous_page_number }}&category={{category_name}}">&laquo;</a>
                   {% else %}
                     <a class="disabled"><span>&laquo;</span></a>
                   {% endif %}
@@ -84,11 +84,11 @@
                     {% if all_food.number == i %}
                       <a class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></a>
                     {% else %}
-                      <a href="?page={{ i }}">{{ i }}</a>
+                      <a href="?page={{ i }}&category={{category_name}}">{{ i }}</a>
                     {% endif %}
                   {% endfor %}
                   {% if all_food.has_next %}
-                    <a href="?page={{ all_food.next_page_number }}">&raquo;</a>
+                    <a href="?page={{ all_food.next_page_number }}&category={{category_name}}">&raquo;</a>
                   {% else %}
                     <a class="disabled"><span>&raquo;</span></a>
                   {% endif %}

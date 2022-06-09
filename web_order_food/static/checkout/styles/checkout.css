@@ -1,3 +1,15 @@
+/*Css for empty cart*/
+.box {
+  text-align: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.btn-primary, .btn-primary.disabled, .btn-primary:disabled {
+  background-color: #4466f2!important;
+  border-color: #4466f2!important;
+}
+/****************************************************************/
 .wp-shopping-cart {
   padding: 20px 30px;
 }

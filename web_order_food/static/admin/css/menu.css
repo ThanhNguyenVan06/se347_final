@@ -45,7 +45,7 @@ a:hover{
 .btn{
     position: absolute;
     margin-left: -200px;
-    margin-top: 500px;
+    margin-top: 400px;
     padding: 1%;
     border: none;
     font-size: 1rem;
@@ -112,7 +112,7 @@ CSS for Select Category
     margin-left: 100px;
     width:80%;
     overflow: hidden;
-    background-color:  #f4e377;
+    background-color: white;
 }
 .select_category li {
     float: left;
@@ -121,7 +121,7 @@ CSS for Select Category
 }
 .select_category li a {
     display: block;
-    color:black;
+    color:#0b387c;
     text-align: center;
     padding: 20px 16px;
     text-decoration: none;
@@ -129,7 +129,7 @@ CSS for Select Category
   
   /* Change the link color to #111 (black) on hover */
 .select_category li a:hover {
-    background-color:  white;
+   background-color: #cac9c1;
 }
 /*Css for cart*/
 .notification {
@@ -187,7 +187,7 @@ CSS for Select Category
 }
 .food-menu-box{
     width: 350px;
-    height: 600px;
+    height: 500px;
     margin: 1%;
     padding: 2%;
     float: left;

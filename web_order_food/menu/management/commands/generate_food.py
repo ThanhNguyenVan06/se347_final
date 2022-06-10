@@ -7,10 +7,10 @@ file= open("category.json", encoding='utf8')
 data= json.load(file)
 def generate_category():
     category.objects.create(id=1,category="pizza").save()
-    category.objects.create(id=2,category="other").save()
-    category.objects.create(id=3,category="drink").save()
-    category.objects.create(id=4,category="dessert").save()
-    category.objects.create(id=5,category="chicken").save()
+    category.objects.create(id=2,category="khác").save()
+    category.objects.create(id=3,category="giải khát").save()
+    category.objects.create(id=4,category="tráng miệng").save()
+    category.objects.create(id=5,category="gà").save()
     print("generated category")
 class Command(BaseCommand):
     help = "generate mock food"

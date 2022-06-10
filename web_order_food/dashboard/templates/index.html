@@ -48,11 +48,12 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html">
                         <!-- Logo icon -->
-                        <b><img src="{% static 'dashboard/images/logo.png' %}" alt="homepage" class="dark-logo" /></b>
+                        <!-- <b><img src="{% static 'dashboard/images/logo.png' %}" alt="homepage" class="dark-logo" /></b> -->
                         <!--End Logo icon -->
                         <!-- Logo text -->
-                        <span><img src="{% static 'dashboard/images/logo-text.png' %}" alt="homepage"
-                                class="dark-logo" /></span>
+                        <!-- <span><img src="{% static 'dashboard/images/logo-text.png' %}" alt="homepage"
+                        class="dark-logo" /></span> -->
+                        <span>Báo cáo</span>
                     </a>
                 </div>
                 <!-- End Logo -->
@@ -65,11 +66,11 @@
                         <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  "
                                 href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
                         <!-- Messages -->
-
                         <!-- End Messages -->
                     </ul>
                     <!-- User profile and search -->
                     <ul class="navbar-nav my-lg-0">
+
                         <!-- Comment -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted text-muted  " href="#" data-toggle="dropdown"
@@ -92,7 +93,6 @@
                                                         admin!</span> <span class="time">9:30 AM</span>
                                                 </div>
                                             </a>
-
                                         </div>
                                     </li>
                                     <li>
@@ -103,52 +103,18 @@
                             </div>
                         </li>
                         <!-- End Comment -->
-                        <!-- Messages -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted  " href="#" id="2" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false"> <i class="fa fa-envelope"></i>
-                                <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
-                            </a>
-                            <!-- <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn" aria-labelledby="2">
-                                <ul>
-                                    <li>
-                                        <div class="drop-title">You have 4 new messages</div>
-                                    </li>
-                                    <li>
-                                        <div class="message-center">
-                                            <a href="#">
-                                                <div class="mail-contnet">
-                                                    <h5>Michael Qin</h5> <span class="mail-desc">Just see the my
-                                                        admin!</span> <span class="time">9:30 AM</span>
-                                                </div>
-                                            </a>
-
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link text-center" href="javascript:void(0);"> <strong>See all
-                                                e-Mails</strong> <i class="fa fa-angle-right"></i> </a>
-                                    </li>
-                                </ul>
-                            </div> -->
-                        </li>
-                        <!-- End Messages -->
                         <!-- Profile -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false"><img
-                                    src="{% static 'dashboard/images/avatar/1.jpg' %}" alt="user"
+                                aria-haspopup="true" aria-expanded="false"><img src="{{user_avatar}}" alt="user"
                                     class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
-                                    <li><a href="#"><i class="ti-user"></i> Profile</a></li>
-                                    <li><a href="#"><i class="ti-wallet"></i> Balance</a></li>
-                                    <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
-                                    <li><a href="#"><i class="ti-settings"></i> Setting</a></li>
                                     <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </li>
+                        <li class="nav-item" style="margin: auto">{{user_name}}</li>
                     </ul>
                 </div>
             </nav>
@@ -345,13 +311,13 @@
                     <div class="col-lg-4">
                         <div class="card">
                             <div class="card-body browser">
-                                <p class="f-w-600">chicken<span class="pull-right">{{categories_sold.chicken}}%</span>
+                                <!-- <p class="f-w-600">chicken<span class="pull-right">%</span>
                                 </p>
                                 <div class="progress ">
                                     <div role="progressbar" style="width: {{categories_sold.chicken}}%; height:8px;"
                                         class="progress-bar bg-info wow animated progress-animated"> <span
                                             class="sr-only">{{categories_sold.chicken}}% Complete</span> </div>
-                                </div>
+                                </div> -->
                                 {% for k,v in categories_sold.items %}
                                 {% if k != "chicken" %}
                                 <p class="m-t-30 f-w-600">{{k}}<span class="pull-right">{{v}}%</span></p>

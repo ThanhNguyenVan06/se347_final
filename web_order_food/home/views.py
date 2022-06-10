@@ -8,13 +8,35 @@ from menu.models import cart
 from user.models import user,User
 from django.contrib.auth import authenticate,login
 from django.core.paginator import Paginator
+from collections import defaultdict
+
 
 NUM_BILL_PER_PAGE = 5
 from menu.models import food
 # Create your views here.
 def home(request):
     username = request.user.username
-    return render(request, 'home.html',{'username':username})
+    food_name_counts= defaultdict(int)
+    images = []
+    prices = []
+    carts= cart.objects.all()
+    for cart_item in carts:
+        for id_food in cart_item.id_foods.split(","):
+            food_query= food.objects.get(id=id_food)
+            images.append(food_query.image)
+            prices.append(food_query.price)
+            # print(food_query.image)
+            food_name_counts[food_query.name_food]+=1
+    food_name_counts = sorted(food_name_counts.items(),key=(lambda i: i[1]))
+    # print(food_name_counts)
+    data={
+        "first_best_seller": {"name":food_name_counts[-1][0],"value":food_name_counts[-1][1], "image": images[-1], "price": prices[-1]},
+        "second_best_seller": {"name":food_name_counts[-2][0],"value":food_name_counts[-2][1], "image": images[-2], "price": prices[-2]},
+        "third_best_seller": {"name":food_name_counts[-3][0],"value":food_name_counts[-3][1], "image": images[-3], "price": prices[-3]},
+    }
+    print(data)
+
+    return render(request, 'home.html',{'username':username, 'food_best_seller': data})
 def logout_user(request):
     logout(request)
     return redirect('home_page:home')

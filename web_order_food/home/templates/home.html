@@ -5,13 +5,13 @@
 <div class="hero">
   <div class="container">
     <div class="searchbox">
-      <h3 class="slogun">Finding your favorite food now!</h3>
+      <h3 class="slogun">Tìm món ăn yêu thích của bạn</h3>
       <div class="inputwrapper">
         <form action="{% url 'menu:search' %}" method="GET">
           <div class="searchwrapper">
             <input type="text" name="search" class="search" />
           </div>
-          <input class="orderwrapper" type="submit" class="order" value="Search">
+          <input class="orderwrapper" type="submit" class="order" value="Tìm kiếm">
           <!-- <div class="orderwrapper">
           </div> -->
         </form>
@@ -26,31 +26,31 @@
   <br>
   <br>
   <center>
-    <h1 class="the_best_sell"> The best seller </h1>
+    <h1 class="the_best_sell"> Bán chạy nhất </h1>
   </center>
   <div class="container">
     <!-- Card 1 -->
     <div class="card">
       <div class="cardwrapper">
-        <img src="{% static 'admin/img/biryani.jpg' %}" alt="" srcset="" />
-        <h3>Chicken Biryani</h3>
-        <button class="btn btn-transparent">Read More</button>
+        <img src="{{food_best_seller.first_best_seller.image.url}}" alt="" srcset="" />
+        <h3>{{food_best_seller.first_best_seller.name}}</h3>
+        <button class="btn btn-transparent" disabled>{{food_best_seller.first_best_seller.price}}</button>
       </div>
     </div>
     <!-- Card 2 -->
     <div class="card">
       <div class="cardwrapper">
-        <img src="{% static 'admin/img/bread.jpg' %}" alt="" srcset="" />
-        <h3>Egg Toast</h3>
-        <button class="btn btn-transparent">Read More</button>
+        <img src="{{food_best_seller.second_best_seller.image.url}}" alt="" srcset="" />
+        <h3>{{food_best_seller.second_best_seller.name}}</h3>
+        <button class="btn btn-transparent" disabled>{{food_best_seller.second_best_seller.price}}</button>
       </div>
     </div>
     <!-- Card 3 -->
     <div class="card">
       <div class="cardwrapper">
-        <img src="{% static 'admin/img/buffet.jpg' %}" alt="" srcset="" />
-        <h3>Buffet Lunch</h3>
-        <button class="btn btn-transparent">Read More</button>
+        <img src="{{food_best_seller.third_best_seller.image.url}}" alt="" srcset="" />
+        <h3>{{food_best_seller.third_best_seller.name}}</h3>
+        <button class="btn btn-transparent" disabled>{{food_best_seller.third_best_seller.price}}</button>
       </div>
     </div>
   </div>
@@ -61,21 +61,16 @@
   <div class="left"></div>
   <div class="right">
     <div class="content">
-      <h2>FAASOS ELITE</h2>
+      <h2>FoodShop</h2>
       <p>
-        Faasos Elite is our loyalty programme to express our gratitude to
-        delight our power customers with prioritized delivery, facility to
-        pay once in 15 days, surprise complimentary freebies and more.
+       FoodShop là nơi mà bạn có thể thưởng thức các món ăn ngon mà không cần phải bước chân ra ngoài. Với mục tiêu là cung cấp đa dạng món ăn cho khách hàng và dịch vụ giao hàng tận nơi nhanh chóng. FoodShop mong những gì chúng tôi đang làm sẽ làm lòng quý khách.
       </p>
-      <div class="more">
-        Find More <i class="fas fa-chevron-right"></i>
-      </div>
     </div>
   </div>
 </div>
 
 <!-- Section d -->
-<div class="section-d">
+<!-- <div class="section-d">
   <div class="container">
     <div class="content">
       Avail exclusive offers only on FAASOS app.
@@ -86,10 +81,10 @@
         placeholder="Enter Mobile No." /><button class="btn-light">Submit</button>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- Section e -->
-<div class="section-e">
+<!-- <div class="section-e">
   <div class="container">
     <img src="{% static 'admin/img/limelight-logo.png' %}" width="42" height="42" />
     <h3>In The Limelight</h3>
@@ -99,10 +94,10 @@
       physical process of bringing the food to a consumer's doorstep.
     </p>
   </div>
-</div>
+</div> -->
 
 <!-- Section f -->
-<div class="section-f">
+<!-- <div class="section-f">
   <div class="container">
     <ul>
       <li><img class="first" src="{% static 'admin/img/economic-time.png' %}" alt="" /></li>
@@ -110,53 +105,8 @@
       <li><img class="third" src="{% static 'admin/img/hindu.png' %}" alt="" /></li>
     </ul>
   </div>
-</div>
+</div> -->
 
 <!-- Section g -->
-<div class="section-g">
-  <div class="container">
-    <div class="company">
-      <h3>The Company</h3>
-      <ul>
-        <li><a href="#">Careers</a></li>
-        <li><a href="#">Terms & Conditions</a></li>
-        <li><a href="#">Privacy Policy</a></li>
-      </ul>
-    </div>
-    <div class="social">
-      <h2 class="followus">Follow us on</h2>
-      <ul class="sociallinks">
-        <li>
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-        </li>
-        <li>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-        </li>
-        <li>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-        </li>
-        <li>
-          <a href="#"><i class="fab fa-youtube"></i></a>
-        </li>
-      </ul>
-      <h2 class="getintouch">Get in touch</h2>
-      <ul class="contact">
-        <li><i class="fas fa-phone-alt"></i> +91-7700020020</li>
-        <li><i class="fas fa-envelope"></i> crm@faasos.com</li>
-      </ul>
-    </div>
-    <div class="downloads">
-      <h2 class="download">Download our app at</h2>
-      <button class="btn">
-        <i class="fab fa-android"></i> Download from Google Play
-      </button>
-      <br />
-      <button class="btn">
-        <i class="fab fa-apple"></i> Download from Appstore
-      </button>
-      <br />
-      <p>Delivering in 15 cities across India</p>
-    </div>
-  </div>
-</div>
+
 {% endblock%}

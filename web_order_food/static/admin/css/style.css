@@ -744,6 +744,10 @@ body {
   }
 }
 
+.section-g .container .company {
+  text-align: center;
+}
+
 @media screen and (max-width: 780px) {
   .section-g .container .company {
     text-align: center;
@@ -765,6 +769,8 @@ body {
 
 .section-g .container .company ul {
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .section-g .container .company ul li {
@@ -781,6 +787,11 @@ body {
   color: #fff;
   font-family: "Blinker", sans-serif;
   font-weight: lighter;
+  text-decoration: none;
+}
+
+.section-g .container .social {
+  text-align: center;
 }
 
 @media screen and (max-width: 780px) {
@@ -875,12 +886,31 @@ body {
   margin-top: 17px;
 }
 
+.section-g .container .address {
+  text-align: center;
+}
+
+.section-g .container .address h2 {
+  color: #fff;
+  font-size: 1.5rem;
+  font-family: "Blinker", sans-serif;
+  font-weight: lighter;
+}
+
+.section-g .container .address p {
+  color: white;
+}
+
 footer.footer {
   background: var(--footer);
-  height: 70px;
+  min-height: 70px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 @media screen and (max-width: 780px) {
@@ -897,6 +927,7 @@ footer.footer .container {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  padding: 10px 0;
 }
 
 @media screen and (max-width: 780px) {

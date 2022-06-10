@@ -21,13 +21,13 @@
     {% block style %} {% endblock %}
     <title>Order Food Online</title>
   </head>
-  <body>
+  <body style="display: flex; flex-direction: column; min-height: 100vh;">
     <!-- Top Bar -->
     <nav class="navigation">
       <div class="container">
         <div class="navwrapper">
           <a href="/" style="text-decoration: none;">
-            <h3 class="logo">Faasos</h3>
+            <h3 class="logo">FoodShop</h3>
           </a>
           <ul class="menu">
             {% if user.is_authenticated %}
@@ -85,23 +85,72 @@
     </nav>
 
     <!-- Showcase -->
-    <main>
+    <!-- <main> -->
     {%block content%}
     {%endblock%}
 
       <!-- Footer  -->
       <footer class="footer">
+        <div class="section-g">
+          <div class="container">
+            <div class="company">
+              <h3>Công Ty</h3>
+              <ul>
+                <li><a href="#">Sự nghiệp</a></li>
+                <li><a href="#">Điều khoản</a></li>
+                <li><a href="#">Chính sách bảo mật</a></li>
+              </ul>
+            </div>
+            <div class="social">
+              <h2 class="followus">Liên hệ</h2>
+              <ul class="contact">
+                <li><i class="fas fa-phone-alt"></i> 0916180063</li>
+                <li><i class="fas fa-envelope"></i> contact@foodshop.com</li>
+              </ul>
+              <ul class="sociallinks">
+                <li>
+                  <a href="#"><i class="fab fa-facebook-f"></i></a>
+                </li>
+                <li>
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+                </li>
+                <li>
+                  <a href="#"><i class="fab fa-twitter"></i></a>
+                </li>
+                <li>
+                  <a href="#"><i class="fab fa-youtube"></i></a>
+                </li>
+              </ul>
+            </div>
+            <div class="address">
+              <h2 class="followus">Địa chỉ</h2>
+              <p>100, Hai Bà Trưng, Bến Nghé, Quận 1, TPHCM</p>
+            </div>
+            <!-- <div class="downloads">
+              <h2 class="download">Download our app at</h2>
+              <button class="btn">
+                <i class="fab fa-android"></i> Download from Google Play
+              </button>
+              <br />
+              <button class="btn">
+                <i class="fab fa-apple"></i> Download from Appstore
+              </button>
+              <br />
+              <p>Delivering in 15 cities across India</p>
+            </div> -->
+          </div>
+        </div>
         <div class="container">
           <div class="left">
             <i class="fas fa-motorcycle"></i>
-            Delivering at your doorstep
+            Giao hàng tận nơi
           </div>
           <div class="right">
-            2019 © Faasos Food Services Pvt. Ltd.
+            Bản quyền © Dịch vụ FoodShop
           </div>
         </div>
       </footer>
-    </main>
+    <!-- </main> -->
 
     <script src="js/main.js"></script>
     <script src="/static/home/main.js"></script>

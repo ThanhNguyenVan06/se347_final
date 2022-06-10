@@ -24,7 +24,7 @@ class cart(models.Model):
     id_foods = models.TextField()
     bill_code = models.CharField(max_length=100,null=True)
     active = models.IntegerField(choices=active_choice,default=0)
-    date_created = models.DateTimeField(auto_now_add=False)
+    date_created = models.DateTimeField(auto_now_add=True)
     address_ship = models.TextField(null = True)
     number_telephone = models.TextField(blank=True)
     receiver = models.TextField(null = True)

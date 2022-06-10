@@ -72,7 +72,8 @@ margin-right: 5px;
 .login_btn{
 color: black;
 background-color: #FFC312;
-width: 110px;
+width:360px;
+margin-top:20px;
 }
 
 .login_btn:hover{

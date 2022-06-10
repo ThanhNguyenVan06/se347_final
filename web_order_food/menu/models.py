@@ -14,7 +14,7 @@ class food(models.Model):
     image = models.ImageField()
     price = models.DecimalField(max_digits = 200,decimal_places = 2)
     active = models.IntegerField(choices=active_choice,default=1)
-    
+
     def __str__(self):
         return self.name_food
 class cart(models.Model):
@@ -23,8 +23,8 @@ class cart(models.Model):
     user_name = models.CharField(max_length=100)
     id_foods = models.TextField()
     bill_code = models.CharField(max_length=100,null=True)
-    active = models.IntegerField(choices=active_choice,default=0) 
-    date_created = models.DateTimeField(auto_now_add=True)
+    active = models.IntegerField(choices=active_choice,default=0)
+    date_created = models.DateTimeField(auto_now_add=False)
     address_ship = models.TextField(null = True)
     number_telephone = models.TextField(blank=True)
     receiver = models.TextField(null = True)
@@ -34,4 +34,3 @@ class cart(models.Model):
     statement_bill = models.IntegerField(choices = statement_bill_choice,default = 0)
     paid_bill = models.BooleanField(default = False)
 
-    

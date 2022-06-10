@@ -1,114 +1,226 @@
 [
   {
-    "name_food": "chicken",
+    "name_food": "gà nguyên con",
     "category_food_id": 5,
-    "description": "chicken",
+    "description": "gà nguyên con",
     "image": "..asd",
-    "price": 50,
+    "price": 250000,
     "active": 1
   },
   {
-    "name_food": "combo_chicken",
+    "name_food": "đùi gà",
     "category_food_id": 5,
-    "description": "combo_chicken",
+    "description": "đùi gà",
     "image": "..asd",
-    "price": 100,
+    "price": 30000,
     "active": 1
   },
   {
-    "name_food": "fried-chicken",
+    "name_food": "combo đùi và ức gà",
     "category_food_id": 5,
-    "description": "fried-chicken",
+    "description": "combo đùi và ức gà",
     "image": "..asd",
-    "price": 150,
+    "price": 60000,
     "active": 1
   },
   {
-    "name_food": "nuggest",
+    "name_food": "cánh gà",
     "category_food_id": 5,
-    "description": "nuggest",
+    "description": "cánh gà",
     "image": "..asd",
-    "price": 200,
+    "price": 100000,
     "active": 1
   },
   {
-    "name_food": "whole-chicken",
+    "name_food": "gà nguyên con chiên",
     "category_food_id": 5,
-    "description": "whole-chicken",
+    "description": "gà nguyên con chiên",
     "image": "..asd",
-    "price": 150,
+    "price": 250000,
     "active": 1
   },
   {
-    "name_food": "cereal",
+    "name_food": "ngũ cốc",
     "category_food_id": 4,
-    "description": "cereal",
+    "description": "ngũ cốc",
     "image": "..asd",
-    "price": 50,
+    "price": 25000,
     "active": 1
   },
   {
-    "name_food": "chocolate-cake",
+    "name_food": "bánh socola",
     "category_food_id": 4,
-    "description": "chocolate-cake",
+    "description": "bánh socola",
     "image": "..asd",
-    "price": 50,
+    "price": 80000,
     "active": 1
   },
   {
-    "name_food": "cupcake",
+    "name_food": "bánh cup",
     "category_food_id": 4,
-    "description": "cupcake",
+    "description": "bánh cup",
     "image": "..asd",
-    "price": 50,
+    "price": 20000,
     "active": 1
   },
   {
-    "name_food": "dessert",
+    "name_food": "bánh xếp",
     "category_food_id": 4,
-    "description": "dessert",
+    "description": "bánh xếp",
     "image": "..asd",
-    "price": 50,
+    "price": 50000,
     "active": 1
   },
   {
-    "name_food": "ice-cream",
+    "name_food": "kem",
     "category_food_id": 4,
-    "description": "ice-cream",
+    "description": "kem",
     "image": "..asd",
-    "price": 50,
+    "price": 20000,
     "active": 1
   },
   {
-    "name_food": "pancake",
+    "name_food": "bánh pan",
     "category_food_id": 4,
-    "description": "pancake",
+    "description": "bánh pan",
     "image": "..asd",
-    "price": 50,
+    "price": 90000,
     "active": 1
   },
   {
-    "name_food": "waffles",
+    "name_food": "bánh lưới",
     "category_food_id": 4,
-    "description": "waffles",
+    "description": "bánh lưới",
     "image": "..asd",
-    "price": 50,
+    "price": 20000,
     "active": 1
   },
   {
-    "name_food": "drinks",
-    "category_food_id": 4,
-    "description": "drinks",
+    "name_food": "nước ép chanh, cam",
+    "category_food_id": 3,
+    "description": "nước ép chanh, cam",
     "image": "..asd",
-    "price": 20,
+    "price": 20000,
     "active": 1
   },
   {
-    "name_food": "orange-juices",
-    "category_food_id": 4,
-    "description": "orange-juices",
+    "name_food": "nước ép cam",
+    "category_food_id": 3,
+    "description": "nước ép cam",
     "image": "..asd",
-    "price": 30,
+    "price": 20000,
+    "active": 1
+  },
+  {
+    "name_food": "mì ý",
+    "category_food_id": 2,
+    "description": "mì ý",
+    "image": "..asd",
+    "price": 30000,
+    "active": 1
+  },
+  {
+    "name_food": "salad",
+    "category_food_id": 2,
+    "description": "salad",
+    "image": "..asd",
+    "price": 25000,
+    "active": 1
+  },
+  {
+    "name_food": "cơm",
+    "category_food_id": 2,
+    "description": "cơm",
+    "image": "..asd",
+    "price": 30000,
+    "active": 1
+  },
+  {
+    "name_food": "mì pasta",
+    "category_food_id": 2,
+    "description": "mì pasta",
+    "image": "..asd",
+    "price": 30000,
+    "active": 1
+  },
+  {
+    "name_food": "mandu",
+    "category_food_id": 2,
+    "description": "mandu",
+    "image": "..asd",
+    "price": 30000,
+    "active": 1
+  },
+  {
+    "name_food": "mandu",
+    "category_food_id": 2,
+    "description": "mandu",
+    "image": "..asd",
+    "price": 30000,
+    "active": 1
+  },
+  {
+    "name_food": "mandu",
+    "category_food_id": 2,
+    "description": "mandu",
+    "image": "..asd",
+    "price": 30000,
+    "active": 1
+  },
+  {
+    "name_food": "hamburger loại 1",
+    "category_food_id": 2,
+    "description": "hamburger loại 1",
+    "image": "..asd",
+    "price": 30000,
+    "active": 1
+  },
+  {
+    "name_food": "hamburger loại 2",
+    "category_food_id": 2,
+    "description": "hamburger loại 2",
+    "image": "..asd",
+    "price": 35000,
+    "active": 1
+  },
+  {
+    "name_food": "hamburger loại 3",
+    "category_food_id": 2,
+    "description": "hamburger loại 3",
+    "image": "..asd",
+    "price": 40000,
+    "active": 1
+  },
+  {
+    "name_food": "sủi cảo",
+    "category_food_id": 2,
+    "description": "sủi cảo",
+    "image": "..asd",
+    "price": 30000,
+    "active": 1
+  },
+  {
+    "name_food": "pizaa loại 1",
+    "category_food_id": 1,
+    "description": "pizaa loại 1",
+    "image": "..asd",
+    "price": 100000,
+    "active": 1
+  },
+  {
+    "name_food": "pizaa loại 2",
+    "category_food_id": 1,
+    "description": "pizaa loại 2",
+    "image": "..asd",
+    "price": 120000,
+    "active": 1
+  },
+  {
+    "name_food": "pizaa loại 3",
+    "category_food_id": 1,
+    "description": "pizaa loại 3",
+    "image": "..asd",
+    "price": 150000,
     "active": 1
   }
 ]

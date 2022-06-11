@@ -3,7 +3,7 @@
     "name_food": "gà nguyên con",
     "category_food_id": 5,
     "description": "gà nguyên con",
-    "image": "..asd",
+    "image": "food/chicken/chicken.jpg",
     "price": 250000,
     "active": 1
   },
@@ -11,7 +11,7 @@
     "name_food": "đùi gà",
     "category_food_id": 5,
     "description": "đùi gà",
-    "image": "..asd",
+    "image": "food/chicken/combo-chicken.jpg",
     "price": 30000,
     "active": 1
   },
@@ -19,7 +19,7 @@
     "name_food": "combo đùi và ức gà",
     "category_food_id": 5,
     "description": "combo đùi và ức gà",
-    "image": "..asd",
+    "image": "food/chicken/fried-chicken.jpg",
     "price": 60000,
     "active": 1
   },
@@ -27,15 +27,15 @@
     "name_food": "cánh gà",
     "category_food_id": 5,
     "description": "cánh gà",
-    "image": "..asd",
+    "image": "food/chicken/nuggets.jpg",
     "price": 100000,
     "active": 1
   },
   {
-    "name_food": "gà nguyên con chiên",
+    "name_food": "gà nguyên con kiểu Pháp",
     "category_food_id": 5,
     "description": "gà nguyên con chiên",
-    "image": "..asd",
+    "image": "food/chicken/whole-chicken.jpg",
     "price": 250000,
     "active": 1
   },
@@ -43,7 +43,7 @@
     "name_food": "ngũ cốc",
     "category_food_id": 4,
     "description": "ngũ cốc",
-    "image": "..asd",
+    "image": "food/dessert/cereal.jpg",
     "price": 25000,
     "active": 1
   },
@@ -51,7 +51,7 @@
     "name_food": "bánh socola",
     "category_food_id": 4,
     "description": "bánh socola",
-    "image": "..asd",
+    "image": "food/dessert/chocolate-cake.jpg",
     "price": 80000,
     "active": 1
   },
@@ -59,7 +59,7 @@
     "name_food": "bánh cup",
     "category_food_id": 4,
     "description": "bánh cup",
-    "image": "..asd",
+    "image": "food/dessert/cupcake.jpg",
     "price": 20000,
     "active": 1
   },
@@ -67,7 +67,7 @@
     "name_food": "bánh xếp",
     "category_food_id": 4,
     "description": "bánh xếp",
-    "image": "..asd",
+    "image": "food/dessert/dessert.jpg",
     "price": 50000,
     "active": 1
   },
@@ -75,7 +75,7 @@
     "name_food": "kem",
     "category_food_id": 4,
     "description": "kem",
-    "image": "..asd",
+    "image": "food/dessert/ice-cream.jpg",
     "price": 20000,
     "active": 1
   },
@@ -83,7 +83,7 @@
     "name_food": "bánh pan",
     "category_food_id": 4,
     "description": "bánh pan",
-    "image": "..asd",
+    "image": "food/dessert/pancake.jpg",
     "price": 90000,
     "active": 1
   },
@@ -91,7 +91,7 @@
     "name_food": "bánh lưới",
     "category_food_id": 4,
     "description": "bánh lưới",
-    "image": "..asd",
+    "image": "food/dessert/waffles.jpg",
     "price": 20000,
     "active": 1
   },
@@ -99,7 +99,7 @@
     "name_food": "nước ép chanh, cam",
     "category_food_id": 3,
     "description": "nước ép chanh, cam",
-    "image": "..asd",
+    "image": "food/drinks/drinks.jpg",
     "price": 20000,
     "active": 1
   },
@@ -107,7 +107,7 @@
     "name_food": "nước ép cam",
     "category_food_id": 3,
     "description": "nước ép cam",
-    "image": "..asd",
+    "image": "food/drinks/orange-juice.jpg",
     "price": 20000,
     "active": 1
   },
@@ -115,7 +115,7 @@
     "name_food": "mì ý",
     "category_food_id": 2,
     "description": "mì ý",
-    "image": "..asd",
+    "image": "food/other/spaghetti.jpg",
     "price": 30000,
     "active": 1
   },
@@ -123,7 +123,7 @@
     "name_food": "salad",
     "category_food_id": 2,
     "description": "salad",
-    "image": "..asd",
+    "image": "food/other/salad.jpg",
     "price": 25000,
     "active": 1
   },
@@ -131,7 +131,7 @@
     "name_food": "cơm",
     "category_food_id": 2,
     "description": "cơm",
-    "image": "..asd",
+    "image": "food/other/rice.jpg",
     "price": 30000,
     "active": 1
   },
@@ -139,7 +139,7 @@
     "name_food": "mì pasta",
     "category_food_id": 2,
     "description": "mì pasta",
-    "image": "..asd",
+    "image": "food/other/pasta.jpg",
     "price": 30000,
     "active": 1
   },
@@ -147,23 +147,7 @@
     "name_food": "mandu",
     "category_food_id": 2,
     "description": "mandu",
-    "image": "..asd",
-    "price": 30000,
-    "active": 1
-  },
-  {
-    "name_food": "mandu",
-    "category_food_id": 2,
-    "description": "mandu",
-    "image": "..asd",
-    "price": 30000,
-    "active": 1
-  },
-  {
-    "name_food": "mandu",
-    "category_food_id": 2,
-    "description": "mandu",
-    "image": "..asd",
+    "image": "food/other/mandu.jpg",
     "price": 30000,
     "active": 1
   },
@@ -171,7 +155,7 @@
     "name_food": "hamburger loại 1",
     "category_food_id": 2,
     "description": "hamburger loại 1",
-    "image": "..asd",
+    "image": "food/other/hamburger.png",
     "price": 30000,
     "active": 1
   },
@@ -179,7 +163,7 @@
     "name_food": "hamburger loại 2",
     "category_food_id": 2,
     "description": "hamburger loại 2",
-    "image": "..asd",
+    "image": "food/other/hamburger1.jpg",
     "price": 35000,
     "active": 1
   },
@@ -187,7 +171,7 @@
     "name_food": "hamburger loại 3",
     "category_food_id": 2,
     "description": "hamburger loại 3",
-    "image": "..asd",
+    "image": "food/other/hamburger2.jpg",
     "price": 40000,
     "active": 1
   },
@@ -195,31 +179,31 @@
     "name_food": "sủi cảo",
     "category_food_id": 2,
     "description": "sủi cảo",
-    "image": "..asd",
+    "image": "food/other/sui_cao.jpg",
     "price": 30000,
     "active": 1
   },
   {
-    "name_food": "pizaa loại 1",
+    "name_food": "piza loại 1",
     "category_food_id": 1,
-    "description": "pizaa loại 1",
-    "image": "..asd",
+    "description": "piza loại 1",
+    "image": "food/other/pizza.jpg",
     "price": 100000,
     "active": 1
   },
   {
-    "name_food": "pizaa loại 2",
+    "name_food": "piza loại 2",
     "category_food_id": 1,
-    "description": "pizaa loại 2",
-    "image": "..asd",
+    "description": "piza loại 2",
+    "image": "food/other/pizza1.jpg",
     "price": 120000,
     "active": 1
   },
   {
-    "name_food": "pizaa loại 3",
+    "name_food": "piza loại 3",
     "category_food_id": 1,
-    "description": "pizaa loại 3",
-    "image": "..asd",
+    "description": "piza loại 3",
+    "image": "food/other/pizza2.jpg",
     "price": 150000,
     "active": 1
   }

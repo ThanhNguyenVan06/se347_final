@@ -8,7 +8,9 @@ from menu.models import cart
 from user.models import user,User
 from django.contrib.auth import authenticate,login
 from django.core.paginator import Paginator
+import logging
 
+LOG= logging.getLogger('info')
 NUM_BILL_PER_PAGE = 5
 from menu.models import food
 # Create your views here.
@@ -41,12 +43,13 @@ class changePassword(View):
         new_password = request.POST.get('new_password')
         user_name = request.user.username
         user_current = User.objects.get(username=user_name)
-        
+
         if user_current.check_password(current_password):
             user_current.set_password(new_password)
             user_current.save()
             my_user = authenticate(username = user_name,password = new_password)
             login(request,my_user)
+            LOG.info(f'{user_name} successfully reset the password')
             return JsonResponse({'message': 'Cập nhật mật khẩu thành công', 'status': 'success'},status=200)
         else:
             # return HttpResponse("Sai password")
@@ -63,7 +66,7 @@ def all_bill(request):
         page = request.GET.get('page')
     else:
         page = 1
-    # try: 
+    # try:
     #     page = request.GET.get('page')
     # except NameError:
     #     page = 1
@@ -97,21 +100,21 @@ def detail_bill(request):
             id_count = collections.Counter(arr_id)
             for key,value in id_count.items():
                 item = food.objects.get(id = key)
-                 
+
                 arr_items.append({'id_food':key,
                                   'quantity':value,
                                   'name_food' : item.name_food,
                                   'image_url': item.image.url,
                                   'price' : item.price })
-            return JsonResponse({'arr_items': arr_items,  
+            return JsonResponse({'arr_items': arr_items,
             'billCode': bill_code,
             'address': detail_bill_code[0].address_ship,
             'status': detail_bill_code[0].statement_bill,},status=200)
 def change_profile(request):
-    fullname = request.POST.get('fullname') 
+    fullname = request.POST.get('fullname')
     address = request.POST.get('address')
     email = request.POST.get('email')
-    print("fullname: ", fullname);
+    print("fullname: ", fullname)
     print("address: ", address )
     old_profile = user.objects.get(user_name__username = request.user.username)
     user_reset  = User.objects.get(username= request.user.username)
@@ -121,9 +124,10 @@ def change_profile(request):
     user_reset.email = email
     old_profile.save()
     user_reset.save()
+    LOG.info(f"{request.user.username} successfully update the profile")
     # return HttpResponse("Update thành công")
     # return redirect("home_page:home")
     return JsonResponse({'message': 'Cập nhật thông tin thành công', 'status': 'success'},status=403)
 
 # def bestSeller(self, request):
-                   
+

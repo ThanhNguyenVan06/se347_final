@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import smtplib
+import logging
 s = smtplib.SMTP('smtp.gmail.com', 587)
 s.starttls()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -47,7 +48,7 @@ INSTALLED_APPS = [
     'news',
     'dashboard',
     'discount',
-    
+
 ]
 
 MIDDLEWARE = [
@@ -145,3 +146,43 @@ EMAIL_HOST_USER = 'tenytdhn01@gmail.com'
 EMAIL_HOST_PASSWORD = 'nguyenvanthanh130601'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {asctime} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class' : 'logging.handlers.RotatingFileHandler',
+            'filename' : './logs/info.log',
+            'maxBytes' : 1024*1024*10, # 10MB
+            'backupCount' : 10,
+            'formatter': 'simple',
+        },
+        'console': {
+            'level': 'ERROR',
+            'formatter': 'simple',
+            'class': 'logging.StreamHandler',
+        }
+    },
+    'loggers': {
+        'info': {
+            'handlers': ['file'],
+            'level': 'INFO'
+        },
+        'debug': {
+            'handlers': ['console'],
+            'level': 'DEBUG'
+        },
+    }
+}

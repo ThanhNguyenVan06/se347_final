@@ -47,12 +47,6 @@
                 <!-- Logo -->
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html">
-                        <!-- Logo icon -->
-                        <!-- <b><img src="{% static 'dashboard/images/logo.png' %}" alt="homepage" class="dark-logo" /></b> -->
-                        <!--End Logo icon -->
-                        <!-- Logo text -->
-                        <!-- <span><img src="{% static 'dashboard/images/logo-text.png' %}" alt="homepage"
-                        class="dark-logo" /></span> -->
                         <span>Báo cáo</span>
                     </a>
                 </div>
@@ -311,22 +305,13 @@
                     <div class="col-lg-4">
                         <div class="card">
                             <div class="card-body browser">
-                                <!-- <p class="f-w-600">chicken<span class="pull-right">%</span>
-                                </p>
-                                <div class="progress ">
-                                    <div role="progressbar" style="width: {{categories_sold.chicken}}%; height:8px;"
-                                        class="progress-bar bg-info wow animated progress-animated"> <span
-                                            class="sr-only">{{categories_sold.chicken}}% Complete</span> </div>
-                                </div> -->
                                 {% for k,v in categories_sold.items %}
-                                {% if k != "chicken" %}
                                 <p class="m-t-30 f-w-600">{{k}}<span class="pull-right">{{v}}%</span></p>
                                 <div class="progress">
                                     <div role="progressbar" style="width: {{v}}%; height:8px;"
                                         class="progress-bar bg-info wow animated progress-animated"> <span
                                             class="sr-only">{{v}}% Complete</span> </div>
                                 </div>
-                                {% endif %}
                                 {% endfor %}
                             </div>
                         </div>

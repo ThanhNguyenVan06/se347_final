@@ -1,27 +1,32 @@
-import json
 from datetime import  datetime
 import locale
-import os
+import logging
+from collections import defaultdict
+
 from django.shortcuts import render
 from django.views import View
-from menu.models import food, cart, category
 from django.contrib.auth.models import User
-from collections import defaultdict
 from django.db.models.functions import ExtractYear, ExtractMonth, ExtractDay
 
+from menu.models import food, cart, category
 from dashboard.service.food import food_service
 from dashboard.service.time import time_service
 from django.core.paginator import Paginator
 
+
 DEFAULT_AVATAR="/static/home/image/default-user.png"
-# Create your views here.
+
 locale.setlocale(locale.LC_ALL, 'en_US')
+
 def convert_currency(number):
     return locale.format("%d", number, grouping=True)
+
+LOG= logging.getLogger('info')
 
 class dashboard(View):
     def get(self,request):
         # get the total profit weekly up to that date, monthly, seasonaly
+        LOG.info(f"{request.user} acessed dashboard page")
         total_revenue=0
         categories_sold=defaultdict(int)
         total_food_sold=0
@@ -128,8 +133,10 @@ class dashboard(View):
                     "user_avatar": DEFAULT_AVATAR # will fix when user have avatar attribute
                 })
 
+
 class analytic(View):
     def get(self,request):
+        LOG.info(f"{request.user} acessed analytic page")
         carts=None
         cart_list=None
         page_cart=None
@@ -142,13 +149,16 @@ class analytic(View):
             carts= cart.objects.filter(statement_bill=1)
         if carts:
             paginator = Paginator(carts,10 ) # Show 25 contacts per page.
+
             toggle_id=request.GET.get("button_value")
             toggle_type=request.GET.get("type")
             page_number = request.GET.get('page',1)
+
             page_cart= paginator.get_page(page_number)
             cart_list=[]
             food_name_counts= defaultdict(int)
             int_to_status= {0: "pending", 1: "delivering", 2: "delivered"}
+
             for cart_item in page_cart:
                 total_price=0
                 name_food_boughts=[]
@@ -159,8 +169,10 @@ class analytic(View):
                 if toggle_id != None and int(toggle_id)== cart_item.id:
                     if toggle_type == "status":
                         cart_item.statement_bill+=1
+                        LOG.info(f'{request.user} change the status bill of {toggle_id}')
                     else:
                         cart_item.paid_bill=cart_item.paid_bill
+                        LOG.info(f'{request.user} change the status bill of {toggle_id}')
                     cart_item.save()
                 cart_item_statuses= {
                     "id": cart_item.id,

@@ -10,7 +10,11 @@ from django.contrib.auth import authenticate,login
 from django.core.paginator import Paginator
 from collections import defaultdict
 
+import logging
 
+import logging
+
+LOG= logging.getLogger('info')
 NUM_BILL_PER_PAGE = 5
 from menu.models import food
 # Create your views here.
@@ -74,6 +78,7 @@ class changePassword(View):
             user_current.save()
             my_user = authenticate(username = user_name,password = new_password)
             login(request,my_user)
+            LOG.info(f'{user_name} successfully reset the password')
             return JsonResponse({'message': 'Cập nhật mật khẩu thành công', 'status': 'success'},status=200)
         else:
             # return HttpResponse("Sai password")
@@ -138,7 +143,7 @@ def change_profile(request):
     fullname = request.POST.get('fullname')
     address = request.POST.get('address')
     email = request.POST.get('email')
-    print("fullname: ", fullname);
+    print("fullname: ", fullname)
     print("address: ", address )
     old_profile = user.objects.get(user_name__username = request.user.username)
     user_reset  = User.objects.get(username= request.user.username)
@@ -148,6 +153,7 @@ def change_profile(request):
     user_reset.email = email
     old_profile.save()
     user_reset.save()
+    LOG.info(f"{request.user.username} successfully update the profile")
     # return HttpResponse("Update thành công")
     # return redirect("home_page:home")
     return JsonResponse({'message': 'Cập nhật thông tin thành công', 'status': 'success'},status=403)

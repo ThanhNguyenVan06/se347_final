@@ -12,6 +12,8 @@ from collections import defaultdict
 
 import logging
 
+import logging
+
 LOG= logging.getLogger('info')
 NUM_BILL_PER_PAGE = 5
 from menu.models import food

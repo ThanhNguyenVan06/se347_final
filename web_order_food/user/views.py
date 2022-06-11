@@ -68,4 +68,4 @@ class reset(View):
             a=send_mail('Reset your password','Your password: ' + password,'tenytdhn01@gmail.com',[str(email)])
             return render(request,'sendmail.html')
 
-        return HttpResponse("haha")
+        return render(request, 'reset_pass_wrong.html')

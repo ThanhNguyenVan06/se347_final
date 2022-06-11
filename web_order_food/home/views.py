@@ -23,16 +23,21 @@ def home(request):
     for cart_item in carts:
         for id_food in cart_item.id_foods.split(","):
             food_query= food.objects.get(id=id_food)
-            images.append(food_query.image)
-            prices.append(food_query.price)
-            # print(food_query.image)
             food_name_counts[food_query.name_food]+=1
     food_name_counts = sorted(food_name_counts.items(),key=(lambda i: i[1]))
-    # print(food_name_counts)
+
+    # get properties of three best sellers food
+    food_query=food.objects.get(name_food=food_name_counts[-1][0])
+    first_best_seller= {'name': food_query.name_food, 'price': food_query.price, 'image': food_query.image}
+    food_query=food.objects.get(name_food=food_name_counts[-2][0])
+    second_best_seller= {'name': food_query.name_food, 'price': food_query.price, 'image': food_query.image}
+    food_query=food.objects.get(name_food=food_name_counts[-3][0])
+    third_best_seller= {'name': food_query.name_food, 'price': food_query.price, 'image': food_query.image}
+
     data={
-        "first_best_seller": {"name":food_name_counts[-1][0],"value":food_name_counts[-1][1], "image": images[-1], "price": prices[-1]},
-        "second_best_seller": {"name":food_name_counts[-2][0],"value":food_name_counts[-2][1], "image": images[-2], "price": prices[-2]},
-        "third_best_seller": {"name":food_name_counts[-3][0],"value":food_name_counts[-3][1], "image": images[-3], "price": prices[-3]},
+        "first_best_seller": first_best_seller,
+        "second_best_seller": second_best_seller,
+        "third_best_seller": third_best_seller,
     }
     print(data)
 
@@ -63,7 +68,7 @@ class changePassword(View):
         new_password = request.POST.get('new_password')
         user_name = request.user.username
         user_current = User.objects.get(username=user_name)
-        
+
         if user_current.check_password(current_password):
             user_current.set_password(new_password)
             user_current.save()
@@ -85,7 +90,7 @@ def all_bill(request):
         page = request.GET.get('page')
     else:
         page = 1
-    # try: 
+    # try:
     #     page = request.GET.get('page')
     # except NameError:
     #     page = 1
@@ -119,18 +124,18 @@ def detail_bill(request):
             id_count = collections.Counter(arr_id)
             for key,value in id_count.items():
                 item = food.objects.get(id = key)
-                 
+
                 arr_items.append({'id_food':key,
                                   'quantity':value,
                                   'name_food' : item.name_food,
                                   'image_url': item.image.url,
                                   'price' : item.price })
-            return JsonResponse({'arr_items': arr_items,  
+            return JsonResponse({'arr_items': arr_items,
             'billCode': bill_code,
             'address': detail_bill_code[0].address_ship,
             'status': detail_bill_code[0].statement_bill,},status=200)
 def change_profile(request):
-    fullname = request.POST.get('fullname') 
+    fullname = request.POST.get('fullname')
     address = request.POST.get('address')
     email = request.POST.get('email')
     print("fullname: ", fullname);
@@ -148,4 +153,4 @@ def change_profile(request):
     return JsonResponse({'message': 'Cập nhật thông tin thành công', 'status': 'success'},status=403)
 
 # def bestSeller(self, request):
-                   
+

@@ -5,13 +5,13 @@ from menu.models import cart,food
 from discount.models import discounts
 from django.http import HttpResponse, HttpResponseRedirect
 import collections
-from django.http import JsonResponse 
+from django.http import JsonResponse
 from django.shortcuts import redirect
 from user.models import user
 # Create your views here.
 class check_cart(View):
     def get(self, request):
-        
+
         user = request.user.username
         goods_user = cart.objects.filter(user_name = user , active = 0)
         if (goods_user.count() == 0):
@@ -19,7 +19,7 @@ class check_cart(View):
         elif(len(goods_user[0].id_foods) == 0):
             goods_user[0].delete()
             return HttpResponse(0)
-        
+
         else:
             arr_items= []
             items = goods_user[0].id_foods
@@ -27,14 +27,14 @@ class check_cart(View):
             id_count = collections.Counter(arr_id)
             for key,value in id_count.items():
                 item = food.objects.get(id = key)
-                 
+
                 arr_items.append({'id_food':key,
                                   'quantity':value,
                                   'name_food' : item.name_food,
                                   'price' : item.price })
-            
+
             return JsonResponse({'arr_items': arr_items},status=200)
-        
+
     def post(self, request):
         user = request.user.username
         goods_user = cart.objects.filter(user_name = user , active = 0)
@@ -58,7 +58,7 @@ class check_cart(View):
             print(string_id_items)
             return render(request, 'empty_cart.html')
         # else :
-        #     goods_user.update(id_foods = string_id_items)   
+        #     goods_user.update(id_foods = string_id_items)
         return redirect('checkout:confirm')
 class check_cart_html(View):
     def get(self, request):
@@ -92,10 +92,10 @@ class confirm_infor(View):
                                   'name_food' : item.name_food,
                                   'price' : item.price,
                                   'image_food': item.image})
-            goods_user.update(raw_price = raw_price, final_price = raw_price)  
+            goods_user.update(raw_price = raw_price, final_price = raw_price)
         return render(request, 'comfirm.html',{'fullname':fullname,'raw_price':raw_price})
         # return HttpResponse(fullname)
-    
+
     def post(self, request):
         name = request.user.username
         # fullname_ = user.objects.get(user_name__username=name)
@@ -124,7 +124,7 @@ def success( request):
     name = request.user.username
     goods_user = cart.objects.filter(user_name = name , active = 0)
     goods_user.update(paid_bill = True,active = 1)
-    
+
     return render(request, 'success.html')
 def success_v2(request):
     name = request.user.username
@@ -139,7 +139,7 @@ def delete_item( request):
     goods_user = cart.objects.filter(user_name = name , active = 0)
     arr_items= []
     items = goods_user[0].id_foods
-    arr_id = items.split(",") 
+    arr_id = items.split(",")
     arr_items = [item for item in arr_id if item != id_del]
     string_id_items =','.join(arr_items)
     goods_user.update(id_foods = string_id_items)
@@ -151,7 +151,7 @@ def change_good(request):
     goods_user = cart.objects.filter(user_name = name , active = 0)
     arr_items= []
     items = goods_user[0].id_foods
-    arr_id = items.split(",") 
+    arr_id = items.split(",")
     arr_items = [item for item in arr_id if item != id_food]
     for i in range(int(quantity)):
         arr_items.append(id_food)
@@ -164,7 +164,7 @@ def change_good(request):
         'price':food_price,
         "total" : total,
     }
-    
+
     return JsonResponse ({
         'id':id_food,
         'price':food_price,

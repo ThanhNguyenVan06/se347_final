@@ -1,4 +1,3 @@
-from ast import Constant
 import collections
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
@@ -11,8 +10,7 @@ from django.core.paginator import Paginator
 from collections import defaultdict
 
 import logging
-
-import logging
+from common.currency import Currency
 
 LOG= logging.getLogger('info')
 NUM_BILL_PER_PAGE = 5
@@ -32,11 +30,11 @@ def home(request):
 
     # get properties of three best sellers food
     food_query=food.objects.get(name_food=food_name_counts[-1][0])
-    first_best_seller= {'name': food_query.name_food, 'price': food_query.price, 'image': food_query.image}
+    first_best_seller= {'name': food_query.name_food, 'price': Currency.convert_currency(food_query.price), 'image': food_query.image}
     food_query=food.objects.get(name_food=food_name_counts[-2][0])
-    second_best_seller= {'name': food_query.name_food, 'price': food_query.price, 'image': food_query.image}
+    second_best_seller= {'name': food_query.name_food, 'price': Currency.convert_currency(food_query.price), 'image': food_query.image}
     food_query=food.objects.get(name_food=food_name_counts[-3][0])
-    third_best_seller= {'name': food_query.name_food, 'price': food_query.price, 'image': food_query.image}
+    third_best_seller= {'name': food_query.name_food, 'price': Currency.convert_currency(food_query.price), 'image': food_query.image}
 
     data={
         "first_best_seller": first_best_seller,

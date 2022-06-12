@@ -4,180 +4,178 @@
 
 {% for new in page.object_list %}
 
-  <div class="container_new">
-    <div class="box-news">
-    {%if forloop.counter == 1 %}  
-      <div class="big-box">
-        <div class="des">
-          <img src="{{ new.image_new.url }}" alt="">
-          <h2>{{ new.title }}</h2>
-          <p>{{new.context}}</p>
+<div class="container_new">
+  <div class="box-news">
+    {%if forloop.counter == 1 %}
+    <div class="big-box">
+      <div class="des">
+        <img src="{{ new.image_new }}" alt="">
+        <h2>{{ new.title }}</h2>
+        <p>{{new.context}}</p>
+        <a href="{{ new.link_seemore }}" target="_blank" class="see-more">See More</a> <i class="fas fa-chevron-right"></i>
+      </div>
+    </div>
+
+    {% else %}
+    <div class="small-boxs">
+      {%if forloop.counter == 2%}
+
+      <div class="content">
+        <img src="{{ new.image_new }}" alt="">
+        <h2>{{ new.title }}</h2>
+        <p>
+          {{new.context}}
+        </p>
+        <div class="more">
           <a href="{{ new.link_seemore }}" target="_blank" class="see-more">See More</a> <i class="fas fa-chevron-right"></i>
         </div>
       </div>
-  
-      {% else %}
-      <div class="small-boxs">
-        {%if forloop.counter == 2%}
 
-        <div class="content">
-          <img src="{{ new.image_new.url }}" alt="">
-          <h2>{{ new.title }}</h2>
-          <p>
-            {{new.context}}
-          </p>
-          <div class="more">
-            <a href="{{ new.link_seemore }}" target="_blank" class="see-more">See More</a> <i class="fas fa-chevron-right"></i>
-          </div>
+      {% for new in page.object_list %}
+      {%if forloop.counter == 3%}
+      <div class="content">
+        <img src="{{ new.image_new }}" alt="">
+        <h2>{{ new.title }}</h2>
+        <p>
+          {{new.context}}
+        </p>
+        <div class="more">
+          <a href="{{ new.link_seemore }}" target="_blank" class="see-more">See More</a> <i class="fas fa-chevron-right"></i>
         </div>
-
-        {% for new in page.object_list %} 
-        {%if forloop.counter == 3%}
-        <div class="content">
-          <img src="{{ new.image_new.url }}" alt="">
-          <h2>{{ new.title }}</h2>
-          <p>
-            {{new.context}}
-          </p>
-          <div class="more">
-            <a href="{{ new.link_seemore }}" target="_blank" class="see-more">See More</a> <i class="fas fa-chevron-right"></i>
-          </div>
-        </div>
-        {%endif%}
-        {% endfor %}
-
-        {% for new in page.object_list %}
-        {% if forloop.counter == 4 %}
-        <div class="content">
-          <img src="{{ new.image_new.url }}" alt="">
-          <h2>{{ new.title }}</h2>
-          <p>
-            {{new.context}}
-          </p>
-          <div class="more">
-            <a href="{{ new.link_seemore }}" target="_blank" class="see-more">See More</a> <i class="fas fa-chevron-right"></i>
-          </div>
-        </div>
-        {%endif%}
-        {% endfor %}
-
-        {%endif%}
-
-
-
-        {%if forloop.counter == 5%}
-
-        <div class="content">
-          <img src="{{ new.image_new.url }}" alt="">
-          <h2>{{ new.title }}</h2>
-          <p>
-            {{new.context}}
-          </p>
-          <div class="more">
-            <a href="{{ new.link_seemore }}" target="_blank" class="see-more">See More</a> <i class="fas fa-chevron-right"></i>
-          </div>
-        </div>
-
-        {% for new in page.object_list %} 
-        {%if forloop.counter == 6%}
-        <div class="content">
-          <img src="{{ new.image_new.url }}" alt="">
-          <h2>{{ new.title }}</h2>
-          <p>
-            {{new.context}}
-          </p>
-          <div class="more">
-            <a href="{{ new.link_seemore }}" target="_blank" class="see-more">See More</a> <i class="fas fa-chevron-right"></i>
-          </div>
-        </div>
-        {%endif%}
-        {% endfor %}
-
-        {% for new in page.object_list %}
-        {% if forloop.counter == 7 %}
-        <div class="content">
-          <img src="{{ new.image_new.url }}" alt="">
-          <h2>{{ new.title }}</h2>
-          <p>
-            {{new.context}}
-          </p>
-          <div class="more">
-            <a href="{{ new.link_seemore }}" target="_blank" class="see-more">See More</a> <i class="fas fa-chevron-right"></i>
-          </div>
-        </div>
-        {%endif%}
-        {% endfor %}
-
-        {%endif%}
-
       </div>
+      {%endif%}
+      {% endfor %}
+
+      {% for new in page.object_list %}
+      {% if forloop.counter == 4 %}
+      <div class="content">
+        <img src="{{ new.image_new.url }}" alt="">
+        <h2>{{ new.title }}</h2>
+        <p>
+          {{new.context}}
+        </p>
+        <div class="more">
+          <a href="{{ new.link_seemore }}" target="_blank" class="see-more">See More</a> <i class="fas fa-chevron-right"></i>
+        </div>
+      </div>
+      {%endif%}
+      {% endfor %}
+
+      {%endif%}
+
+
+
+      {%if forloop.counter == 5%}
+
+      <div class="content">
+        <img src="{{ new.image_new }}" alt="">
+        <h2>{{ new.title }}</h2>
+        <p>
+          {{new.context}}
+        </p>
+        <div class="more">
+          <a href="{{ new.link_seemore }}" target="_blank" class="see-more">See More</a> <i class="fas fa-chevron-right"></i>
+        </div>
+      </div>
+
+      {% for new in page.object_list %}
+      {%if forloop.counter == 6%}
+      <div class="content">
+        <img src="{{ new.image_new }}" alt="">
+        <h2>{{ new.title }}</h2>
+        <p>
+          {{new.context}}
+        </p>
+        <div class="more">
+          <a href="{{ new.link_seemore }}" target="_blank" class="see-more">See More</a> <i class="fas fa-chevron-right"></i>
+        </div>
+      </div>
+      {%endif%}
+      {% endfor %}
+
+      {% for new in page.object_list %}
+      {% if forloop.counter == 7 %}
+      <div class="content">
+        <img src="{{ new.image_new }}" alt="">
+        <h2>{{ new.title }}</h2>
+        <p>
+          {{new.context}}
+        </p>
+        <div class="more">
+          <a href="{{ new.link_seemore }}" target="_blank" class="see-more">See More</a> <i class="fas fa-chevron-right"></i>
+        </div>
+      </div>
+      {%endif%}
+      {% endfor %}
+
       {%endif%}
 
     </div>
-
-    {% if forloop.counter == 1 %}
-    <div class="right-side">
-    <img src="https://saodieu.vn/media/Bai%20Viet%20-%20T62016/Saodieu%20-%2010%20mon%20an%201.jpg" alt=""> 
-    <img src="https://saodieu.vn/media/Bai%20Viet%20-%20T62016/Saodieu%20-%2010%20mon%20an%203.jpg" alt=""> 
-    <img src="https://images.foody.vn/res/g81/804197/prof/s576x330/foody-upload-api-foody-mobile-1-gif-181123133231.jpg" alt=""> 
-
-
-    </div>
     {%endif%}
 
-    {% if forloop.counter == 2 %}
-    <div class="right-side">
-    <img src="https://saodieu.vn/media/Bai%20Viet%20-%20T62016/Saodieu%20-%2010%20mon%20an%204.jpg" alt=""> 
-    <img src="https://cokhiviendong.com/wp-content/uploads/2019/01/s%E1%BB%91t-bbq.jpg" alt=""> 
+  </div>
 
-    </div>
-    {%endif%}
-
-    {% if forloop.counter == 5 %}
-    <div class="right-side">
-    <img src="https://saodieu.vn/media/Bai%20Viet%20-%20T62016/Saodieu%20-%2010%20mon%20an%206.jpg" alt=""> 
-    <img src="https://cokhiviendong.com/wp-content/uploads/2019/01/canh-ga-nhoi-thit-nuong-sot-bbq.jpg" alt=""> 
-
-    </div>
-    {%endif%}
+  {% if forloop.counter == 1 %}
+  <div class="right-side">
+    <img src="https://saodieu.vn/media/Bai%20Viet%20-%20T62016/Saodieu%20-%2010%20mon%20an%201.jpg" alt="">
+    <img src="https://saodieu.vn/media/Bai%20Viet%20-%20T62016/Saodieu%20-%2010%20mon%20an%203.jpg" alt="">
+    <img src="https://images.foody.vn/res/g81/804197/prof/s576x330/foody-upload-api-foody-mobile-1-gif-181123133231.jpg" alt="">
 
 
   </div>
-  {% endfor %}
+  {%endif%}
 
-  
+  {% if forloop.counter == 2 %}
+  <div class="right-side">
+    <img src="https://saodieu.vn/media/Bai%20Viet%20-%20T62016/Saodieu%20-%2010%20mon%20an%204.jpg" alt="">
+    <img src="https://cokhiviendong.com/wp-content/uploads/2019/01/s%E1%BB%91t-bbq.jpg" alt="">
+
+  </div>
+  {%endif%}
+
+  {% if forloop.counter == 5 %}
+  <div class="right-side">
+    <img src="https://saodieu.vn/media/Bai%20Viet%20-%20T62016/Saodieu%20-%2010%20mon%20an%206.jpg" alt="">
+    <img src="https://cokhiviendong.com/wp-content/uploads/2019/01/canh-ga-nhoi-thit-nuong-sot-bbq.jpg" alt="">
+
+  </div>
+  {%endif%}
+
+
+</div>
+{% endfor %}
+
+
 {% comment %} pagination {% endcomment %}
-<nav aria-label="Page navigation">   
+<nav aria-label="Page navigation">
   <ul class="pagination justify-content-center">
-  {% if page.has_previous %}
+    {% if page.has_previous %}
     <li class="page-item">
       <a class="page-link" href="?page=1" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
         <span class="sr-only">begin</span>
       </a>
-    </li>  
-  {% endif %}
-  
-  {% for n in page.paginator.page_range %}
-    {% if page.number == n %}
-      <li class="page-item active">
-        <span class="page-link">{{ n }}<span class="sr-only">(current)</span></span>
-      </li>
-    {% elif n > page.number|add:'-3' and n < page.number|add:'3' %}
-      <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
-    {% endif %}
-  {% endfor %}
-  
-  {% if page.has_next %}
-    <li class="page-item">
-      <a class="page-link" href="?page={{ page.paginator.num_pages }}" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-        <span class="sr-only">end</span>
-      </a>
     </li>
-  {% endif %}  
-  </ul> 
+    {% endif %}
+
+    {% for n in page.paginator.page_range %}
+    {% if page.number == n %}
+    <li class="page-item active">
+      <span class="page-link">{{ n }}<span class="sr-only">(current)</span></span>
+    </li>
+    {% elif n > page.number|add:'-3' and n < page.number|add:'3' %} <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+      {% endif %}
+      {% endfor %}
+
+      {% if page.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page.paginator.num_pages }}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">end</span>
+        </a>
+      </li>
+      {% endif %}
+  </ul>
 </nav>
 {% comment %} end_pagination {% endcomment %}
 {% endblock %}
-  

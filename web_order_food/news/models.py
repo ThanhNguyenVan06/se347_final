@@ -5,7 +5,7 @@ class news(models.Model):
     title = models.TextField()
     context = models.TextField(blank=True)
     link_seemore = models.TextField()
-    image_new = models.ImageField()
-    
+    image_new = models.TextField()
+
     def __str__(self):
         return self.title

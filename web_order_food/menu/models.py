@@ -33,6 +33,9 @@ class cart(models.Model):
     final_price = models.TextField(max_length=100,null=True)
     statement_bill = models.IntegerField(choices = statement_bill_choice,default = 0)
     paid_bill = models.BooleanField(default = False)
-    
+
     def __str__(self):
         return self.bill_code
+
+    class Meta:
+        ordering = ['-date_created']

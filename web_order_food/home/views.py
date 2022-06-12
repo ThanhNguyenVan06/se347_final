@@ -79,7 +79,6 @@ class changePassword(View):
             LOG.info(f'{user_name} successfully reset the password')
             return JsonResponse({'message': 'Cập nhật mật khẩu thành công', 'status': 'success'},status=200)
         else:
-            # return HttpResponse("Sai password")
             return JsonResponse({'message': 'Sai mật khẩu', 'status': 'fail'},status=403)
     def get(self,request):
         current_password = request.POST.get('current_password')
@@ -93,17 +92,9 @@ def all_bill(request):
         page = request.GET.get('page')
     else:
         page = 1
-    # try:
-    #     page = request.GET.get('page')
-    # except NameError:
-    #     page = 1
     bill_code_list = cart.objects.filter(user_name = username, active = 1)
     totalPage = bill_code_list.count();
     p = Paginator(bill_code_list, NUM_BILL_PER_PAGE)
-    # print(p.count)
-    # print(p.num_pages)
-    # print(p.page(page).object_list)
-    print('============', page)
     bill_code_list = p.page(page).object_list
     dict_bill_code = []
     for i in range (len(bill_code_list)):
@@ -112,7 +103,6 @@ def all_bill(request):
             'address': bill_code_list[i].address_ship,
             'status': bill_code_list[i].statement_bill,
             })
-    # return JsonResponse({'listBill': dict_bill_code })
     pages = range(1, p.num_pages + 1)
     return render(request, 'list_bill.html', {'listBill': dict_bill_code, 'totalPage': pages})
 def detail_bill(request):
@@ -152,9 +142,4 @@ def change_profile(request):
     old_profile.save()
     user_reset.save()
     LOG.info(f"{request.user.username} successfully update the profile")
-    # return HttpResponse("Update thành công")
-    # return redirect("home_page:home")
     return JsonResponse({'message': 'Cập nhật thông tin thành công', 'status': 'success'},status=403)
-
-# def bestSeller(self, request):
-

@@ -136,23 +136,22 @@ class analytic(View):
         carts=None
         cart_list=None
         page_cart=None
+        food_name_counts= defaultdict(int)
         filter_value= request.GET.get("filter_value")
-        if filter_value == None or filter_value == "1" :
+        if filter_value == None or filter_value == 'None' or filter_value == "1" :
             carts= cart.objects.filter(statement_bill__in=[0,1])
         elif filter_value =="2":
             carts= cart.objects.filter(statement_bill=0)
         elif filter_value =="3":
             carts= cart.objects.filter(statement_bill=1)
         if carts:
-            paginator = Paginator(carts,10 ) # Show 25 contacts per page.
-
+            paginator = Paginator(carts,20)
             toggle_id=request.GET.get("button_value")
             toggle_type=request.GET.get("type")
             page_number = request.GET.get('page',1)
 
             page_cart= paginator.get_page(page_number)
             cart_list=[]
-            food_name_counts= defaultdict(int)
             int_to_status= {0: "pending", 1: "delivering", 2: "delivered"}
 
             for cart_item in page_cart:
@@ -179,12 +178,12 @@ class analytic(View):
                     "paid_bill": cart_item.paid_bill
                 }
                 cart_list.append(cart_item_statuses)
-            carts= cart.objects.all()
-            for cart_item in carts:
-                for id_food in cart_item.id_foods.split(","):
-                    food_query= food.objects.get(id=id_food)
-                    food_name_counts[food_query.name_food]+=1
-            food_name_counts = sorted(food_name_counts.items(),key=(lambda i: i[1]))
+        carts= cart.objects.all()
+        for cart_item in carts:
+            for id_food in cart_item.id_foods.split(","):
+                food_query= food.objects.get(id=id_food)
+                food_name_counts[food_query.name_food]+=1
+        food_name_counts = sorted(food_name_counts.items(),key=(lambda i: i[1]))
         # get the total revenue of each category following months
         today= datetime.today
         curr_month= today().month

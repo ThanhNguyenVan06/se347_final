@@ -174,7 +174,7 @@ def change_good(request):
 
     return JsonResponse ({
         'id':id_food,
-        'price':food_price,
+        'price':Currency.convert_currency(food_price),
         "total" : total,
     })
 

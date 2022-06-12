@@ -34,7 +34,8 @@
       <div class="cardwrapper">
         <img src="{{food_best_seller.first_best_seller.image.url}}" alt="" srcset="" />
         <h3>{{food_best_seller.first_best_seller.name}}</h3>
-        <button class="btn btn-transparent" disabled>{{food_best_seller.first_best_seller.price}}VND</button>
+        <button class="btn btn-transparent text-nowrap"
+          disabled>{{food_best_seller.first_best_seller.price}}VND</button>
       </div>
     </div>
     <!-- Card 2 -->
@@ -42,7 +43,8 @@
       <div class="cardwrapper">
         <img src="{{food_best_seller.second_best_seller.image.url}}" alt="" srcset="" />
         <h3>{{food_best_seller.second_best_seller.name}}</h3>
-        <button class="btn btn-transparent" disabled>{{food_best_seller.second_best_seller.price}}VND</button>
+        <button class="btn btn-transparent text-nowrap"
+          disabled>{{food_best_seller.second_best_seller.price}}VND</button>
       </div>
     </div>
     <!-- Card 3 -->
@@ -50,7 +52,8 @@
       <div class="cardwrapper">
         <img src="{{food_best_seller.third_best_seller.image.url}}" alt="" srcset="" />
         <h3>{{food_best_seller.third_best_seller.name}}</h3>
-        <button class="btn btn-transparent" disabled>{{food_best_seller.third_best_seller.price}}VND</button>
+        <button class="btn btn-transparent text-nowrap"
+          disabled>{{food_best_seller.third_best_seller.price}}VND</button>
       </div>
     </div>
   </div>
@@ -70,45 +73,4 @@
     </div>
   </div>
 </div>
-
-<!-- Section d -->
-<!-- <div class="section-d">
-  <div class="container">
-    <div class="content">
-      Avail exclusive offers only on FAASOS app.
-      <br /><br />Get link to download the app NOW!
-    </div>
-    <div class="subscriptionbox">
-      <input type="text" name="prefix" class="prefix" value="+91" /><input type="tel" name="telephone" class="telephone"
-        placeholder="Enter Mobile No." /><button class="btn-light">Submit</button>
-    </div>
-  </div>
-</div> -->
-
-<!-- Section e -->
-<!-- <div class="section-e">
-  <div class="container">
-    <img src="{% static 'admin/img/limelight-logo.png' %}" width="42" height="42" />
-    <h3>In The Limelight</h3>
-    <i class="fas fa-quote-left"></i>
-    <p>
-      Faasos has managed to seamlessly integrate the technology with the
-      physical process of bringing the food to a consumer's doorstep.
-    </p>
-  </div>
-</div> -->
-
-<!-- Section f -->
-<!-- <div class="section-f">
-  <div class="container">
-    <ul>
-      <li><img class="first" src="{% static 'admin/img/economic-time.png' %}" alt="" /></li>
-      <li><img class="second" src="{% static 'admin/img/forbes.png' %}" alt="" /></li>
-      <li><img class="third" src="{% static 'admin/img/hindu.png' %}" alt="" /></li>
-    </ul>
-  </div>
-</div> -->
-
-<!-- Section g -->
-
 {% endblock%}

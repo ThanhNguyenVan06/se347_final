@@ -1,3 +1,0 @@
-- Optimize the web page
-- Add predicton sales
-- Add user board

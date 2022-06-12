@@ -10,8 +10,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'dashboard/images/favicon.png' %}">
-    <title>Ela - Bootstrap Admin Dashboard Template</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'dashboard/logo/admin.ico' %}">
+    <title>Admin Dashboard Template</title>
     <!-- Bootstrap Core CSS -->
     <link href="{% static 'dashboard/css/lib/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
     <!-- Custom CSS -->
@@ -24,9 +24,7 @@
     <script src="{% static 'dashboard/js/lib/chartist/chartist.min.js' %}"></script>
     <script src="{% static 'dashboard/js/lib/chartist/chartist-plugin-tooltip.min.js' %}"></script>
     <script src="{% static 'dashboard/js/lib/chartist/chartist-init.js' %}"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
     <!--[if lt IE 9]>
@@ -51,9 +49,7 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html">
                         <!-- Logo icon -->
-                        <!-- <b><img src="{% static 'dashboard/images/logo.png' %}" alt="homepage" class="dark-logo" /></b> -->
-                        <!--End Logo icon -->
-                        <!-- Logo text -->
+                        <b><img src="{% static 'dashboard/logo/admin.ico' %}" alt="homepage" style="height: 40px; width:auto" /></b>
                         <!-- <span><img src="{% static 'dashboard/images/logo-text.png' %}" alt="homepage"
                         class="dark-logo" /></span> -->
                         <span>Báo cáo</span>
@@ -64,56 +60,24 @@
                     <!-- toggle and nav items -->
                     <ul class="navbar-nav mr-auto mt-md-0">
                         <!-- This is  -->
-                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  "
-                                href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
-                        <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  "
-                                href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
+                        <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
                         <!-- Messages -->
                         <!-- End Messages -->
                     </ul>
                     <!-- User profile and search -->
                     <ul class="navbar-nav my-lg-0">
-
-                        <!-- Comment -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted text-muted  " href="#" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false"> <i class="fa fa-bell"></i>
-                                <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn">
-                                <ul>
-                                    <li>
-                                        <div class="drop-title">Notifications</div>
-                                    </li>
-                                    <li>
-                                        <div class="message-center">
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="btn btn-danger btn-circle m-r-10"><i class="fa fa-link"></i>
-                                                </div>
-                                                <div class="mail-contnet">
-                                                    <h5>This is title</h5> <span class="mail-desc">Just see the my new
-                                                        admin!</span> <span class="time">9:30 AM</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link text-center" href="javascript:void(0);"> <strong>Check all
-                                                notifications</strong> <i class="fa fa-angle-right"></i> </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
                         <!-- End Comment -->
                         <!-- Profile -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false"><img src="{{user_avatar}}" alt="user"
-                                    class="profile-pic" /></a>
+                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{user_avatar}}" alt="user" class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
-                                    <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+                                    <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-light btn-block"> <i class="fa fa-power-off"></i> Log
+                                            out</button>
+                                    </form>
                                 </ul>
                             </div>
                         </li>
@@ -132,9 +96,7 @@
                     <ul id="sidebarnav">
                         <li class="nav-devider"></li>
                         <li class="nav-label">Home</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span
-                                    class="hide-menu">Bảng điều khiển <span
-                                        class="label label-rouded label-primary pull-right">2</span></span></a>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Bảng điều khiển <span class="label label-rouded label-primary pull-right">2</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{% url 'admin-dashboard:main' %}">Tổng quan </a></li>
                                 <li><a href="{% url 'admin-dashboard:analytics' %}">Bảng Phân tích </a></li>
@@ -156,7 +118,7 @@
                 </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'admin:index' %}">Home</a></li>
                         <li class="breadcrumb-item active">Bảng điều khiển</li>
                     </ol>
                 </div>
@@ -308,7 +270,7 @@
                                         <div class="row">
                                             <label for="text" class="mr-3">Trạng thái</label>
                                             <select class="filter">
-                                                {% if filter_value == "1" or filter_value == None %}
+                                                {% if filter_value == "1" or filter_value == "None" or filter_value == None %}
                                                 <option value="1" selected>Tất cả </option>
                                                 <option value="2">Đang chờ
                                                 </option>
@@ -354,30 +316,24 @@
                                                 <td><span>{{cart.total_price}}</span></td>
                                                 {% if cart.status == "pending" %}
                                                 <td>
-                                                    <button type="button" class="btn btn-danger switch {{cart.id }}"
-                                                        value="{{ cart.id }}">
+                                                    <button type="button" class="btn btn-danger switch {{cart.id }}" value="{{ cart.id }}">
                                                         Đang chờ
                                                     </button>
                                                 </td>
                                                 {% elif cart.status == "delivering" %}
                                                 <td>
-                                                    <button type="button" class="btn btn-warning switch {{cart.id }}"
-                                                        value="{{ cart.id }}">
+                                                    <button type="button" class="btn btn-warning switch {{cart.id }}" value="{{ cart.id }}">
                                                         Đang giao hàng
                                                     </button>
                                                 </td>
                                                 {% endif %}
                                                 <td>
                                                     {% if cart.paid_bill %}
-                                                    <button type="button"
-                                                        class="btn btn-success switch_paid {{cart.id }}_paid"
-                                                        value="{{ cart.id }} paid">
+                                                    <button type="button" class="btn btn-success switch_paid {{cart.id }}_paid" value="{{ cart.id }} paid">
                                                         Đã thanh toán
                                                     </button>
                                                     {% else %}
-                                                    <button type="button"
-                                                        class="btn btn-danger switch_paid {{cart.id }}_paid"
-                                                        value="{{ cart.id }} paid">
+                                                    <button type="button" class="btn btn-danger switch_paid {{cart.id }}_paid" value="{{ cart.id }} paid">
                                                         Chưa thanh toán
                                                     </button>
                                                     {% endif %}
@@ -397,8 +353,7 @@
                                 <ul class="pagination justify-content-center">
                                     {% if page_cart.has_previous %}
                                     <li class="page-item">
-                                        <a class="page-link" href="?page=1&filter_value={{ filter_value }}"
-                                            aria-label="Previous">
+                                        <a class="page-link" href="?page=1&filter_value={{ filter_value }}" aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                             <span class="sr-only">begin</span>
                                         </a>
@@ -409,17 +364,13 @@
                                     <li class="page-item active">
                                         <span class="page-link">{{ n }}<span class="sr-only">(current)</span></span>
                                     </li>
-                                    {% elif n > page_cart.number|add:'-3' and n < page_cart.number|add:'3' %} <li
-                                        class="page-item"><a class="page-link"
-                                            href="?page={{ n }}&filter_value={{ filter_value}}">{{ n }}</a></li>
+                                    {% elif n > page_cart.number|add:'-3' and n < page_cart.number|add:'3' %} <li class="page-item"><a class="page-link" href="?page={{ n }}&filter_value={{ filter_value}}">{{ n }}</a></li>
                                         {% endif %}
                                         {% endfor %}
 
                                         {% if page_cart.has_next %}
                                         <li class="page-item">
-                                            <a class="page-link"
-                                                href="?page={{ page_cart.paginator.num_pages }}&filter_value={{ filter_value }}"
-                                                aria-label="Next">
+                                            <a class="page-link" href="?page={{ page_cart.paginator.num_pages }}&filter_value={{ filter_value }}" aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
                                                 <span class="sr-only">end</span>
                                             </a>

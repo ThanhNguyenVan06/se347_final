@@ -12,14 +12,10 @@ from menu.models import food, cart, category
 from dashboard.service.food import food_service
 from dashboard.service.time import time_service
 from django.core.paginator import Paginator
-
+from common.currency import Currency
 
 DEFAULT_AVATAR="/static/home/image/default-user.png"
 
-locale.setlocale(locale.LC_ALL, 'en_US')
-
-def convert_currency(number):
-    return locale.format("%d", number, grouping=True)
 
 LOG= logging.getLogger('info')
 
@@ -115,8 +111,8 @@ class dashboard(View):
         # user=User.objects.filter(username = request.user)
         return render(request, 'index.html',
                 {
-                    "total_revenue": convert_currency(total_revenue),
-                    "total_food_sold": convert_currency(total_food_sold),
+                    "total_revenue": Currency.convert_currency(total_revenue),
+                    "total_food_sold": Currency.convert_currency(total_food_sold),
                     "total_category": total_category,
                     "total_customer": total_customer,
                     "extra_area_chart_var_list": extra_area_chart_var_list,
@@ -125,10 +121,10 @@ class dashboard(View):
                     "curr_year": curr_year,
                     "curr_month": curr_month,
                     "curr_season": curr_season_num,
-                    "total_revenue_year": convert_currency(total_revenue_year),
-                    "total_revenue_month": convert_currency(total_revenue_month),
-                    "total_revenue_week_up_to_now": convert_currency(total_revenue_week_up_to_now),
-                    "total_revenue_season": convert_currency(total_revenue_season),
+                    "total_revenue_year": Currency.convert_currency(total_revenue_year),
+                    "total_revenue_month": Currency.convert_currency(total_revenue_month),
+                    "total_revenue_week_up_to_now": Currency.convert_currency(total_revenue_week_up_to_now),
+                    "total_revenue_season": Currency.convert_currency(total_revenue_season),
                     "user_name": request.user,
                     "user_avatar": DEFAULT_AVATAR # will fix when user have avatar attribute
                 })
@@ -178,7 +174,7 @@ class analytic(View):
                     "id": cart_item.id,
                     "user_name": cart_item.user_name,
                     "food_bought": ",".join(name for name in name_food_boughts),
-                    "total_price": convert_currency(total_price) ,
+                    "total_price": Currency.convert_currency(total_price) ,
                     "status":  int_to_status[cart_item.statement_bill],
                     "paid_bill": cart_item.paid_bill
                 }

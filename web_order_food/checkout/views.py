@@ -8,6 +8,11 @@ import collections
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from user.models import user
+import logging
+from common.currency import Currency
+
+LOG = logging.getLogger('info')
+
 # Create your views here.
 class check_cart(View):
     def get(self, request):
@@ -90,7 +95,7 @@ class confirm_infor(View):
                 arr_items.append({'id_food':key,
                                   'quantity':value,
                                   'name_food' : item.name_food,
-                                  'price' : item.price,
+                                  'price' : Currency.convert_currency(item.price),
                                   'image_food': item.image})
             goods_user.update(raw_price = raw_price, final_price = raw_price)
         return render(request, 'comfirm.html',{'fullname':fullname,'raw_price':raw_price})
@@ -124,6 +129,8 @@ def success( request):
     name = request.user.username
     goods_user = cart.objects.filter(user_name = name , active = 0)
     goods_user.update(paid_bill = True,active = 1)
+
+    LOG.info(f'{name} paid for the cart')
 
     return render(request, 'success.html')
 def success_v2(request):
@@ -161,7 +168,7 @@ def change_good(request):
     total = int(quantity)*int(food_price)
     content = {
         'id':id_food,
-        'price':food_price,
+        'price': Currency.convert_currency(food_price),
         "total" : total,
     }
 

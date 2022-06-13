@@ -166,7 +166,7 @@ class analytic(View):
                         cart_item.statement_bill+=1
                         LOG.info(f'{request.user} change the status bill of {toggle_id}')
                     else:
-                        cart_item.paid_bill=cart_item.paid_bill
+                        cart_item.paid_bill= True
                         LOG.info(f'{request.user} change the status bill of {toggle_id}')
                     cart_item.save()
                 cart_item_statuses= {

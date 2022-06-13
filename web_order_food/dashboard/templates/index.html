@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'dashboard/logo/admin.ico' %}">
-    <title>Admin Dashboard Template</title>
+    <title>Admin Dashboard</title>
     <!-- Bootstrap Core CSS -->
     <link href="{% static 'dashboard/css/lib/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
     <!-- Custom CSS -->
@@ -40,8 +40,7 @@
                 <!-- Logo -->
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html">
-                        <b><img src="{% static 'dashboard/logo/admin.ico' %}" alt="homepage"
-                                style="height: 40px; width:auto" /></b>
+                        <b><img src="{% static 'dashboard/logo/admin.ico' %}" alt="homepage" style="height: 40px; width:auto" /></b>
                         <span>Báo cáo</span>
                     </a>
                 </div>
@@ -50,25 +49,20 @@
                     <!-- toggle and nav items -->
                     <ul class="navbar-nav mr-auto mt-md-0">
                         <!-- This is  -->
-                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  "
-                                href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
-                        <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  "
-                                href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
+                        <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
                     </ul>
                     <!-- User profile and search -->
                     <ul class="navbar-nav my-lg-0">
                         <!-- End Comment -->
                         <!-- Profile -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false"><img src="{{user_avatar}}" alt="user"
-                                    class="profile-pic" /></a>
+                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{user_avatar}}" alt="user" class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
                                     <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
                                         {% csrf_token %}
-                                        <button type="submit" class="btn btn-light btn-block"> <i
-                                                class="fa fa-power-off"></i> Log
+                                        <button type="submit" class="btn btn-light btn-block"> <i class="fa fa-power-off"></i> Log
                                             out</button>
                                     </form>
                                 </ul>
@@ -89,9 +83,7 @@
                     <ul id="sidebarnav">
                         <li class="nav-devider"></li>
                         <li class="nav-label">Home</li>
-                        <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span
-                                    class="hide-menu">Bảng điều khiển <span
-                                        class="label label-rouded label-primary pull-right">2</span></span></a>
+                        <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Bảng điều khiển <span class="label label-rouded label-primary pull-right">2</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{% url 'admin-dashboard:main' %}">Tổng quan </a></li>
                                 <li><a href="{% url 'admin-dashboard:analytics' %}">Bảng phân tích </a></li>
@@ -274,9 +266,7 @@
                                 {% for k,v in categories_sold.items %}
                                 <p class="m-t-30 f-w-600">{{k}}<span class="pull-right">{{v}}%</span></p>
                                 <div class="progress">
-                                    <div role="progressbar" style="width: {{v}}%; height:8px;"
-                                        class="progress-bar bg-info wow animated progress-animated"> <span
-                                            class="sr-only">{{v}}% Complete</span> </div>
+                                    <div role="progressbar" style="width: {{v}}%; height:8px;" class="progress-bar bg-info wow animated progress-animated"> <span class="sr-only">{{v}}% Complete</span> </div>
                                 </div>
                                 {% endfor %}
                             </div>

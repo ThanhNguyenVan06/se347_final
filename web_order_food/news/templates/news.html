@@ -49,7 +49,7 @@
       {% for new in page.object_list %}
       {% if forloop.counter == 4 %}
       <div class="content">
-        <img src="{{ new.image_new.url }}" alt="">
+        <img src="{{ new.image_new }}" alt="">
         <h2>{{ new.title }}</h2>
         <p>
           {{new.context}}

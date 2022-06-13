@@ -41,7 +41,6 @@ def home(request):
         "second_best_seller": second_best_seller,
         "third_best_seller": third_best_seller,
     }
-    print(data)
 
     return render(request, 'home.html',{'username':username, 'food_best_seller': data})
 def logout_user(request):
@@ -131,8 +130,6 @@ def change_profile(request):
     fullname = request.POST.get('fullname')
     address = request.POST.get('address')
     email = request.POST.get('email')
-    print("fullname: ", fullname)
-    print("address: ", address )
     old_profile = user.objects.get(user_name__username = request.user.username)
     user_reset  = User.objects.get(username= request.user.username)
 

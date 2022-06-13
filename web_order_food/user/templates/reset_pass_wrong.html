@@ -46,7 +46,7 @@
                 <div class="card-body" style="text-align:center;margin-top:50px;">
                     <form action="{% url  'user:reset' %}" method="post">
                         {% csrf_token %}
-                        <input type="text" name="username_or_email" id="" style="height:40px;width:250px;">
+                        <input type="text" name="username_or_email" id="" style="height:40px;width:250px;color:white;">
                         Sai user_name vui lòng nhập lại
                         <input type="submit" value="Tiếp theo" style="background-color:#FFC312; height:40px;">
                     </form>
